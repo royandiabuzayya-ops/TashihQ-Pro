@@ -8,6 +8,7 @@
   "display": "standalone",
   "display_override": ["standalone", "minimal-ui"],
   "orientation": "portrait-primary",
+  "launch_handler": { "client_mode": "navigate-existing" },
   "background_color": "#fcfaf7",
   "theme_color": "#022c22",
   "lang": "id-ID",

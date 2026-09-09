@@ -35,6 +35,72 @@ misalnya `https://tashihq-sembalun.netlify.app/index.html`, dan
 > buka `manifest.webmanifest` dan sesuaikan `"start_url"` dan `"scope"` agar
 > cocok dengan path tersebut.
 
+## Soal skor "26/46" di PWABuilder
+
+Angka itu **bukan nilai lulus/gagal** — itu cuma jumlah field manifest yang
+terisi dari total field yang PWABuilder kenali (termasuk banyak field niche
+yang tidak relevan untuk kebanyakan PWA). Yang benar-benar menentukan apakah
+paket Android bisa dibuat adalah kolom **Required** — dan semua sudah ✅ di
+paket ini (`start_url`, `short_name`, `icons`, `name`), plus **Recommended**
+juga sudah ✅ semua kecuali `screenshots`.
+
+Rincian kolom **Optional** yang masih kuning, dan kenapa aman diabaikan:
+
+| Field | Perlu? | Alasan |
+|---|---|---|
+| `screenshots` | **Ya, sebaiknya diisi** | Dipakai Play Store & dialog instal untuk pratinjau tampilan app. Cara isi ada di bawah. |
+| `launch_handler` | Sudah ditambahkan ✅ | Supaya app tidak membuka jendela baru kalau dibuka ulang dari shortcut/notifikasi. |
+| `iarc_rating_id` | Nanti saja | ID rating konten ini justru **dibuatkan otomatis oleh Google Play Console** saat Anda mengisi kuesioner rating konten ketika submit app — bukan sesuatu yang diisi manual sebelumnya. |
+| `related_applications` / `prefer_related_applications` | Nanti saja | Untuk menautkan ke listing Play Store yang sudah live — belum ada karena app belum dipublikasikan. Bisa ditambahkan setelah rilis pertama. |
+| `file_handlers` | Tidak perlu | Untuk app yang perlu "buka dengan..." dari file manager OS. Tidak relevan untuk app ini. |
+| `protocol_handlers` | Tidak perlu | Untuk menangani custom URL scheme (misal `mailto:`, `web+tashihq:`). Tidak dipakai di app ini. |
+| `share_target` | Tidak perlu | Supaya app ini muncul di menu "Share" aplikasi lain. Bukan use-case aplikasi ini. |
+| `widgets` | Tidak perlu | Widget home-screen Android khusus (fitur lanjutan, jarang dipakai PWA sekolah). |
+| `edge_side_panel` | Tidak perlu | Fitur sidebar khusus Microsoft Edge desktop, tidak berlaku untuk APK Android. |
+| `note_taking` | Tidak perlu | Hanya untuk app yang mau jadi "default note app" di Windows. |
+| `scope_extensions` | Tidak perlu | Untuk PWA yang mencakup beberapa domain sekaligus. App ini satu origin saja. |
+
+Jadi fokus yang layak dikerjakan sebelum submit ke Play Store cuma **satu**: `screenshots`.
+
+### Cara mengisi `screenshots` (setelah hosting live)
+
+Saya tidak bisa membuatkan screenshot yang akurat dari sandbox ini karena
+Tailwind/FontAwesome/Chart.js/Google Fonts dimuat dari CDN dan sandbox saya
+tidak punya akses ke domain-domain itu — hasilnya tampilan akan polos/rusak,
+tidak mewakili tampilan asli aplikasi. Setelah aplikasi live di hosting HTTPS
+(Langkah 1), pilih salah satu:
+
+1. **Cara termudah — otomatis dari PWABuilder**: buka kembali hasil scan URL
+   Anda di PWABuilder → **Edit Your Manifest** → tab **Screenshots** → pilih
+   **"Generate screenshots from your site"**. PWABuilder akan membuka situs
+   Anda dan mengambil tangkapan layar otomatis (mobile & desktop), lalu
+   menuliskan array `screenshots` ke manifest untuk Anda — tinggal salin ke
+   `manifest.webmanifest` di paket ini.
+2. **Cara manual**: buka situs Anda di Chrome, tekan `Ctrl+Shift+M`
+   (mode perangkat mobile) untuk tangkapan "narrow", dan mode biasa untuk
+   "wide", lalu `Ctrl+Shift+P` → ketik "Capture full size screenshot".
+   Simpan sebagai PNG, upload ke folder `icons/` (atau folder baru
+   `screenshots/`), lalu tambahkan ke `manifest.webmanifest` dengan format:
+
+```json
+"screenshots": [
+  {
+    "src": "screenshots/mushaf-mobile.png",
+    "sizes": "390x844",
+    "type": "image/png",
+    "form_factor": "narrow",
+    "label": "Tampilan Mushaf Tashih di HP"
+  },
+  {
+    "src": "screenshots/rekap-desktop.png",
+    "sizes": "1280x800",
+    "type": "image/png",
+    "form_factor": "wide",
+    "label": "Tampilan Rekap Siswa di desktop"
+  }
+]
+```
+
 ## Langkah 2 — Cek kelayakan PWA di PWABuilder
 
 1. Buka **https://www.pwabuilder.com/**
