@@ -30,7 +30,7 @@ self.addEventListener('activate', (event) => {
     caches.keys().then((keys) =>
       Promise.all(
         keys
-          .filter((key) => key.startsWith('tashihq-pro-') && key !== CACHE_NAME)
+          .filter((key) => key.startsWith('index') && key !== CACHE_NAME)
           .map((key) => caches.delete(key))
       )
     )
