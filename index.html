@@ -140,6 +140,107 @@
       }
     }
   </style>
+
+<style id="tqRaporProgressCardStyle">
+#raporTargetBreakdown .tq-activity-section{margin-bottom:10px}
+#raporTargetBreakdown .tq-activity-heading{
+  display:flex;align-items:center;gap:6px;margin:0 0 6px;
+  font-weight:800;font-size:12px;color:#292524
+}
+#raporTargetBreakdown .tq-activity-heading .tq-section-icon{
+  width:24px;height:24px;border-radius:7px;display:grid;place-items:center;
+  background:#f5f5f4;color:#57534e;flex:none;font-size:10px
+}
+#raporTargetBreakdown .tq-target-grid{
+  display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px
+}
+#raporTargetBreakdown .tq-target-card{
+  position:relative;border:1px solid #e7e5e4;border-radius:9px;padding:7px 8px;
+  background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.04);overflow:hidden
+}
+#raporTargetBreakdown .tq-target-card:before{
+  content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:#d6d3d1
+}
+#raporTargetBreakdown .tq-target-card.is-complete{
+  background:#f0fdf4;border-color:#bbf7d0
+}
+#raporTargetBreakdown .tq-target-card.is-complete:before{background:#16a34a}
+#raporTargetBreakdown .tq-target-card.is-partial{
+  background:#fffbeb;border-color:#fde68a
+}
+#raporTargetBreakdown .tq-target-card.is-partial:before{background:#f59e0b}
+#raporTargetBreakdown .tq-target-card.is-empty{
+  background:#fff;border-color:#e7e5e4
+}
+#raporTargetBreakdown .tq-target-card .tq-target-top{
+  display:flex;justify-content:space-between;align-items:flex-start;gap:4px
+}
+#raporTargetBreakdown .tq-target-card .tq-target-name{
+  font-weight:800;color:#292524;line-height:1.2;font-size:11px
+}
+#raporTargetBreakdown .tq-target-card .tq-target-sub{
+  margin-top:2px;font-size:9px;color:#78716c
+}
+#raporTargetBreakdown .tq-target-card .tq-status{
+  flex:none;border-radius:999px;padding:2px 5px;font-size:8px;font-weight:800;
+  white-space:nowrap
+}
+#raporTargetBreakdown .tq-target-card.is-complete .tq-status{
+  background:#dcfce7;color:#15803d
+}
+#raporTargetBreakdown .tq-target-card.is-partial .tq-status{
+  background:#fef3c7;color:#b45309
+}
+#raporTargetBreakdown .tq-target-card.is-empty .tq-status{
+  background:#f5f5f4;color:#78716c
+}
+#raporTargetBreakdown .tq-target-card .tq-mini-bar{
+  height:4px;background:#e7e5e4;border-radius:99px;overflow:hidden;margin:6px 0 4px
+}
+#raporTargetBreakdown .tq-target-card .tq-mini-fill{height:100%;border-radius:99px;width:0}
+#raporTargetBreakdown .tq-target-card.is-complete .tq-mini-fill{background:#22c55e}
+#raporTargetBreakdown .tq-target-card.is-partial .tq-mini-fill{background:#f59e0b}
+#raporTargetBreakdown .tq-target-card.is-empty .tq-mini-fill{background:#d6d3d1}
+#raporTargetBreakdown .tq-target-card .tq-progress-text{
+  display:flex;justify-content:space-between;align-items:center;gap:4px;
+  font-size:8.5px;color:#57534e
+}
+#raporTargetBreakdown .tq-target-card .tq-progress-text strong{
+  font-size:10px;color:#292524
+}
+#raporTargetBreakdown .tq-target-card .tq-detail{
+  margin-top:5px;padding:4px 5px;border-radius:6px;background:rgba(255,255,255,.68);
+  font-size:8.5px;line-height:1.25;color:#57534e
+}
+#raporTargetBreakdown .tq-target-card.is-complete .tq-detail{color:#166534}
+#raporTargetBreakdown .tq-target-card.is-partial .tq-detail{color:#92400e}
+#raporTargetBreakdown .tq-no-target{
+  padding:7px;border:1px dashed #d6d3d1;border-radius:8px;color:#78716c;
+  background:#fafaf9;font-size:9px
+}
+
+/* Saat dicetak, kartu dibuat lebih padat agar memaksimalkan kertas. */
+@media print{
+  #raporTargetBreakdown .tq-activity-section{margin-bottom:7px}
+  #raporTargetBreakdown .tq-target-grid{grid-template-columns:repeat(5,minmax(0,1fr));gap:4px}
+  #raporTargetBreakdown .tq-target-card{padding:5px 6px;border-radius:6px;box-shadow:none}
+  #raporTargetBreakdown .tq-target-card:before{width:2px}
+  #raporTargetBreakdown .tq-target-card .tq-target-name{font-size:9px}
+  #raporTargetBreakdown .tq-target-card .tq-target-sub{font-size:7px}
+  #raporTargetBreakdown .tq-target-card .tq-status{font-size:6.5px;padding:1px 3px}
+  #raporTargetBreakdown .tq-target-card .tq-mini-bar{height:3px;margin:4px 0 3px}
+  #raporTargetBreakdown .tq-target-card .tq-progress-text{font-size:7px}
+  #raporTargetBreakdown .tq-target-card .tq-progress-text strong{font-size:8px}
+  #raporTargetBreakdown .tq-target-card .tq-detail{margin-top:3px;padding:3px 4px;font-size:7px}
+}
+@media(max-width:700px){
+  #raporTargetBreakdown .tq-target-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:480px){
+  #raporTargetBreakdown .tq-target-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+</style>
+
 </head>
 <body class="text-slate-800 min-h-screen flex flex-col antialiased pb-20 md:pb-4">
 
@@ -2107,6 +2208,95 @@
     // Hitung capaian santri untuk 1 jenis kegiatan: jumlah AYAT target dibandingkan
     // dengan jumlah AYAT yang sudah lulus (bukan lagi dihitung per unit Surah/Juz utuh,
     // agar setoran parsial pada satu surah/juz tetap tercatat proporsional).
+
+    // ==============================================================
+    // RINCIAN PROGRES TARGET KURIKULUM DI RAPOR
+    // Menampilkan apa yang SUDAH diselesaikan, termasuk setoran parsial.
+    // Contoh: "An-Naba' (40 ayat), An-Nazi'at (1-10)".
+    // Hanya sesi LULUS yang dihitung.
+    // ==============================================================
+    function getTargetCompletedAyatSet(student, activityType) {
+      const target = normalizeTargetKurikulum(student)[activityType];
+      const targetAyatSet = buildTargetAyatKeySet(target);
+      const achievedSet = new Set();
+
+      if (!targetAyatSet || targetAyatSet.size === 0) return achievedSet;
+
+      const isPassedSession = (h) =>
+        h.statusKelulusan === 'Lulus' || (!h.statusKelulusan && h.score >= 75);
+
+      appState.setoranHistory
+        .filter(h => h.studentId === student.id && h.sessionType === activityType && isPassedSession(h))
+        .forEach(h => {
+          const start = h.surahStartNo || h.surahNo;
+          const end = h.surahEndNo || h.surahNo;
+          const endMeta = SURAH_DATA.find(s => s.no === end);
+          const ayatStart = h.ayatStart || 1;
+          const ayatEnd = h.ayatEnd || (endMeta ? endMeta.ayat : ayatStart);
+
+          expandRangeToAyatKeys(start, ayatStart, end, ayatEnd).forEach(key => {
+            if (targetAyatSet.has(key)) achievedSet.add(key);
+          });
+        });
+
+      return achievedSet;
+    }
+
+    function formatCompletedTargetDetail(student, activityType) {
+      const target = normalizeTargetKurikulum(student)[activityType];
+      if (!target.items || target.items.length === 0) return 'Belum ada target yang diatur';
+
+      const achievedSet = getTargetCompletedAyatSet(student, activityType);
+      const completedParts = [];
+
+      // Rapor selalu dirinci per-surah agar setoran parsial terlihat jelas,
+      // baik target dibuat "Per Surah" maupun "Per Juz".
+      const targetSurahNos = new Set();
+
+      if (target.mode === 'surah') {
+        target.items.forEach(no => targetSurahNos.add(no));
+      } else {
+        // Untuk target per-juz, gunakan ayat target resmi per juz sehingga
+        // hanya surah yang benar-benar masuk target yang ditampilkan.
+        const targetAyatSet = buildTargetAyatKeySet(target);
+        targetAyatSet.forEach(key => {
+          const no = parseInt(key.split(':')[0], 10);
+          if (Number.isFinite(no)) targetSurahNos.add(no);
+        });
+      }
+
+      [...targetSurahNos].sort((a,b) => a-b).forEach(surahNo => {
+        const meta = SURAH_DATA.find(s => s.no === surahNo);
+        if (!meta) return;
+
+        const done = [];
+        for (let a = 1; a <= meta.ayat; a++) {
+          if (achievedSet.has(`${surahNo}:${a}`)) done.push(a);
+        }
+        if (done.length === 0) return;
+
+        // Kompres ayat berurutan: [1..10, 12, 13..20] => "1-10, 12-13"
+        const ranges = [];
+        let start = done[0], prev = done[0];
+        for (let i = 1; i <= done.length; i++) {
+          const cur = done[i];
+          if (cur !== prev + 1) {
+            ranges.push(start === prev ? `${start}` : `${start}-${prev}`);
+            start = cur;
+          }
+          prev = cur;
+        }
+
+        const full = done.length === meta.ayat;
+        const detail = full ? 'selesai' : `ayat ${ranges.join(', ')}`;
+        completedParts.push(`${meta.nama} (${detail})`);
+      });
+
+      return completedParts.length
+        ? completedParts.join(', ')
+        : 'Belum ada yang diselesaikan';
+    }
+
     function getTargetProgress(student, activityType) {
       const target = normalizeTargetKurikulum(student)[activityType];
 
@@ -4650,33 +4840,141 @@ _Pengampu Halaqah Tahfidz_`;
       document.getElementById('raporAvgScore').textContent = avgScore;
       document.getElementById('raporTargetPercent').textContent = `${targetPercent}%`;
 
-      // Rincian rapi per target kurikulum: label kegiatan, isi target (nama surah/rentang juz),
-      // progress bar, dan capaian ayat — satu kartu ringkas per jenis kegiatan.
+      // Rincian target dibuat SATU KARTU untuk setiap Surah/Juz yang ditentukan.
+      // Hijau = selesai 100%, kuning = sebagian, putih = belum mulai.
       const targetNorm = normalizeTargetKurikulum(student);
       const breakdownEl = document.getElementById('raporTargetBreakdown');
+
+      function getTargetUnitData(target, item) {
+        if (target.mode === 'surah') {
+          const meta = SURAH_DATA.find(s => s.no === item);
+          if (!meta) return null;
+          return {
+            key: `surah-${item}`,
+            name: meta.nama,
+            sub: `${meta.ayat} ayat`,
+            ayatSet: new Set(expandRangeToAyatKeys(item, 1, item, meta.ayat))
+          };
+        }
+
+        const juzMeta = JUZ_METADATA.find(j => j.juz === item);
+        if (!juzMeta) return null;
+        return {
+          key: `juz-${item}`,
+          name: `Juz ${item}`,
+          sub: `${juzMeta.startSurah === juzMeta.endSurah
+            ? (SURAH_DATA.find(s => s.no === juzMeta.startSurah)?.nama || `Surah ${juzMeta.startSurah}`)
+            : `${SURAH_DATA.find(s => s.no === juzMeta.startSurah)?.nama || `Surah ${juzMeta.startSurah}`} s.d. ${SURAH_DATA.find(s => s.no === juzMeta.endSurah)?.nama || `Surah ${juzMeta.endSurah}`}`}`,
+          ayatSet: new Set(expandRangeToAyatKeys(
+            juzMeta.startSurah, juzMeta.startAyat, juzMeta.endSurah, juzMeta.endAyat
+          ))
+        };
+      }
+
+      function getCompletedRangesForSet(ayatSet, achievedSet) {
+        const grouped = {};
+        ayatSet.forEach(key => {
+          const [s, a] = key.split(':').map(Number);
+          if (achievedSet.has(key)) {
+            if (!grouped[s]) grouped[s] = [];
+            grouped[s].push(a);
+          }
+        });
+
+        return Object.keys(grouped).sort((a,b) => Number(a)-Number(b)).map(sNo => {
+          const nums = grouped[sNo].sort((a,b) => a-b);
+          const ranges = [];
+          let st = nums[0], prev = nums[0];
+          for (let i = 1; i <= nums.length; i++) {
+            const cur = nums[i];
+            if (cur !== prev + 1) {
+              ranges.push(st === prev ? `${st}` : `${st}-${prev}`);
+              st = cur;
+            }
+            prev = cur;
+          }
+          const meta = SURAH_DATA.find(s => s.no === Number(sNo));
+          return `${meta ? meta.nama : `Surah ${sNo}`} ayat ${ranges.join(', ')}`;
+        });
+      }
+
       if (breakdownEl) {
+        const iconMap = {
+          'Bacaan': 'fa-book-open',
+          'Hafalan Baru': 'fa-brain',
+          'Murajaah': 'fa-rotate',
+          "Tasmi'": 'fa-award'
+        };
+
         breakdownEl.innerHTML = ACTIVITY_TYPES.map(t => {
           const label = ACTIVITY_TYPE_LABELS[t];
           const target = targetNorm[t];
-          const p = getTargetProgress(student, t);
-          const belumDiatur = p.total === 0;
-          const pct = belumDiatur ? 0 : p.percent;
-          const itemsDetail = formatTargetItemsDetail(target);
-          const barColor = belumDiatur ? 'bg-stone-200' : (pct >= 100 ? 'bg-emerald-600' : 'bg-amber-500');
+          const icon = iconMap[label] || 'fa-bullseye';
+
+          if (!target.items || target.items.length === 0) {
+            return `
+              <div class="tq-activity-section">
+                <div class="tq-activity-heading">
+                  <span class="tq-section-icon"><i class="fa-solid ${icon}"></i></span>
+                  <span>${escapeHtml(label)}</span>
+                </div>
+                <div class="tq-no-target">Target ${escapeHtml(label.toLowerCase())} belum diatur.</div>
+              </div>
+            `;
+          }
+
+          const achievedSet = getTargetCompletedAyatSet(student, t);
+          const cards = target.items
+            .slice()
+            .sort((a,b) => a-b)
+            .map(item => {
+              const unit = getTargetUnitData(target, item);
+              if (!unit) return '';
+
+              let achieved = 0;
+              unit.ayatSet.forEach(k => { if (achievedSet.has(k)) achieved++; });
+
+              const total = unit.ayatSet.size;
+              const pct = total ? Math.round((achieved / total) * 100) : 0;
+              const statusClass = pct >= 100 ? 'is-complete' : (pct > 0 ? 'is-partial' : 'is-empty');
+              const statusText = pct >= 100 ? '✓ Selesai' : (pct > 0 ? 'Sebagian' : 'Belum');
+              const detail = pct >= 100
+                ? 'Target selesai 100%'
+                : pct > 0
+                  ? `Sudah: ${getCompletedRangesForSet(unit.ayatSet, achievedSet).join(', ')}`
+                  : 'Belum ada capaian pada target ini.';
+
+              return `
+                <div class="tq-target-card ${statusClass}">
+                  <div class="tq-target-top">
+                    <div>
+                      <div class="tq-target-name">${escapeHtml(unit.name)}</div>
+                      <div class="tq-target-sub">${escapeHtml(unit.sub)}</div>
+                    </div>
+                    <span class="tq-status">${statusText}</span>
+                  </div>
+
+                  <div class="tq-mini-bar">
+                    <div class="tq-mini-fill" style="width:${pct}%"></div>
+                  </div>
+
+                  <div class="tq-progress-text">
+                    <strong>${pct}%</strong>
+                    <span>${achieved}/${total} ayat</span>
+                  </div>
+
+                  <div class="tq-detail">${escapeHtml(detail)}</div>
+                </div>
+              `;
+            }).join('');
 
           return `
-            <div class="border border-stone-200 rounded-xl p-2.5 ${belumDiatur ? 'bg-stone-50' : 'bg-white'}">
-              <div class="flex justify-between items-center mb-1">
-                <span class="font-bold text-stone-800">${escapeHtml(label)}</span>
-                <span class="font-black ${belumDiatur ? 'text-stone-400' : 'text-emerald-800'}">
-                  ${belumDiatur ? 'Belum diatur' : `${pct}%`}
-                </span>
+            <div class="tq-activity-section">
+              <div class="tq-activity-heading">
+                <span class="tq-section-icon"><i class="fa-solid ${icon}"></i></span>
+                <span>${escapeHtml(label)}</span>
               </div>
-              <p class="text-[10px] text-stone-500 mb-1.5 leading-relaxed">${escapeHtml(itemsDetail)}</p>
-              <div class="w-full bg-stone-100 rounded-full h-1.5 overflow-hidden border border-stone-200">
-                <div class="${barColor} h-1.5 rounded-full" style="width:${pct}%"></div>
-              </div>
-              ${!belumDiatur ? `<p class="text-[10px] text-stone-500 mt-1 text-right font-semibold">${p.achieved} / ${p.total} Ayat</p>` : ''}
+              <div class="tq-target-grid">${cards}</div>
             </div>
           `;
         }).join('');
