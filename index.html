@@ -421,6 +421,15 @@
         </div>
       </div>
 
+      <!-- FLOATING SAVE BUTTON: agar tombol "Simpan Kegiatan" tetap terjangkau meski rentang
+           mushaf sangat panjang (mis. Al-Baqarah s/d An-Nas) & pengguna sudah scroll jauh ke bawah. -->
+      <button onclick="finishSessionAndSave()" type="button" id="floatingSaveSessionBtn" title="Simpan Catatan Setoran ke Jurnal"
+        class="fixed bottom-20 md:bottom-5 left-1/2 -translate-x-1/2 z-[55] bg-amber-400 hover:bg-amber-500 active:scale-95 text-emerald-950 font-extrabold pl-4 pr-3 py-3 rounded-full shadow-2xl border-2 border-amber-300 flex items-center gap-2 text-xs transition">
+        <i class="fa-solid fa-floppy-disk text-sm"></i>
+        <span>Simpan Kegiatan</span>
+        <span id="floatingSaveMistakeBadge" class="bg-emerald-950 text-amber-300 text-[10px] font-black w-5 h-5 rounded-full inline-flex items-center justify-center hidden"></span>
+      </button>
+
       <!-- DISPLAY MUSHAF UTSMANI MADINAH -->
       <div class="mushaf-paper border-2 border-emerald-900/30 rounded-2xl sm:rounded-3xl shadow-xl p-3 sm:p-6 md:p-10 min-h-[550px] flex flex-col justify-between relative overflow-hidden">
         
@@ -1389,9 +1398,17 @@
               <h3 id="raporAvgScore" class="text-lg font-black text-amber-950">0</h3>
             </div>
             <div class="p-2.5 bg-blue-50 border border-blue-200 rounded-xl">
-              <p class="text-[10px] text-blue-800 font-bold">Capaian Target</p>
+              <p class="text-[10px] text-blue-800 font-bold">Rata-Rata Target</p>
               <h3 id="raporTargetPercent" class="text-lg font-black text-blue-950">0%</h3>
             </div>
+          </div>
+
+          <!-- Rincian Capaian per Target Kurikulum -->
+          <div class="space-y-1.5 text-xs">
+            <h4 class="font-bold text-stone-800 flex items-center gap-1.5">
+              <i class="fa-solid fa-bullseye text-emerald-700"></i> Rincian Capaian per Target Kurikulum:
+            </h4>
+            <div id="raporTargetBreakdown" class="space-y-2"></div>
           </div>
 
           <!-- Tabel Ringkasan Setoran Terakhir -->
@@ -2122,6 +2139,38 @@
       return { mode: target.mode, total, achieved, percent };
     }
 
+    // Deskripsi rinci isi 1 target kurikulum: nama-nama surah (mode surah) atau
+    // rentang juz yang dikompres (mode juz, mis. "Juz 1-5, 7, 9-10"). Dipakai di Rapor.
+    function formatTargetItemsDetail(target) {
+      if (!target.items || target.items.length === 0) return 'Belum diatur';
+      const sorted = [...target.items].sort((a, b) => a - b);
+
+      if (target.mode === 'surah') {
+        const names = sorted.map(no => {
+          const meta = SURAH_DATA.find(s => s.no === no);
+          return meta ? meta.nama : `Surah ${no}`;
+        });
+        if (names.length > 6) {
+          return `${names.slice(0, 6).join(', ')}, dan ${names.length - 6} surah lainnya`;
+        }
+        return names.join(', ');
+      }
+
+      // mode 'juz': kompres angka berurutan jadi rentang, mis. [1,2,3,5,7,8] -> "1-3, 5, 7-8"
+      const ranges = [];
+      let start = sorted[0];
+      let prev = sorted[0];
+      for (let i = 1; i <= sorted.length; i++) {
+        const cur = sorted[i];
+        if (cur !== prev + 1) {
+          ranges.push(start === prev ? `${start}` : `${start}-${prev}`);
+          start = cur;
+        }
+        prev = cur;
+      }
+      return `Juz ${ranges.join(', ')}`;
+    }
+
     // Ringkasan teks target semua jenis kegiatan (untuk Rapor & share WhatsApp)
     function formatTargetSummary(student) {
       const target = normalizeTargetKurikulum(student);
@@ -2530,6 +2579,14 @@
       const khafyEl = document.getElementById('counterKhafy');
       if (jalyEl) jalyEl.textContent = countJaly;
       if (khafyEl) khafyEl.textContent = countKhafy;
+
+      // Badge total kesalahan di tombol simpan mengambang (agar terlihat tanpa scroll ke atas)
+      const floatBadge = document.getElementById('floatingSaveMistakeBadge');
+      if (floatBadge) {
+        const total = countJaly + countKhafy;
+        floatBadge.textContent = total > 99 ? '99+' : total;
+        floatBadge.classList.toggle('hidden', total === 0);
+      }
     }
 
     function setActiveMarkingTool(tool) {
@@ -2921,6 +2978,111 @@
       return text;
     }
 
+    // Observer untuk lazy-render surah pada rentang panjang (lihat renderMushafText).
+    // Disimpan di scope modul agar bisa di-disconnect setiap render baru dimulai.
+    let mushafLazyObserver = null;
+
+    // Bangun HTML 1 bagian surah (divider + seluruh kata beranotasi) untuk rentang [startSurah..endSurah]
+    // yang sedang aktif. Dipisah jadi fungsi sendiri agar bisa dipanggil langsung (surah pertama)
+    // ATAU ditunda sampai surah itu mendekati area pandang (surah-surah berikutnya di rentang panjang).
+    function buildSurahSectionHTML(sNo, sData, startSurah, endSurah, activeMarks) {
+      const sMeta = SURAH_DATA.find(s => s.no === sNo);
+
+      if (!sData || !sData.ayahs) {
+        return {
+          verseCount: 0,
+          html: `
+            <div class="py-6 text-center text-rose-600 font-sans text-xs dir-ltr bg-rose-50 border border-rose-200 rounded-2xl p-4 my-3">
+              <p class="font-bold">Gagal memuat teks Surah ${sMeta ? sMeta.nama : sNo}.</p>
+              <p class="mt-1 text-[11px] text-stone-500">Silakan periksa koneksi internet Anda atau pilih surah lain yang tersedia luring.</p>
+              <button onclick="renderMushafText()" class="mt-2 bg-rose-600 hover:bg-rose-700 text-white px-3 py-1 rounded-lg text-xs font-bold transition">
+                Coba Muat Ulang
+              </button>
+            </div>
+          `
+        };
+      }
+
+      let fromAyat = 1;
+      let toAyat = sMeta.ayat;
+      if (sNo === startSurah) fromAyat = appState.currentAyatStart;
+      if (sNo === endSurah) toAyat = appState.currentAyatEnd;
+
+      const filteredAyahs = sData.ayahs.filter(a => a.numberInSurah >= fromAyat && a.numberInSurah <= toAyat);
+
+      let surahDividerHTML = '';
+      if (startSurah !== endSurah) {
+        surahDividerHTML = `
+          <div class="pt-6 pb-3 text-center border-t-2 border-dashed border-emerald-800/30 my-4 select-none">
+            <div class="inline-block bg-emerald-950 text-amber-300 font-quran text-2xl font-bold px-7 py-1.5 rounded-2xl border-2 border-amber-400 shadow">
+              سُورَةُ ${sMeta.ar} (${sMeta.nama})
+            </div>
+            <p class="text-[11px] text-stone-500 font-sans font-bold mt-1">
+              Surah ke-${sMeta.no} &bull; ${sMeta.type} &bull; ${sMeta.ayat} Ayat &bull; Juz ${sMeta.juz}
+            </p>
+            ${(sNo !== 1 && sNo !== 9 && fromAyat === 1) ? `
+              <div class="text-center my-4 font-quran text-2xl text-emerald-950 tracking-wider dir-rtl select-none" dir="rtl">
+                بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
+              </div>
+            ` : ''}
+          </div>
+        `;
+      }
+
+      let wordsHTML = '';
+      filteredAyahs.forEach(a => {
+        const rawVerse = cleanBismillah(a.text, sNo, a.numberInSurah);
+        const words = rawVerse.trim().split(/\s+/);
+
+        let verseWordsHTML = '';
+        words.forEach((word, wordIdx) => {
+          const mark = activeMarks.find(m => 
+            m.surahNo === sNo && 
+            m.ayatNo === a.numberInSurah && 
+            m.wordIdx === wordIdx
+          );
+
+          let markClass = '';
+          let title = `Surah ${sMeta.nama} Ayat ${a.numberInSurah} Kata #${wordIdx + 1}: Klik untuk koreksi`;
+
+          if (mark) {
+            markClass = (mark.type === 'Jaly') ? 'word-mark-jaly' : 'word-mark-khafy';
+            title = `[Kesalahan ${mark.type}] ${mark.note || 'Catatan koreksi kata'}`;
+          }
+
+          verseWordsHTML += `
+            <span class="word-tashih ${markClass}"
+              data-surah="${sNo}"
+              data-ayat="${a.numberInSurah}"
+              data-word-idx="${wordIdx}"
+              data-word="${escapeHtml(word)}"
+              title="${escapeHtml(title)}">
+              ${word}
+            </span>
+          `;
+        });
+
+        wordsHTML += `
+          <span class="inline leading-[3.2] align-middle">
+            ${verseWordsHTML}
+            <span class="inline-flex items-center justify-center text-xs font-sans font-black text-emerald-950 bg-amber-200 border border-amber-400 rounded-full w-7 h-7 mx-1 align-middle select-none shadow-sm" title="Ayat ${a.numberInSurah}">
+              ${toArabicNumerals(a.numberInSurah)}
+            </span>
+          </span>
+        `;
+      });
+
+      return {
+        verseCount: filteredAyahs.length,
+        html: `
+          <div class="surah-section">
+            ${surahDividerHTML}
+            <div>${wordsHTML}</div>
+          </div>
+        `
+      };
+    }
+
     async function renderMushafText() {
       const startSurah = appState.currentSurahStart;
       const endSurah = appState.currentSurahEnd;
@@ -2957,107 +3119,74 @@
       const surahsData = await Promise.all(fetchPromises);
       document.getElementById('mushafLoading').classList.add('hidden');
 
-      const activeMarks = appState.reviewMode ? (appState.reviewSession?.marks || []) : appState.currentSessionMarks;
-      let totalVersesCount = 0;
-      let compositeHTML = '';
+      // Hentikan observer lazy-render dari pemanggilan renderMushafText() sebelumnya (jika ada),
+      // agar tidak menumpuk observer/menyentuh elemen placeholder lama yang sudah tak terpakai.
+      if (mushafLazyObserver) {
+        mushafLazyObserver.disconnect();
+        mushafLazyObserver = null;
+      }
 
+      const activeMarks = appState.reviewMode ? (appState.reviewSession?.marks || []) : appState.currentSessionMarks;
+      const isMultiSurah = startSurah !== endSurah;
+
+      // Hitung total ayat dulu (murah, tanpa render DOM) untuk footer -- tetap akurat
+      // sekalipun render kata sebagian besar surah ditunda (lazy).
+      let totalVersesCount = 0;
       for (let sIdx = 0; sIdx < surahsData.length; sIdx++) {
         const sNo = startSurah + sIdx;
-        const sData = surahsData[sIdx];
         const sMeta = SURAH_DATA.find(s => s.no === sNo);
-
-        if (!sData || !sData.ayahs) {
-          compositeHTML += `
-            <div class="py-6 text-center text-rose-600 font-sans text-xs dir-ltr bg-rose-50 border border-rose-200 rounded-2xl p-4 my-3">
-              <p class="font-bold">Gagal memuat teks Surah ${sMeta ? sMeta.nama : sNo}.</p>
-              <p class="mt-1 text-[11px] text-stone-500">Silakan periksa koneksi internet Anda atau pilih surah lain yang tersedia luring.</p>
-              <button onclick="renderMushafText()" class="mt-2 bg-rose-600 hover:bg-rose-700 text-white px-3 py-1 rounded-lg text-xs font-bold transition">
-                Coba Muat Ulang
-              </button>
-            </div>
-          `;
-          continue;
-        }
-
-        let fromAyat = 1;
-        let toAyat = sMeta.ayat;
+        const sData = surahsData[sIdx];
+        if (!sData || !sData.ayahs || !sMeta) continue;
+        let fromAyat = 1, toAyat = sMeta.ayat;
         if (sNo === startSurah) fromAyat = appState.currentAyatStart;
         if (sNo === endSurah) toAyat = appState.currentAyatEnd;
+        totalVersesCount += sData.ayahs.filter(a => a.numberInSurah >= fromAyat && a.numberInSurah <= toAyat).length;
+      }
 
-        const filteredAyahs = sData.ayahs.filter(a => a.numberInSurah >= fromAyat && a.numberInSurah <= toAyat);
-        totalVersesCount += filteredAyahs.length;
+      let compositeHTML = '';
 
-        let surahDividerHTML = '';
-        if (startSurah !== endSurah) {
-          surahDividerHTML = `
-            <div class="pt-6 pb-3 text-center border-t-2 border-dashed border-emerald-800/30 my-4 select-none">
-              <div class="inline-block bg-emerald-950 text-amber-300 font-quran text-2xl font-bold px-7 py-1.5 rounded-2xl border-2 border-amber-400 shadow">
-                سُورَةُ ${sMeta.ar} (${sMeta.nama})
-              </div>
-              <p class="text-[11px] text-stone-500 font-sans font-bold mt-1">
-                Surah ke-${sMeta.no} &bull; ${sMeta.type} &bull; ${sMeta.ayat} Ayat &bull; Juz ${sMeta.juz}
-              </p>
-              ${(sNo !== 1 && sNo !== 9 && fromAyat === 1) ? `
-                <div class="text-center my-4 font-quran text-2xl text-emerald-950 tracking-wider dir-rtl select-none" dir="rtl">
-                  بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
-                </div>
-              ` : ''}
+      if (!isMultiSurah) {
+        // Rentang 1 surah: render langsung seperti biasa, tidak perlu lazy-load.
+        const built = buildSurahSectionHTML(startSurah, surahsData[0], startSurah, endSurah, activeMarks);
+        compositeHTML = built.html;
+      } else {
+        // Rentang MULTI-SURAH (mis. Al-Baqarah s/d An-Nas): merender ribuan kata dari puluhan
+        // surah sekaligus membuat HP berat/lelet. Solusinya: surah pertama dirender langsung
+        // (agar layar tak kosong), surah-surah berikutnya baru dirender saat pengguna scroll
+        // mendekatinya (placeholder ringan dulu, diganti kontennya via IntersectionObserver).
+        const first = buildSurahSectionHTML(startSurah, surahsData[0], startSurah, endSurah, activeMarks);
+        compositeHTML = first.html;
+
+        for (let sIdx = 1; sIdx < surahsData.length; sIdx++) {
+          const sNo = startSurah + sIdx;
+          const sMeta = SURAH_DATA.find(s => s.no === sNo);
+          compositeHTML += `
+            <div class="surah-section-placeholder py-10 text-center" data-lazy-surah-idx="${sIdx}">
+              <i class="fa-solid fa-spinner fa-spin text-emerald-700/50 text-xl"></i>
+              <p class="text-[11px] text-stone-400 mt-2 font-sans">Memuat ${sMeta ? sMeta.nama : 'Surah ' + sNo}...</p>
             </div>
           `;
         }
-
-        let wordsHTML = '';
-        filteredAyahs.forEach(a => {
-          const rawVerse = cleanBismillah(a.text, sNo, a.numberInSurah);
-          const words = rawVerse.trim().split(/\s+/);
-
-          let verseWordsHTML = '';
-          words.forEach((word, wordIdx) => {
-            const mark = activeMarks.find(m => 
-              m.surahNo === sNo && 
-              m.ayatNo === a.numberInSurah && 
-              m.wordIdx === wordIdx
-            );
-
-            let markClass = '';
-            let title = `Surah ${sMeta.nama} Ayat ${a.numberInSurah} Kata #${wordIdx + 1}: Klik untuk koreksi`;
-
-            if (mark) {
-              markClass = (mark.type === 'Jaly') ? 'word-mark-jaly' : 'word-mark-khafy';
-              title = `[Kesalahan ${mark.type}] ${mark.note || 'Catatan koreksi kata'}`;
-            }
-
-            verseWordsHTML += `
-              <span class="word-tashih ${markClass}"
-                data-surah="${sNo}"
-                data-ayat="${a.numberInSurah}"
-                data-word-idx="${wordIdx}"
-                data-word="${escapeHtml(word)}"
-                title="${escapeHtml(title)}">
-                ${word}
-              </span>
-            `;
-          });
-
-          wordsHTML += `
-            <span class="inline leading-[3.2] align-middle">
-              ${verseWordsHTML}
-              <span class="inline-flex items-center justify-center text-xs font-sans font-black text-emerald-950 bg-amber-200 border border-amber-400 rounded-full w-7 h-7 mx-1 align-middle select-none shadow-sm" title="Ayat ${a.numberInSurah}">
-                ${toArabicNumerals(a.numberInSurah)}
-              </span>
-            </span>
-          `;
-        });
-
-        compositeHTML += `
-          <div class="surah-section">
-            ${surahDividerHTML}
-            <div>${wordsHTML}</div>
-          </div>
-        `;
       }
 
       versesContainer.innerHTML = compositeHTML || '<p class="text-center text-stone-400 text-xs py-8">Tidak ada ayat untuk ditampilkan.</p>';
+
+      if (isMultiSurah) {
+        mushafLazyObserver = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (!entry.isIntersecting) return;
+            mushafLazyObserver.unobserve(entry.target);
+
+            const placeholder = entry.target;
+            const sIdx = parseInt(placeholder.dataset.lazySurahIdx, 10);
+            const sNo = startSurah + sIdx;
+            const built = buildSurahSectionHTML(sNo, surahsData[sIdx], startSurah, endSurah, activeMarks);
+            placeholder.outerHTML = built.html;
+          });
+        }, { root: null, rootMargin: '600px 0px', threshold: 0.01 });
+
+        document.querySelectorAll('[data-lazy-surah-idx]').forEach(el => mushafLazyObserver.observe(el));
+      }
 
       const footer = document.getElementById('mushafAyatCountFooter');
       if (footer) {
@@ -4370,10 +4499,14 @@
         bottomNavs[viewName].className = "flex flex-col items-center gap-1 py-1 px-2.5 rounded-xl transition text-amber-300 font-bold scale-105";
       }
 
-      // Panel "Alur Sesi" hanya relevan saat menandai/menyetor di Mushaf
+      // Panel "Alur Sesi" & tombol simpan mengambang hanya relevan saat menandai/menyetor di Mushaf
       const panelAlurSesi = document.getElementById('panelAlurSesi');
       if (panelAlurSesi) {
         panelAlurSesi.classList.toggle('hidden', viewName !== 'mushaf');
+      }
+      const floatingSaveBtn = document.getElementById('floatingSaveSessionBtn');
+      if (floatingSaveBtn) {
+        floatingSaveBtn.classList.toggle('hidden', viewName !== 'mushaf');
       }
 
       if (viewName === 'mushaf') {
@@ -4445,7 +4578,7 @@ _Jurnal TashihQ Pro_`;
       });
 
       const avgScore = sPassed.length > 0 
-        ? Math.round(sPassed.reduce((a, b) => a + b, 0) / sPassed.length) 
+        ? Math.round(sPassed.reduce((a, b) => a + b.score, 0) / sPassed.length) 
         : 0;
 
       const textMessage = 
@@ -4504,7 +4637,7 @@ _Pengampu Halaqah Tahfidz_`;
       });
 
       const avgScore = sPassed.length > 0 
-        ? Math.round(sPassed.reduce((a, b) => a + b, 0) / sPassed.length) 
+        ? Math.round(sPassed.reduce((a, b) => a + b.score, 0) / sPassed.length) 
         : 0;
 
       const configuredTargets = ACTIVITY_TYPES.map(t => getTargetProgress(student, t)).filter(p => p.total > 0);
@@ -4516,6 +4649,38 @@ _Pengampu Halaqah Tahfidz_`;
       document.getElementById('raporTasmiCount').textContent = `${tasmiJuz.size} / 30 Juz`;
       document.getElementById('raporAvgScore').textContent = avgScore;
       document.getElementById('raporTargetPercent').textContent = `${targetPercent}%`;
+
+      // Rincian rapi per target kurikulum: label kegiatan, isi target (nama surah/rentang juz),
+      // progress bar, dan capaian ayat — satu kartu ringkas per jenis kegiatan.
+      const targetNorm = normalizeTargetKurikulum(student);
+      const breakdownEl = document.getElementById('raporTargetBreakdown');
+      if (breakdownEl) {
+        breakdownEl.innerHTML = ACTIVITY_TYPES.map(t => {
+          const label = ACTIVITY_TYPE_LABELS[t];
+          const target = targetNorm[t];
+          const p = getTargetProgress(student, t);
+          const belumDiatur = p.total === 0;
+          const pct = belumDiatur ? 0 : p.percent;
+          const itemsDetail = formatTargetItemsDetail(target);
+          const barColor = belumDiatur ? 'bg-stone-200' : (pct >= 100 ? 'bg-emerald-600' : 'bg-amber-500');
+
+          return `
+            <div class="border border-stone-200 rounded-xl p-2.5 ${belumDiatur ? 'bg-stone-50' : 'bg-white'}">
+              <div class="flex justify-between items-center mb-1">
+                <span class="font-bold text-stone-800">${escapeHtml(label)}</span>
+                <span class="font-black ${belumDiatur ? 'text-stone-400' : 'text-emerald-800'}">
+                  ${belumDiatur ? 'Belum diatur' : `${pct}%`}
+                </span>
+              </div>
+              <p class="text-[10px] text-stone-500 mb-1.5 leading-relaxed">${escapeHtml(itemsDetail)}</p>
+              <div class="w-full bg-stone-100 rounded-full h-1.5 overflow-hidden border border-stone-200">
+                <div class="${barColor} h-1.5 rounded-full" style="width:${pct}%"></div>
+              </div>
+              ${!belumDiatur ? `<p class="text-[10px] text-stone-500 mt-1 text-right font-semibold">${p.achieved} / ${p.total} Ayat</p>` : ''}
+            </div>
+          `;
+        }).join('');
+      }
 
       // Date for signature
       const todayStr = new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
