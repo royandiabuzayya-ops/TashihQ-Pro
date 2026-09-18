@@ -1,0 +1,12 @@
+TashihQ Pro - Release Checklist
+
+[OK] index.html aplikasi utama
+[OK] manifest.webmanifest
+[OK] sw.js
+[OK] icon 16/32/180/192/384/512/1024
+[OK] icon maskable 192/512
+[OK] README GitHub Pages + instalasi HP
+[OK] logo referensi disertakan
+
+Target:
+GitHub Pages -> HTTPS -> PWA install di Android.

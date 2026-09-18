@@ -1,0 +1,43 @@
+{
+  "name": "TashihQ Pro - Monitoring & Verifikasi Tahfidz",
+  "short_name": "TashihQ Pro",
+  "description": "Sistem Monitoring & Verifikasi Tahfidz dengan Mushaf Tashih, Jurnal Setoran, Rekap Santri, dan dukungan offline.",
+  "lang": "id-ID",
+  "dir": "ltr",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#fcfaf7",
+  "theme_color": "#022c22",
+  "categories": [
+    "education",
+    "productivity"
+  ],
+  "icons": [
+    {
+      "src": "./icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./icons/icon-192-maskable.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "./icons/icon-512-maskable.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
