@@ -1,39 +1,34 @@
 <!DOCTYPE html>
+
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>TashihQ Pro - Mushaf Tashih & Jurnal Hafalan Utsmani Madinah</title>
-
-  <!-- ============================================== -->
-  <!-- PWA: Manifest, Theme Color & Ikon (untuk PWABuilder / TWA) -->
-  <!-- ============================================== -->
-  <link rel="manifest" href="./manifest.webmanifest">
-  <meta name="theme-color" content="#022c22">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="apple-mobile-web-app-title" content="TashihQ Pro">
-  <link rel="icon" type="image/png" sizes="32x32" href="./icons/favicon-32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="./icons/favicon-16.png">
-  <link rel="apple-touch-icon" href="./icons/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png">
-
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-
-  <!-- FontAwesome v6 CDN -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- Chart.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-  <!-- Google Fonts: Amiri (Arabic Uthmani) & Plus Jakarta Sans (UI) -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-
-  <style>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" name="viewport"/>
+<title>TashihQ Pro - Mushaf Tashih &amp; Jurnal Hafalan Utsmani Madinah</title>
+<!-- ============================================== -->
+<!-- PWA: Manifest, Theme Color & Ikon (untuk PWABuilder / TWA) -->
+<!-- ============================================== -->
+<link href="./manifest.webmanifest" rel="manifest"/>
+<meta content="#022c22" name="theme-color"/>
+<meta content="yes" name="mobile-web-app-capable"/>
+<meta content="yes" name="apple-mobile-web-app-capable"/>
+<meta content="black-translucent" name="apple-mobile-web-app-status-bar-style"/>
+<meta content="TashihQ Pro" name="apple-mobile-web-app-title"/>
+<link href="./icons/favicon-32.png" rel="icon" sizes="32x32" type="image/png"/>
+<link href="./icons/favicon-16.png" rel="icon" sizes="16x16" type="image/png"/>
+<link href="./icons/apple-touch-icon.png" rel="apple-touch-icon"/>
+<link href="./icons/icon-192.png" rel="icon" sizes="192x192" type="image/png"/>
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<!-- FontAwesome v6 CDN -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet"/>
+<!-- Chart.js CDN -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Google Fonts: Amiri (Arabic Uthmani) & Plus Jakarta Sans (UI) -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<style>
     :root {
       --quran-font-size: 2rem; /* 32px default */
       --quran-word-gap: 4px;
@@ -98,11 +93,6 @@
       background-color: #fffefb;
       background-image: radial-gradient(#e5dfd5 0.75px, transparent 0.75px);
       background-size: 16px 16px;
-    }
-    .canvas-container-dark {
-      background-color: #0b1329;
-      border-radius: 1rem;
-      box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.5);
     }
     .chart-wrapper {
       position: relative;
@@ -245,7 +235,6 @@
   #printAreaRapor * { visibility:visible !important; }
 }
   </style>
-
 <style id="tqRaporProgressCardStyle">
 #raporTargetBreakdown .tq-activity-section{margin-bottom:10px}
 #raporTargetBreakdown .tq-activity-heading{
@@ -345,9 +334,8 @@
   #raporTargetBreakdown .tq-target-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 </style>
-
-
 <style id="tqRaporScreenControlsFix">
+
 @media screen {
   #modalRaporSantri .tq-rapor-header {
     display:flex !important;
@@ -385,9 +373,7 @@
     visibility:hidden !important;
   }
 }
-</style>
 
-<style id="tqRaporNavigationFix">
 /* Tombol Rapor selalu aktif di layar, tetapi disembunyikan saat mencetak. */
 @media screen {
   #modalRaporSantri .tq-rapor-actions button {
@@ -398,10 +384,8 @@
 @media print {
   #modalRaporSantri .no-print { display:none !important; }
 }
-</style>
 
 
-<style id="tqDirectPrintModeFix">
 /* Mode cetak langsung: tetap memakai DOM aplikasi agar konten dinamis Rapor tidak hilang. */
 @media print {
   body.tq-direct-print-mode > * { visibility:hidden !important; }
@@ -460,1392 +444,1263 @@
     box-sizing:border-box !important;
   }
 }
+
 </style>
 
+
+
+<style id="tqActivationStyle">
+#tqActivationOverlay{position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;padding:20px;background:rgba(2,44,34,.96);backdrop-filter:blur(8px)}
+#tqActivationOverlay.hidden{display:none!important}
+#tqActivationCard{width:min(420px,100%);background:#fff;border-radius:24px;padding:28px;box-shadow:0 25px 70px rgba(0,0,0,.35);text-align:center}
+#tqActivationCode{width:100%;box-sizing:border-box;padding:12px 14px;border:1px solid #d6d3d1;border-radius:12px;outline:none;font-weight:700;letter-spacing:.04em;text-align:center}
+#tqActivationCode:focus{border-color:#059669;box-shadow:0 0 0 3px rgba(16,185,129,.15)}
+#tqActivationBtn{width:100%;margin-top:10px;padding:12px;border:0;border-radius:12px;background:#fbbf24;color:#022c22;font-weight:900;cursor:pointer}
+#tqActivationMsg{min-height:20px;margin-top:10px;font-size:12px;color:#dc2626;font-weight:700}
+@media print{#tqActivationOverlay{display:none!important}}
+</style>
+<div id="tqActivationOverlay" aria-modal="true" role="dialog">
+  <div id="tqActivationCard">
+    <div style="width:58px;height:58px;margin:0 auto 14px;border-radius:18px;background:#022c22;color:#fbbf24;display:flex;align-items:center;justify-content:center;font-size:26px"><i class="fa-solid fa-lock"></i></div>
+    <h2 style="margin:0;color:#022c22;font-size:20px;font-weight:900">Aktivasi TashihQ Pro</h2>
+    <p style="margin:8px 0 18px;color:#57534e;font-size:13px;line-height:1.5">Masukkan kode aktivasi untuk menggunakan aplikasi TashihQ Pro.</p>
+    <input id="tqActivationCode" type="text" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="Kode Aktivasi">
+    <button id="tqActivationBtn" type="button">Aktifkan TashihQ Pro</button>
+    <div id="tqActivationMsg" aria-live="polite"></div>
+  </div>
+</div>
+<script>
+(function(){
+  const KEY='tashihq_pro_activation_v1';
+  const CODE='JAZAKALLAHU-KHAIR';
+  function ready(){
+    const overlay=document.getElementById('tqActivationOverlay');
+    const input=document.getElementById('tqActivationCode');
+    const btn=document.getElementById('tqActivationBtn');
+    const msg=document.getElementById('tqActivationMsg');
+    if(!overlay||!input||!btn) return;
+    let active=false;
+    try{active=localStorage.getItem(KEY)==='1';}catch(e){}
+    if(active){overlay.classList.add('hidden');return;}
+    const activate=()=>{
+      const value=(input.value||'').trim().toUpperCase();
+      if(value===CODE){
+        try{localStorage.setItem(KEY,'1');}catch(e){}
+        overlay.classList.add('hidden');
+        msg.textContent='';
+        return;
+      }
+      msg.textContent='Kode aktivasi tidak valid. Periksa kembali kode Anda.';
+      input.focus();
+      input.select();
+    };
+    btn.addEventListener('click',activate);
+    input.addEventListener('keydown',e=>{if(e.key==='Enter') activate();});
+    setTimeout(()=>input.focus(),100);
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',ready,{once:true}); else ready();
+})();
+</script>
 </head>
 <body class="text-slate-800 min-h-screen flex flex-col antialiased pb-20 md:pb-4">
-
-  <header class="bg-emerald-950 text-white shadow-xl sticky top-0 z-40 border-b border-emerald-800">
-    <div class="max-w-7xl mx-auto px-4 py-2.5 md:py-3 flex flex-wrap justify-between items-center gap-3">
-      
-      <!-- Brand Logo -->
-      <div class="flex items-center space-x-2.5">
-        <div class="bg-gradient-to-br from-amber-300 to-amber-500 text-emerald-950 p-2.5 rounded-2xl font-black shadow-md flex items-center justify-center">
-          <i class="fa-solid fa-book-quran text-2xl"></i>
-        </div>
-        <div>
-          <div class="flex items-center gap-1.5">
-            <h1 class="text-lg md:text-xl font-extrabold tracking-tight text-amber-200">TashihQ <span class="text-xs font-black uppercase bg-emerald-800 text-amber-300 px-1.5 py-0.5 rounded border border-emerald-600">PRO</span></h1>
-          </div>
-          <p class="text-[11px] text-emerald-300 font-medium hidden sm:block">Mushaf Tashih & Jurnal Setoran &bull; Standar Rasm Utsmani Madinah</p>
-        </div>
-      </div>
-
-      <!-- Main Navigation Tabs (Desktop) -->
-      <div class="hidden md:flex items-center bg-emerald-900/90 p-1 rounded-2xl border border-emerald-700/60 text-xs font-semibold">
-        <button id="navMushafBtn" onclick="switchView('mushaf')" class="px-3.5 py-1.5 rounded-xl bg-emerald-700 text-white shadow transition flex items-center gap-1.5">
-          <i class="fa-solid fa-book-open"></i> <span>Mushaf Tashih</span>
-        </button>
-        <button id="navJurnalBtn" onclick="switchView('jurnal')" class="px-3.5 py-1.5 rounded-xl text-emerald-200 hover:text-white transition flex items-center gap-1.5">
-          <i class="fa-solid fa-chart-line"></i> <span>Jurnal & Riwayat</span>
-        </button>
-        <button id="navRekapBtn" onclick="switchView('rekap')" class="px-3.5 py-1.5 rounded-xl text-emerald-200 hover:text-white transition flex items-center gap-1.5">
-          <i class="fa-solid fa-id-card-clip"></i> <span>Rekap Siswa</span>
-        </button>
-        <button id="navSantriBtn" onclick="switchView('santri')" class="px-3.5 py-1.5 rounded-xl text-emerald-200 hover:text-white transition flex items-center gap-1.5">
-          <i class="fa-solid fa-users-gear"></i> <span>Santri & Data</span>
-        </button>
-      </div>
-
-      <!-- Quick Offline Storage Status Badge & Rapor Trigger -->
-      <div class="flex items-center gap-2">
-        <button onclick="openRaporModal()" class="bg-amber-400 hover:bg-amber-500 text-emerald-950 px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 text-xs font-black shadow" title="Cetak Rapor Santri">
-          <i class="fa-solid fa-file-invoice"></i> <span class="hidden sm:inline">Rapor PDF</span>
-        </button>
-        <button onclick="openDownloadOfflineModal()" id="headerOfflineBtn" class="bg-emerald-900/90 hover:bg-emerald-800 text-emerald-200 hover:text-white px-2.5 py-1.5 rounded-xl border border-emerald-700/60 transition flex items-center gap-1.5 text-xs font-bold shadow-sm" title="Kelola Kesiapan Mushaf Offline">
-          <i id="headerOfflineIcon" class="fa-solid fa-cloud-arrow-down text-amber-300"></i>
-          <span id="headerOfflineText" class="hidden sm:inline">Offline: Memeriksa...</span>
-        </button>
-      </div>
-
-    </div>
-  </header>
-
-  <section id="panelAlurSesi" class="bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-950 text-white border-b border-emerald-800 px-4 py-3.5 shadow-lg">
-    <div class="max-w-7xl mx-auto space-y-3">
-      
-      <!-- Top Info Row: Workflow Title & Live Tashih Counters -->
-      <div class="flex flex-wrap items-center justify-between gap-3 border-b border-emerald-800/60 pb-2.5">
-        <div class="flex items-center gap-2">
-          <span class="bg-amber-400 text-emerald-950 px-2.5 py-0.5 rounded-lg font-black text-[11px] tracking-wider flex items-center gap-1.5 shadow">
-            <i class="fa-solid fa-list-check"></i> ALUR SESI
+<header class="bg-emerald-950 text-white shadow-xl sticky top-0 z-40 border-b border-emerald-800">
+<div class="max-w-7xl mx-auto px-4 py-2.5 md:py-3 flex flex-wrap justify-between items-center gap-3">
+<!-- Brand Logo -->
+<div class="flex items-center space-x-2.5">
+<div class="bg-gradient-to-br from-amber-300 to-amber-500 text-emerald-950 p-2.5 rounded-2xl font-black shadow-md flex items-center justify-center">
+<i class="fa-solid fa-book-quran text-2xl"></i>
+</div>
+<div>
+<div class="flex items-center gap-1.5">
+<h1 class="text-lg md:text-xl font-extrabold tracking-tight text-amber-200">TashihQ <span class="text-xs font-black uppercase bg-emerald-800 text-amber-300 px-1.5 py-0.5 rounded border border-emerald-600">PRO</span></h1>
+</div>
+<p class="text-[11px] text-emerald-300 font-medium hidden sm:block">Mushaf Tashih &amp; Jurnal Setoran • Standar Rasm Utsmani Madinah</p>
+</div>
+</div>
+<!-- Main Navigation Tabs (Desktop) -->
+<div class="hidden md:flex items-center bg-emerald-900/90 p-1 rounded-2xl border border-emerald-700/60 text-xs font-semibold">
+<button class="px-3.5 py-1.5 rounded-xl bg-emerald-700 text-white shadow transition flex items-center gap-1.5" id="navMushafBtn" onclick="switchView('mushaf')">
+<i class="fa-solid fa-book-open"></i> <span>Mushaf Tashih</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-xl text-emerald-200 hover:text-white transition flex items-center gap-1.5" id="navJurnalBtn" onclick="switchView('jurnal')">
+<i class="fa-solid fa-chart-line"></i> <span>Jurnal &amp; Riwayat</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-xl text-emerald-200 hover:text-white transition flex items-center gap-1.5" id="navRekapBtn" onclick="switchView('rekap')">
+<i class="fa-solid fa-id-card-clip"></i> <span>Rekap Siswa</span>
+</button>
+<button class="px-3.5 py-1.5 rounded-xl text-emerald-200 hover:text-white transition flex items-center gap-1.5" id="navSantriBtn" onclick="switchView('santri')">
+<i class="fa-solid fa-users-gear"></i> <span>Santri &amp; Data</span>
+</button>
+</div>
+<!-- Quick Offline Storage Status Badge & Rapor Trigger -->
+<div class="flex items-center gap-2">
+<button class="bg-amber-400 hover:bg-amber-500 text-emerald-950 px-3 py-1.5 rounded-xl transition flex items-center gap-1.5 text-xs font-black shadow" onclick="openRaporModal()" title="Cetak Rapor Santri">
+<i class="fa-solid fa-file-invoice"></i> <span class="hidden sm:inline">Rapor PDF</span>
+</button>
+<button class="bg-emerald-900/90 hover:bg-emerald-800 text-emerald-200 hover:text-white px-2.5 py-1.5 rounded-xl border border-emerald-700/60 transition flex items-center gap-1.5 text-xs font-bold shadow-sm" id="headerOfflineBtn" onclick="openDownloadOfflineModal()" title="Kelola Kesiapan Mushaf Offline">
+<i class="fa-solid fa-cloud-arrow-down text-amber-300" id="headerOfflineIcon"></i>
+<span class="hidden sm:inline" id="headerOfflineText">Offline: Memeriksa...</span>
+</button>
+</div>
+</div>
+</header>
+<section class="bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-950 text-white border-b border-emerald-800 px-4 py-3.5 shadow-lg" id="panelAlurSesi">
+<div class="max-w-7xl mx-auto space-y-3">
+<!-- Top Info Row: Workflow Title & Live Tashih Counters -->
+<div class="flex flex-wrap items-center justify-between gap-3 border-b border-emerald-800/60 pb-2.5">
+<div class="flex items-center gap-2">
+<span class="bg-amber-400 text-emerald-950 px-2.5 py-0.5 rounded-lg font-black text-[11px] tracking-wider flex items-center gap-1.5 shadow">
+<i class="fa-solid fa-list-check"></i> ALUR SESI
           </span>
-          <span class="text-xs text-emerald-200 font-semibold hidden sm:inline">
-            Kontrol Terpadu Sesi Setoran, Koreksi Per-Kata & Riwayat
+<span class="text-xs text-emerald-200 font-semibold hidden sm:inline">
+            Kontrol Terpadu Sesi Setoran, Koreksi Per-Kata &amp; Riwayat
           </span>
-        </div>
-
-        <!-- Live Mistake Counters -->
-        <div class="flex items-center gap-2 text-xs">
-          <span class="text-emerald-300 font-bold hidden md:inline">Kesalahan Terdeteksi:</span>
-          <span class="bg-rose-950/90 text-rose-300 border border-rose-600/70 px-3 py-1 rounded-xl font-bold flex items-center gap-1.5 shadow-sm">
-            <span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></span> Jaly (🔴): <strong id="counterJaly" class="text-white text-sm font-black ml-1">0</strong>
-          </span>
-          <span class="bg-amber-950/90 text-amber-300 border border-amber-600/70 px-3 py-1 rounded-xl font-bold flex items-center gap-1.5 shadow-sm">
-            <span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span> Khafy (🟡): <strong id="counterKhafy" class="text-white text-sm font-black ml-1">0</strong>
-          </span>
-        </div>
-      </div>
-
-      <!-- 6-Step Integrated Controls Grid -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-2.5 items-end text-xs">
-        
-        <!-- STEP 1: Waktu & Tanggal -->
-        <div class="lg:col-span-2 space-y-1">
-          <label class="font-bold text-emerald-300 flex items-center gap-1">
-            <span class="w-4 h-4 rounded-full bg-amber-400 text-emerald-950 text-[10px] inline-flex items-center justify-center font-black">1</span>
-            Waktu & Tanggal:
+</div>
+<!-- Live Mistake Counters -->
+<div class="flex items-center gap-2 text-xs">
+<span class="text-emerald-300 font-bold hidden md:inline">Kesalahan Terdeteksi:</span>
+<span class="bg-rose-950/90 text-rose-300 border border-rose-600/70 px-3 py-1 rounded-xl font-bold flex items-center gap-1.5 shadow-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-rose-500 animate-pulse"></span> Jaly (🔴): <strong class="text-white text-sm font-black ml-1" id="counterJaly">0</strong>
+</span>
+<span class="bg-amber-950/90 text-amber-300 border border-amber-600/70 px-3 py-1 rounded-xl font-bold flex items-center gap-1.5 shadow-sm">
+<span class="w-2.5 h-2.5 rounded-full bg-amber-500 animate-pulse"></span> Khafy (🟡): <strong class="text-white text-sm font-black ml-1" id="counterKhafy">0</strong>
+</span>
+</div>
+</div>
+<!-- 6-Step Integrated Controls Grid -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-2.5 items-end text-xs">
+<!-- STEP 1: Waktu & Tanggal -->
+<div class="lg:col-span-2 space-y-1">
+<label class="font-bold text-emerald-300 flex items-center gap-1">
+<span class="w-4 h-4 rounded-full bg-amber-400 text-emerald-950 text-[10px] inline-flex items-center justify-center font-black">1</span>
+            Waktu &amp; Tanggal:
           </label>
-          <input type="datetime-local" id="sessionDateTimeInput"
-            class="w-full bg-emerald-950 text-white border border-emerald-700 rounded-xl px-2.5 py-2 font-semibold text-xs focus:ring-2 focus:ring-amber-400 focus:outline-none shadow-inner">
-        </div>
-
-        <!-- STEP 2: Pilih Siswa / Santri -->
-        <div class="lg:col-span-2 space-y-1">
-          <div class="flex justify-between items-center">
-            <label class="font-bold text-emerald-300 flex items-center gap-1">
-              <span class="w-4 h-4 rounded-full bg-amber-400 text-emerald-950 text-[10px] inline-flex items-center justify-center font-black">2</span>
+<input class="w-full bg-emerald-950 text-white border border-emerald-700 rounded-xl px-2.5 py-2 font-semibold text-xs focus:ring-2 focus:ring-amber-400 focus:outline-none shadow-inner" id="sessionDateTimeInput" type="datetime-local"/>
+</div>
+<!-- STEP 2: Pilih Siswa / Santri -->
+<div class="lg:col-span-2 space-y-1">
+<div class="flex justify-between items-center">
+<label class="font-bold text-emerald-300 flex items-center gap-1">
+<span class="w-4 h-4 rounded-full bg-amber-400 text-emerald-950 text-[10px] inline-flex items-center justify-center font-black">2</span>
               Pilih Santri:
             </label>
-            <button onclick="openModalTambahSantri()" type="button" class="text-[10px] text-amber-300 hover:text-amber-200 font-bold underline">
+<button class="text-[10px] text-amber-300 hover:text-amber-200 font-bold underline" onclick="openModalTambahSantri()" type="button">
               + Baru
             </button>
-          </div>
-          <select id="sessionStudentSelect" onchange="onStudentSelectChange(this.value)"
-            class="w-full bg-emerald-950 text-white border border-emerald-700 rounded-xl px-2.5 py-2 font-semibold text-xs focus:ring-2 focus:ring-amber-400 focus:outline-none cursor-pointer shadow-inner">
-          </select>
-        </div>
-
-        <!-- STEP 3: Jenis Kegiatan -->
-        <div class="lg:col-span-2 space-y-1">
-          <label class="font-bold text-emerald-300 flex items-center gap-1">
-            <span class="w-4 h-4 rounded-full bg-amber-400 text-emerald-950 text-[10px] inline-flex items-center justify-center font-black">3</span>
+</div>
+<select class="w-full bg-emerald-950 text-white border border-emerald-700 rounded-xl px-2.5 py-2 font-semibold text-xs focus:ring-2 focus:ring-amber-400 focus:outline-none cursor-pointer shadow-inner" id="sessionStudentSelect" onchange="onStudentSelectChange(this.value)">
+</select>
+</div>
+<!-- STEP 3: Jenis Kegiatan -->
+<div class="lg:col-span-2 space-y-1">
+<label class="font-bold text-emerald-300 flex items-center gap-1">
+<span class="w-4 h-4 rounded-full bg-amber-400 text-emerald-950 text-[10px] inline-flex items-center justify-center font-black">3</span>
             Jenis Kegiatan:
           </label>
-          <select id="sessionTypeSelect" onchange="onSessionTypeChange(this.value)"
-            class="w-full bg-emerald-950 text-white border border-emerald-700 rounded-xl px-2.5 py-2 font-semibold text-xs focus:ring-2 focus:ring-amber-400 focus:outline-none cursor-pointer shadow-inner">
-            <option value="Setoran Bacaan">Setoran Bacaan (Tahsin)</option>
-            <option value="Setoran Hafalan Baru">Setoran Hafalan Baru</option>
-            <option value="Muraja'ah">Muraja'ah</option>
-            <option value="Tasmi'">Tasmi'</option>
-          </select>
-        </div>
-
-        <!-- STEP 4: Rentang Surah & Ayat -->
-        <div class="lg:col-span-4 space-y-1">
-          <div class="flex items-center justify-between">
-            <label class="font-bold text-emerald-300 flex items-center gap-1">
-              <span class="w-4 h-4 rounded-full bg-amber-400 text-emerald-950 text-[10px] inline-flex items-center justify-center font-black">4</span>
-              Rentang Surah & Ayat:
+<select class="w-full bg-emerald-950 text-white border border-emerald-700 rounded-xl px-2.5 py-2 font-semibold text-xs focus:ring-2 focus:ring-amber-400 focus:outline-none cursor-pointer shadow-inner" id="sessionTypeSelect" onchange="onSessionTypeChange(this.value)">
+<option value="Setoran Bacaan">Setoran Bacaan (Tahsin)</option>
+<option value="Setoran Hafalan Baru">Setoran Hafalan Baru</option>
+<option value="Muraja'ah">Muraja'ah</option>
+<option value="Tasmi'">Tasmi'</option>
+</select>
+</div>
+<!-- STEP 4: Rentang Surah & Ayat -->
+<div class="lg:col-span-4 space-y-1">
+<div class="flex items-center justify-between">
+<label class="font-bold text-emerald-300 flex items-center gap-1">
+<span class="w-4 h-4 rounded-full bg-amber-400 text-emerald-950 text-[10px] inline-flex items-center justify-center font-black">4</span>
+              Rentang Surah &amp; Ayat:
             </label>
-            <span id="rangeSurahCountBadge" class="text-[10px] bg-emerald-800 text-amber-300 px-2 py-0.5 rounded-full font-bold border border-emerald-700 shadow-sm">
+<span class="text-[10px] bg-emerald-800 text-amber-300 px-2 py-0.5 rounded-full font-bold border border-emerald-700 shadow-sm" id="rangeSurahCountBadge">
               1 Surah
             </span>
-          </div>
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
-            <!-- Surah & Ayat Awal -->
-            <div class="flex items-center gap-1 bg-emerald-950/90 p-1 rounded-xl border border-emerald-700 shadow-inner">
-              <span class="text-[10px] text-emerald-300 font-bold pl-1.5 shrink-0">Dari:</span>
-              <select id="workflowSurahStartSelect" onchange="onSurahStartChange(this.value)"
-                class="w-full bg-transparent text-white font-semibold text-[11px] focus:outline-none cursor-pointer truncate">
-              </select>
-              <input type="number" id="workflowAyatStartInput" min="1" value="1" placeholder="Ayat"
-                onchange="onAyatRangeChange()" title="Ayat Awal"
-                class="w-12 bg-emerald-900 text-amber-300 rounded-lg py-1 px-1 font-black text-xs text-center border border-emerald-600 focus:ring-1 focus:ring-amber-400 focus:outline-none shrink-0">
-            </div>
-
-            <!-- Surah & Ayat Akhir -->
-            <div class="flex items-center gap-1 bg-emerald-950/90 p-1 rounded-xl border border-emerald-700 shadow-inner">
-              <span class="text-[10px] text-emerald-300 font-bold pl-1.5 shrink-0">S/d:</span>
-              <select id="workflowSurahEndSelect" onchange="onSurahEndChange(this.value)"
-                class="w-full bg-transparent text-white font-semibold text-[11px] focus:outline-none cursor-pointer truncate">
-              </select>
-              <input type="number" id="workflowAyatEndInput" min="1" value="7" placeholder="Ayat"
-                onchange="onAyatRangeChange()" title="Ayat Akhir"
-                class="w-12 bg-emerald-900 text-amber-300 rounded-lg py-1 px-1 font-black text-xs text-center border border-emerald-600 focus:ring-1 focus:ring-amber-400 focus:outline-none shrink-0">
-            </div>
-          </div>
-        </div>
-
-        <!-- STEP 5 & 6: Mulai Menandai & Simpan Kegiatan -->
-        <div class="lg:col-span-2 flex gap-1.5">
-          <button onclick="focusMarkingMushaf()" type="button" title="Lompat ke Mushaf dan Mulai Tandai Per-Kata"
-            class="w-1/2 bg-teal-800 hover:bg-teal-700 active:scale-95 text-teal-100 font-bold py-2 px-2 rounded-xl text-[11px] shadow transition border border-teal-600 flex flex-col items-center justify-center">
-            <span class="flex items-center gap-1"><span class="w-3.5 h-3.5 rounded-full bg-amber-400 text-emerald-950 text-[9px] inline-flex items-center justify-center font-black">5</span> Tandai</span>
-            <span class="text-[10px] font-medium text-teal-200">Per-Kata</span>
-          </button>
-
-          <button onclick="finishSessionAndSave()" type="button" title="Simpan Catatan Setoran ke Jurnal"
-            class="w-1/2 bg-amber-400 hover:bg-amber-500 active:scale-95 text-emerald-950 font-extrabold py-2 px-2 rounded-xl text-[11px] shadow-md transition flex flex-col items-center justify-center border border-amber-300">
-            <span class="flex items-center gap-1"><span class="w-3.5 h-3.5 rounded-full bg-emerald-950 text-amber-300 text-[9px] inline-flex items-center justify-center font-black">6</span> Simpan</span>
-            <span class="text-[10px] font-black uppercase tracking-tight">Kegiatan</span>
-          </button>
-        </div>
-
-      </div>
-
-      <!-- Quick Session Status Bar -->
-      <div class="flex flex-wrap items-center justify-between gap-2 text-[11px] text-emerald-200 bg-emerald-950/70 px-3 py-1.5 rounded-xl border border-emerald-800/80">
-        <div class="flex items-center gap-2">
-          <span class="text-amber-300 font-bold"><i class="fa-solid fa-crosshairs"></i> Target Aktif:</span>
-          <span id="sessionTargetBadge" class="font-bold text-white">Surah Al-Fatihah (Ayat 1-7)</span>
-          <span class="text-emerald-400">&bull;</span>
-          <span id="sessionStudentBadge" class="text-emerald-300 font-semibold">Santri: Ahmad Fauzi</span>
-        </div>
-        <div class="flex items-center gap-2">
-          <span class="text-stone-300 italic hidden sm:inline">
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+<!-- Surah & Ayat Awal -->
+<div class="flex items-center gap-1 bg-emerald-950/90 p-1 rounded-xl border border-emerald-700 shadow-inner">
+<span class="text-[10px] text-emerald-300 font-bold pl-1.5 shrink-0">Dari:</span>
+<select class="w-full bg-transparent text-white font-semibold text-[11px] focus:outline-none cursor-pointer truncate" id="workflowSurahStartSelect" onchange="onSurahStartChange(this.value)">
+</select>
+<input class="w-12 bg-emerald-900 text-amber-300 rounded-lg py-1 px-1 font-black text-xs text-center border border-emerald-600 focus:ring-1 focus:ring-amber-400 focus:outline-none shrink-0" id="workflowAyatStartInput" min="1" onchange="onAyatRangeChange()" placeholder="Ayat" title="Ayat Awal" type="number" value="1"/>
+</div>
+<!-- Surah & Ayat Akhir -->
+<div class="flex items-center gap-1 bg-emerald-950/90 p-1 rounded-xl border border-emerald-700 shadow-inner">
+<span class="text-[10px] text-emerald-300 font-bold pl-1.5 shrink-0">S/d:</span>
+<select class="w-full bg-transparent text-white font-semibold text-[11px] focus:outline-none cursor-pointer truncate" id="workflowSurahEndSelect" onchange="onSurahEndChange(this.value)">
+</select>
+<input class="w-12 bg-emerald-900 text-amber-300 rounded-lg py-1 px-1 font-black text-xs text-center border border-emerald-600 focus:ring-1 focus:ring-amber-400 focus:outline-none shrink-0" id="workflowAyatEndInput" min="1" onchange="onAyatRangeChange()" placeholder="Ayat" title="Ayat Akhir" type="number" value="7"/>
+</div>
+</div>
+</div>
+<!-- STEP 5 & 6: Mulai Menandai & Simpan Kegiatan -->
+<div class="lg:col-span-2 flex gap-1.5">
+<button class="w-1/2 bg-teal-800 hover:bg-teal-700 active:scale-95 text-teal-100 font-bold py-2 px-2 rounded-xl text-[11px] shadow transition border border-teal-600 flex flex-col items-center justify-center" onclick="focusMarkingMushaf()" title="Lompat ke Mushaf dan Mulai Tandai Per-Kata" type="button">
+<span class="flex items-center gap-1"><span class="w-3.5 h-3.5 rounded-full bg-amber-400 text-emerald-950 text-[9px] inline-flex items-center justify-center font-black">5</span> Tandai</span>
+<span class="text-[10px] font-medium text-teal-200">Per-Kata</span>
+</button>
+<button class="w-1/2 bg-amber-400 hover:bg-amber-500 active:scale-95 text-emerald-950 font-extrabold py-2 px-2 rounded-xl text-[11px] shadow-md transition flex flex-col items-center justify-center border border-amber-300" onclick="finishSessionAndSave()" title="Simpan Catatan Setoran ke Jurnal" type="button">
+<span class="flex items-center gap-1"><span class="w-3.5 h-3.5 rounded-full bg-emerald-950 text-amber-300 text-[9px] inline-flex items-center justify-center font-black">6</span> Simpan</span>
+<span class="text-[10px] font-black uppercase tracking-tight">Kegiatan</span>
+</button>
+</div>
+</div>
+<!-- Quick Session Status Bar -->
+<div class="flex flex-wrap items-center justify-between gap-2 text-[11px] text-emerald-200 bg-emerald-950/70 px-3 py-1.5 rounded-xl border border-emerald-800/80">
+<div class="flex items-center gap-2">
+<span class="text-amber-300 font-bold"><i class="fa-solid fa-crosshairs"></i> Target Aktif:</span>
+<span class="font-bold text-white" id="sessionTargetBadge">Surah Al-Fatihah (Ayat 1-7)</span>
+<span class="text-emerald-400">•</span>
+<span class="text-emerald-300 font-semibold" id="sessionStudentBadge">Santri: Ahmad Fauzi</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-stone-300 italic hidden sm:inline">
             * Pilih alat penanda di bawah, lalu klik kata Arab untuk memberi tanda.
           </span>
-          <button onclick="showAllSurahAyat()" class="text-[10px] bg-emerald-800 hover:bg-emerald-700 text-emerald-100 px-2 py-0.5 rounded-lg border border-emerald-600 transition">
+<button class="text-[10px] bg-emerald-800 hover:bg-emerald-700 text-emerald-100 px-2 py-0.5 rounded-lg border border-emerald-600 transition" onclick="showAllSurahAyat()">
             Tampilkan Semua Ayat
           </button>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <main class="max-w-7xl mx-auto px-2 sm:px-4 py-6 flex-grow w-full">
-
-    <!-- ============================================== -->
-    <!-- VIEW 1: MODE MUSHAF INTERAKTIF (PER-KATA TASHIH) -->
-    <!-- ============================================== -->
-    <section id="viewMushaf" class="space-y-4">
-      
-      <!-- Banner Mode Tinjau Riwayat Sesi -->
-      <div id="reviewModeBanner" class="hidden bg-gradient-to-r from-blue-900 to-indigo-950 text-white p-4 rounded-2xl border border-blue-600 shadow-md flex flex-wrap items-center justify-between gap-3 animate-in fade-in">
-        <div class="flex items-center gap-3">
-          <div class="w-9 h-9 rounded-xl bg-blue-500/30 flex items-center justify-center text-blue-300 text-lg">
-            <i class="fa-solid fa-clock-rotate-left"></i>
-          </div>
-          <div>
-            <span class="text-[10px] uppercase font-black tracking-wider px-2 py-0.5 rounded bg-blue-500/40 text-blue-200">
+</div>
+</div>
+</div>
+</section>
+<main class="max-w-7xl mx-auto px-2 sm:px-4 py-6 flex-grow w-full">
+<!-- ============================================== -->
+<!-- VIEW 1: MODE MUSHAF INTERAKTIF (PER-KATA TASHIH) -->
+<!-- ============================================== -->
+<section class="space-y-4" id="viewMushaf">
+<!-- Banner Mode Tinjau Riwayat Sesi -->
+<div class="hidden bg-gradient-to-r from-blue-900 to-indigo-950 text-white p-4 rounded-2xl border border-blue-600 shadow-md flex flex-wrap items-center justify-between gap-3 animate-in fade-in" id="reviewModeBanner">
+<div class="flex items-center gap-3">
+<div class="w-9 h-9 rounded-xl bg-blue-500/30 flex items-center justify-center text-blue-300 text-lg">
+<i class="fa-solid fa-clock-rotate-left"></i>
+</div>
+<div>
+<span class="text-[10px] uppercase font-black tracking-wider px-2 py-0.5 rounded bg-blue-500/40 text-blue-200">
               Mode Tinjau Riwayat Setoran
             </span>
-            <p id="reviewModeDetails" class="text-xs font-bold text-blue-100 mt-0.5">
+<p class="text-xs font-bold text-blue-100 mt-0.5" id="reviewModeDetails">
               Meninjau tanda koreksi setoran santri
             </p>
-          </div>
-        </div>
-        <button onclick="exitReviewMode()" class="bg-amber-400 hover:bg-amber-500 active:scale-95 text-emerald-950 font-black text-xs px-3.5 py-2 rounded-xl transition shadow flex items-center gap-1.5">
-          <i class="fa-solid fa-rotate-left"></i> Kembali ke Sesi Baru
+</div>
+</div>
+<button class="bg-amber-400 hover:bg-amber-500 active:scale-95 text-emerald-950 font-black text-xs px-3.5 py-2 rounded-xl transition shadow flex items-center gap-1.5" onclick="exitReviewMode()">
+<i class="fa-solid fa-rotate-left"></i> Kembali ke Sesi Baru
         </button>
-      </div>
-
-      <!-- DEDICATED MARKING TOOLBAR (FLOATING, DRAGGABLE, PINCH-RESIZABLE & COLLAPSIBLE) -->
-      <div id="markingToolbarSection" class="fixed right-3 top-1/4 z-[60] bg-emerald-950/95 backdrop-blur-md text-white p-2 rounded-2xl shadow-2xl border border-emerald-700/80 flex flex-col gap-2 transition-transform duration-200" style="touch-action: none; transform-origin: center center;">
-
-        <!-- Handle untuk drag + tombol ciutkan -->
-        <div class="flex items-center gap-1">
-          <div id="toolbarDragHandle" class="flex-grow h-8 flex items-center justify-center cursor-grab active:cursor-grabbing text-emerald-600 hover:text-amber-300 transition">
-            <i class="fa-solid fa-grip-lines text-xl"></i>
-          </div>
-          <button id="toolbarCollapseBtn" onclick="toggleToolbarCollapse()" type="button" title="Ciutkan/Perluas Panel"
-            class="w-7 h-8 flex items-center justify-center rounded-lg text-emerald-500 hover:text-amber-300 hover:bg-emerald-800/80 transition shrink-0">
-            <i id="toolbarCollapseIcon" class="fa-solid fa-chevron-up text-sm"></i>
-          </button>
-        </div>
-
-        <div id="toolbarBody" class="flex flex-col gap-2">
-          <!-- Pilihan Alat Penanda (Ikon Saja) -->
-          <div class="flex flex-col gap-2 border-b border-emerald-800/60 pb-2">
-            <button id="toolJalyBtn" onclick="setActiveMarkingTool('Jaly')" type="button" title="Jaly (Merah)"
-              class="w-12 h-12 flex items-center justify-center rounded-xl bg-rose-600 text-white shadow ring-2 ring-rose-300 transition relative">
-              <span class="w-4 h-4 rounded-full bg-rose-300 animate-pulse"></span>
-            </button>
-
-            <button id="toolKhafyBtn" onclick="setActiveMarkingTool('Khafy')" type="button" title="Khafy (Kuning)"
-              class="w-12 h-12 flex items-center justify-center rounded-xl text-amber-300 hover:bg-emerald-800/80 transition relative">
-              <span class="w-4 h-4 rounded-full bg-amber-400"></span>
-            </button>
-
-            <button id="toolDetailBtn" onclick="setActiveMarkingTool('Detail')" type="button" title="Catatan Rinci"
-              class="w-12 h-12 flex items-center justify-center rounded-xl text-teal-200 hover:bg-emerald-800/80 transition relative">
-              <i class="fa-solid fa-pen-to-square text-xl"></i>
-            </button>
-
-            <button id="toolEraserBtn" onclick="setActiveMarkingTool('Hapus')" type="button" title="Hapus Tanda"
-              class="w-12 h-12 flex items-center justify-center rounded-xl text-slate-300 hover:bg-emerald-800/80 transition relative">
-              <i class="fa-solid fa-eraser text-xl"></i>
-            </button>
-          </div>
-
-          <!-- Touch Ergonomics: Pengatur Ukuran Font & Spasi Kata di HP -->
-          <div class="flex flex-col gap-2 pt-1">
-            <button onclick="adjustQuranFontSize(2)" title="Perbesar Font Arab" class="w-12 h-12 flex items-center justify-center rounded-xl text-amber-300 hover:bg-emerald-800/80 transition font-bold text-lg">
+</div>
+<!-- DEDICATED MARKING TOOLBAR (FLOATING, DRAGGABLE, PINCH-RESIZABLE & COLLAPSIBLE) -->
+<div class="fixed right-3 top-1/4 z-[60] bg-emerald-950/95 backdrop-blur-md text-white p-2 rounded-2xl shadow-2xl border border-emerald-700/80 flex flex-col gap-2 transition-transform duration-200" id="markingToolbarSection" style="touch-action: none; transform-origin: center center;">
+<!-- Handle untuk drag + tombol ciutkan -->
+<div class="flex items-center gap-1">
+<div class="flex-grow h-8 flex items-center justify-center cursor-grab active:cursor-grabbing text-emerald-600 hover:text-amber-300 transition" id="toolbarDragHandle">
+<i class="fa-solid fa-grip-lines text-xl"></i>
+</div>
+<button class="w-7 h-8 flex items-center justify-center rounded-lg text-emerald-500 hover:text-amber-300 hover:bg-emerald-800/80 transition shrink-0" id="toolbarCollapseBtn" onclick="toggleToolbarCollapse()" title="Ciutkan/Perluas Panel" type="button">
+<i class="fa-solid fa-chevron-up text-sm" id="toolbarCollapseIcon"></i>
+</button>
+</div>
+<div class="flex flex-col gap-2" id="toolbarBody">
+<!-- Pilihan Alat Penanda (Ikon Saja) -->
+<div class="flex flex-col gap-2 border-b border-emerald-800/60 pb-2">
+<button class="w-12 h-12 flex items-center justify-center rounded-xl bg-rose-600 text-white shadow ring-2 ring-rose-300 transition relative" id="toolJalyBtn" onclick="setActiveMarkingTool('Jaly')" title="Jaly (Merah)" type="button">
+<span class="w-4 h-4 rounded-full bg-rose-300 animate-pulse"></span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl text-amber-300 hover:bg-emerald-800/80 transition relative" id="toolKhafyBtn" onclick="setActiveMarkingTool('Khafy')" title="Khafy (Kuning)" type="button">
+<span class="w-4 h-4 rounded-full bg-amber-400"></span>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl text-teal-200 hover:bg-emerald-800/80 transition relative" id="toolDetailBtn" onclick="setActiveMarkingTool('Detail')" title="Catatan Rinci" type="button">
+<i class="fa-solid fa-pen-to-square text-xl"></i>
+</button>
+<button class="w-12 h-12 flex items-center justify-center rounded-xl text-slate-300 hover:bg-emerald-800/80 transition relative" id="toolEraserBtn" onclick="setActiveMarkingTool('Hapus')" title="Hapus Tanda" type="button">
+<i class="fa-solid fa-eraser text-xl"></i>
+</button>
+</div>
+<!-- Touch Ergonomics: Pengatur Ukuran Font & Spasi Kata di HP -->
+<div class="flex flex-col gap-2 pt-1">
+<button class="w-12 h-12 flex items-center justify-center rounded-xl text-amber-300 hover:bg-emerald-800/80 transition font-bold text-lg" onclick="adjustQuranFontSize(2)" title="Perbesar Font Arab">
               A+
             </button>
-            <button onclick="adjustQuranFontSize(-2)" title="Perkecil Font Arab" class="w-12 h-12 flex items-center justify-center rounded-xl text-emerald-200 hover:bg-emerald-800/80 transition font-bold text-lg">
+<button class="w-12 h-12 flex items-center justify-center rounded-xl text-emerald-200 hover:bg-emerald-800/80 transition font-bold text-lg" onclick="adjustQuranFontSize(-2)" title="Perkecil Font Arab">
               A-
             </button>
-            <button onclick="toggleWordSpacing()" id="btnWordSpacing" title="Atur Kerapatan Kata" class="w-12 h-12 flex items-center justify-center rounded-xl text-emerald-200 hover:bg-emerald-800/80 transition">
-              <i class="fa-solid fa-arrows-left-right text-xl"></i>
-            </button>
-
-            <button onclick="clearAllCurrentMarks()" type="button" title="Reset Tanda"
-              class="w-12 h-12 mt-1 flex items-center justify-center rounded-xl bg-rose-950 hover:bg-rose-900 text-rose-200 border border-rose-700/60 transition">
-              <i class="fa-solid fa-rotate-left text-lg"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- FLOATING SAVE BUTTON: agar tombol "Simpan Kegiatan" tetap terjangkau meski rentang
+<button class="w-12 h-12 flex items-center justify-center rounded-xl text-emerald-200 hover:bg-emerald-800/80 transition" id="btnWordSpacing" onclick="toggleWordSpacing()" title="Atur Kerapatan Kata">
+<i class="fa-solid fa-arrows-left-right text-xl"></i>
+</button>
+<button class="w-12 h-12 mt-1 flex items-center justify-center rounded-xl bg-rose-950 hover:bg-rose-900 text-rose-200 border border-rose-700/60 transition" onclick="clearAllCurrentMarks()" title="Reset Tanda" type="button">
+<i class="fa-solid fa-rotate-left text-lg"></i>
+</button>
+</div>
+</div>
+</div>
+<!-- FLOATING SAVE BUTTON: agar tombol "Simpan Kegiatan" tetap terjangkau meski rentang
            mushaf sangat panjang (mis. Al-Baqarah s/d An-Nas) & pengguna sudah scroll jauh ke bawah. -->
-      <button onclick="finishSessionAndSave()" type="button" id="floatingSaveSessionBtn" title="Simpan Catatan Setoran ke Jurnal"
-        class="fixed bottom-20 md:bottom-5 left-1/2 -translate-x-1/2 z-[55] bg-amber-400 hover:bg-amber-500 active:scale-95 text-emerald-950 font-extrabold pl-4 pr-3 py-3 rounded-full shadow-2xl border-2 border-amber-300 flex items-center gap-2 text-xs transition">
-        <i class="fa-solid fa-floppy-disk text-sm"></i>
-        <span>Simpan Kegiatan</span>
-        <span id="floatingSaveMistakeBadge" class="bg-emerald-950 text-amber-300 text-[10px] font-black w-5 h-5 rounded-full inline-flex items-center justify-center hidden"></span>
-      </button>
-
-      <!-- DISPLAY MUSHAF UTSMANI MADINAH -->
-      <div class="mushaf-paper border-2 border-emerald-900/30 rounded-2xl sm:rounded-3xl shadow-xl p-3 sm:p-6 md:p-10 min-h-[550px] flex flex-col justify-between relative overflow-hidden">
-        
-        <!-- Header Surah Frame -->
-        <div>
-          <div class="text-center pb-5 border-b-2 border-emerald-800/20 relative">
-            <div class="inline-block bg-emerald-950 text-amber-300 font-quran text-2xl md:text-3xl font-bold px-8 py-2 rounded-2xl border-2 border-amber-400 shadow-md">
-              <span id="mushafSurahArHeader">سُورَةُ الفَاتِحَةِ</span>
-            </div>
-            <p id="mushafSurahMetaHeader" class="text-xs text-stone-600 mt-2 font-bold tracking-wide">
-              Surah ke-1 &bull; Makkiyah &bull; 7 Ayat &bull; Juz 1
+<button class="fixed bottom-20 md:bottom-5 left-1/2 -translate-x-1/2 z-[55] bg-amber-400 hover:bg-amber-500 active:scale-95 text-emerald-950 font-extrabold pl-4 pr-3 py-3 rounded-full shadow-2xl border-2 border-amber-300 flex items-center gap-2 text-xs transition" id="floatingSaveSessionBtn" onclick="finishSessionAndSave()" title="Simpan Catatan Setoran ke Jurnal" type="button">
+<i class="fa-solid fa-floppy-disk text-sm"></i>
+<span>Simpan Kegiatan</span>
+<span class="bg-emerald-950 text-amber-300 text-[10px] font-black w-5 h-5 rounded-full inline-flex items-center justify-center hidden" id="floatingSaveMistakeBadge"></span>
+</button>
+<!-- DISPLAY MUSHAF UTSMANI MADINAH -->
+<div class="mushaf-paper border-2 border-emerald-900/30 rounded-2xl sm:rounded-3xl shadow-xl p-3 sm:p-6 md:p-10 min-h-[550px] flex flex-col justify-between relative overflow-hidden">
+<!-- Header Surah Frame -->
+<div>
+<div class="text-center pb-5 border-b-2 border-emerald-800/20 relative">
+<div class="inline-block bg-emerald-950 text-amber-300 font-quran text-2xl md:text-3xl font-bold px-8 py-2 rounded-2xl border-2 border-amber-400 shadow-md">
+<span id="mushafSurahArHeader">سُورَةُ الفَاتِحَةِ</span>
+</div>
+<p class="text-xs text-stone-600 mt-2 font-bold tracking-wide" id="mushafSurahMetaHeader">
+              Surah ke-1 • Makkiyah • 7 Ayat • Juz 1
             </p>
-          </div>
-
-          <!-- Basmalah Frame -->
-          <div id="bismillahContainer" class="text-center my-6 font-quran text-2xl md:text-3xl text-emerald-950 tracking-wider dir-rtl" dir="rtl">
+</div>
+<!-- Basmalah Frame -->
+<div class="text-center my-6 font-quran text-2xl md:text-3xl text-emerald-950 tracking-wider dir-rtl" dir="rtl" id="bismillahContainer">
             بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ
           </div>
-
-          <!-- Loading Indicator -->
-          <div id="mushafLoading" class="py-20 text-center text-stone-400 space-y-3 hidden">
-            <i class="fa-solid fa-spinner fa-spin text-4xl text-emerald-700"></i>
-            <p class="text-xs font-bold text-stone-600">Memuat Teks Rasm Utsmani Madinah...</p>
-          </div>
-
-          <!-- Container Teks Ayat RTL -->
-          <div id="mushafContentArea" dir="rtl" class="dir-rtl my-6 px-2">
-            <div id="mushafVersesContainer" dir="rtl" class="font-quran text-2xl md:text-3xl md:leading-[3.2] text-right text-stone-900 dir-rtl select-none space-y-8">
-              <!-- Verses & Words populated via JS -->
-            </div>
-          </div>
-        </div>
-
-        <!-- Footer Info Mushaf -->
-        <div class="pt-5 border-t border-stone-200 flex flex-wrap justify-between items-center text-xs text-stone-500 gap-2">
-          <span class="font-semibold text-stone-700"><i class="fa-solid fa-circle-check text-emerald-700"></i> Rasm Utsmani Madinah Standard</span>
-          <div class="flex items-center gap-2">
-            <span class="inline-flex items-center gap-1 text-rose-900 font-bold bg-rose-50 px-2.5 py-0.5 rounded-lg border border-rose-200">
-              <span class="w-2 h-2 rounded-full bg-rose-600"></span> Jaly (🔴)
+<!-- Loading Indicator -->
+<div class="py-20 text-center text-stone-400 space-y-3 hidden" id="mushafLoading">
+<i class="fa-solid fa-spinner fa-spin text-4xl text-emerald-700"></i>
+<p class="text-xs font-bold text-stone-600">Memuat Teks Rasm Utsmani Madinah...</p>
+</div>
+<!-- Container Teks Ayat RTL -->
+<div class="dir-rtl my-6 px-2" dir="rtl" id="mushafContentArea">
+<div class="font-quran text-2xl md:text-3xl md:leading-[3.2] text-right text-stone-900 dir-rtl select-none space-y-8" dir="rtl" id="mushafVersesContainer">
+<!-- Verses & Words populated via JS -->
+</div>
+</div>
+</div>
+<!-- Footer Info Mushaf -->
+<div class="pt-5 border-t border-stone-200 flex flex-wrap justify-between items-center text-xs text-stone-500 gap-2">
+<span class="font-semibold text-stone-700"><i class="fa-solid fa-circle-check text-emerald-700"></i> Rasm Utsmani Madinah Standard</span>
+<div class="flex items-center gap-2">
+<span class="inline-flex items-center gap-1 text-rose-900 font-bold bg-rose-50 px-2.5 py-0.5 rounded-lg border border-rose-200">
+<span class="w-2 h-2 rounded-full bg-rose-600"></span> Jaly (🔴)
             </span>
-            <span class="inline-flex items-center gap-1 text-amber-900 font-bold bg-amber-50 px-2.5 py-0.5 rounded-lg border border-amber-200">
-              <span class="w-2 h-2 rounded-full bg-amber-600"></span> Khafy (🟡)
+<span class="inline-flex items-center gap-1 text-amber-900 font-bold bg-amber-50 px-2.5 py-0.5 rounded-lg border border-amber-200">
+<span class="w-2 h-2 rounded-full bg-amber-600"></span> Khafy (🟡)
             </span>
-          </div>
-          <span id="mushafAyatCountFooter" class="font-bold text-stone-700">Menampilkan 7 Ayat</span>
-        </div>
-
-      </div>
-
-    </section>
-
-    <!-- ============================================== -->
-    <!-- VIEW 2: REKAP JURNAL & STATISTIK SETORAN       -->
-    <!-- ============================================== -->
-    <section id="viewJurnal" class="hidden space-y-6">
-      
-      <!-- Stats Overview Cards -->
-      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-        <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex items-center space-x-3">
-          <div class="p-3 bg-emerald-50 text-emerald-700 rounded-2xl border border-emerald-100">
-            <i class="fa-solid fa-receipt text-xl"></i>
-          </div>
-          <div>
-            <p class="text-[11px] text-stone-500 font-medium">Total Sesi Setoran</p>
-            <h3 id="statTotalSetoran" class="text-2xl font-black text-stone-800">0</h3>
-          </div>
-        </div>
-
-        <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex items-center space-x-3">
-          <div class="p-3 bg-rose-50 text-rose-700 rounded-2xl border border-rose-100">
-            <i class="fa-solid fa-circle-xmark text-xl"></i>
-          </div>
-          <div>
-            <p class="text-[11px] text-stone-500 font-medium">Total Kesalahan Jaly</p>
-            <h3 id="statTotalJaly" class="text-2xl font-black text-rose-700">0</h3>
-          </div>
-        </div>
-
-        <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex items-center space-x-3">
-          <div class="p-3 bg-amber-50 text-amber-700 rounded-2xl border border-amber-100">
-            <i class="fa-solid fa-triangle-exclamation text-xl"></i>
-          </div>
-          <div>
-            <p class="text-[11px] text-stone-500 font-medium">Total Kesalahan Khafy</p>
-            <h3 id="statTotalKhafy" class="text-2xl font-black text-amber-700">0</h3>
-          </div>
-        </div>
-
-        <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex items-center space-x-3">
-          <div class="p-3 bg-blue-50 text-blue-700 rounded-2xl border border-blue-100">
-            <i class="fa-solid fa-star text-xl"></i>
-          </div>
-          <div>
-            <p class="text-[11px] text-stone-500 font-medium">Rata-Rata Nilai</p>
-            <h3 id="statAvgScore" class="text-2xl font-black text-blue-700">0</h3>
-          </div>
-        </div>
-      </div>
-
-      <!-- Chart Analytics Container -->
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-5">
-        <div class="md:col-span-6 bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-3">
-          <h3 class="text-sm font-bold text-stone-800 flex items-center gap-2">
-            <i class="fa-solid fa-chart-pie text-emerald-700"></i> Distribusi Kesalahan Santri
+</div>
+<span class="font-bold text-stone-700" id="mushafAyatCountFooter">Menampilkan 7 Ayat</span>
+</div>
+</div>
+</section>
+<!-- ============================================== -->
+<!-- VIEW 2: REKAP JURNAL & STATISTIK SETORAN       -->
+<!-- ============================================== -->
+<section class="hidden space-y-6" id="viewJurnal">
+<!-- Stats Overview Cards -->
+<div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+<div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex items-center space-x-3">
+<div class="p-3 bg-emerald-50 text-emerald-700 rounded-2xl border border-emerald-100">
+<i class="fa-solid fa-receipt text-xl"></i>
+</div>
+<div>
+<p class="text-[11px] text-stone-500 font-medium">Total Sesi Setoran</p>
+<h3 class="text-2xl font-black text-stone-800" id="statTotalSetoran">0</h3>
+</div>
+</div>
+<div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex items-center space-x-3">
+<div class="p-3 bg-rose-50 text-rose-700 rounded-2xl border border-rose-100">
+<i class="fa-solid fa-circle-xmark text-xl"></i>
+</div>
+<div>
+<p class="text-[11px] text-stone-500 font-medium">Total Kesalahan Jaly</p>
+<h3 class="text-2xl font-black text-rose-700" id="statTotalJaly">0</h3>
+</div>
+</div>
+<div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex items-center space-x-3">
+<div class="p-3 bg-amber-50 text-amber-700 rounded-2xl border border-amber-100">
+<i class="fa-solid fa-triangle-exclamation text-xl"></i>
+</div>
+<div>
+<p class="text-[11px] text-stone-500 font-medium">Total Kesalahan Khafy</p>
+<h3 class="text-2xl font-black text-amber-700" id="statTotalKhafy">0</h3>
+</div>
+</div>
+<div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm flex items-center space-x-3">
+<div class="p-3 bg-blue-50 text-blue-700 rounded-2xl border border-blue-100">
+<i class="fa-solid fa-star text-xl"></i>
+</div>
+<div>
+<p class="text-[11px] text-stone-500 font-medium">Rata-Rata Nilai</p>
+<h3 class="text-2xl font-black text-blue-700" id="statAvgScore">0</h3>
+</div>
+</div>
+</div>
+<!-- Chart Analytics Container -->
+<div class="grid grid-cols-1 md:grid-cols-12 gap-5">
+<div class="md:col-span-6 bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-3">
+<h3 class="text-sm font-bold text-stone-800 flex items-center gap-2">
+<i class="fa-solid fa-chart-pie text-emerald-700"></i> Distribusi Kesalahan Santri
           </h3>
-          <p class="text-xs text-stone-500">Perbandingan Kesalahan Jaly vs Khafy dari seluruh riwayat setoran.</p>
-          <div class="chart-wrapper">
-            <canvas id="errorDistributionChart"></canvas>
-          </div>
-        </div>
-
-        <div class="md:col-span-6 bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-3">
-          <h3 class="text-sm font-bold text-stone-800 flex items-center gap-2">
-            <i class="fa-solid fa-chart-line text-emerald-700"></i> Tren Nilai Setoran Terbaru
+<p class="text-xs text-stone-500">Perbandingan Kesalahan Jaly vs Khafy dari seluruh riwayat setoran.</p>
+<div class="chart-wrapper">
+<canvas id="errorDistributionChart"></canvas>
+</div>
+</div>
+<div class="md:col-span-6 bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-3">
+<h3 class="text-sm font-bold text-stone-800 flex items-center gap-2">
+<i class="fa-solid fa-chart-line text-emerald-700"></i> Tren Nilai Setoran Terbaru
           </h3>
-          <p class="text-xs text-stone-500">Perkembangan kelancaran bacaan santri dalam beberapa sesi terakhir.</p>
-          <div class="chart-wrapper">
-            <canvas id="scoreTrendChart"></canvas>
-          </div>
-        </div>
-      </div>
-
-      <!-- Daftar Riwayat Jurnal Setoran -->
-      <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-4">
-        <div class="flex flex-col lg:flex-row justify-between items-stretch lg:items-center gap-3 border-b border-stone-100 pb-3">
-          <div>
-            <h3 class="font-bold text-stone-800 text-sm flex items-center gap-2">
-              <i class="fa-solid fa-list-check text-emerald-700"></i> Riwayat Sesi & Koreksi Bacaan
+<p class="text-xs text-stone-500">Perkembangan kelancaran bacaan santri dalam beberapa sesi terakhir.</p>
+<div class="chart-wrapper">
+<canvas id="scoreTrendChart"></canvas>
+</div>
+</div>
+</div>
+<!-- Daftar Riwayat Jurnal Setoran -->
+<div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-4">
+<div class="flex flex-col lg:flex-row justify-between items-stretch lg:items-center gap-3 border-b border-stone-100 pb-3">
+<div>
+<h3 class="font-bold text-stone-800 text-sm flex items-center gap-2">
+<i class="fa-solid fa-list-check text-emerald-700"></i> Riwayat Sesi &amp; Koreksi Bacaan
             </h3>
-            <p class="text-xs text-stone-500">Daftar rekam medis hafalan per sesi beserta catatan koreksi per-kata.</p>
-          </div>
-
-          <!-- Kontrol Filter Siswa, Jenis Setoran, dan Opsi Limit Tampilan (10, 30, 50, 100) -->
-          <div class="flex flex-wrap items-center gap-2 text-xs">
-            <!-- Filter Siswa -->
-            <div class="flex items-center gap-1.5 bg-stone-50 border border-stone-300 rounded-xl px-2.5 py-1.5 shadow-sm">
-              <i class="fa-solid fa-user-graduate text-emerald-700 text-xs"></i>
-              <select id="jurnalFilterStudent" onchange="renderJurnalHistoryList()" class="bg-transparent text-xs font-bold text-stone-700 focus:outline-none cursor-pointer">
-                <option value="Semua">Semua Santri / Siswa</option>
-              </select>
-            </div>
-
-            <!-- Filter Jenis Kegiatan -->
-            <select id="jurnalFilterType" onchange="renderJurnalHistoryList()" class="bg-stone-50 border border-stone-300 rounded-xl px-2.5 py-1.5 text-xs font-bold text-stone-700 focus:ring-2 focus:ring-emerald-600 focus:outline-none cursor-pointer shadow-sm">
-              <option value="Semua">Semua Jenis Setoran</option>
-              <option value="Setoran Bacaan">Setoran Bacaan (Tahsin)</option>
-              <option value="Setoran Hafalan Baru">Setoran Hafalan Baru</option>
-              <option value="Muraja'ah">Muraja'ah</option>
-              <option value="Tasmi'">Tasmi'</option>
-            </select>
-
-            <!-- Opsi Jumlah Riwayat Ditampilkan (10, 30, 50, 100) -->
-            <div class="flex items-center gap-1.5 bg-stone-50 border border-stone-300 rounded-xl px-2.5 py-1.5 shadow-sm">
-              <span class="text-[11px] text-stone-500 font-semibold">Tampil:</span>
-              <select id="jurnalLimitCount" onchange="renderJurnalHistoryList()" class="bg-transparent text-xs font-black text-emerald-800 focus:outline-none cursor-pointer">
-                <option value="10" selected>10 Riwayat</option>
-                <option value="30">30 Riwayat</option>
-                <option value="50">50 Riwayat</option>
-                <option value="100">100 Riwayat</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Bar Indikator Riwayat Aktif -->
-        <div class="flex flex-wrap justify-between items-center text-[11px] text-stone-500 px-1 gap-2">
-          <span id="jurnalShowingCountInfo" class="font-medium text-stone-600">Memuat riwayat setoran...</span>
-          <span id="jurnalStudentFilterActiveBadge" class="font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200"></span>
-        </div>
-
-        <div id="jurnalHistoryList" class="space-y-3">
-        </div>
-      </div>
-
-    </section>
-
-    <!-- ============================================== -->
-    <!-- VIEW BARU: REKAP PERSISWA (BACAAN, HAFALAN, TASMI') -->
-    <!-- ============================================== -->
-    <section id="viewRekap" class="hidden space-y-6">
-
-      <!-- Student Banner & Profile Card in Rekap -->
-      <div class="bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-950 text-white p-5 rounded-3xl shadow-xl border border-emerald-800 space-y-4">
-        <div class="flex flex-wrap items-center justify-between gap-4 border-b border-emerald-800/70 pb-4">
-          <div class="flex items-center gap-3.5">
-            <div class="w-12 h-12 rounded-2xl bg-amber-400 text-emerald-950 flex items-center justify-center font-black text-2xl shadow-md">
-              <i class="fa-solid fa-user-graduate"></i>
-            </div>
-            <div>
-              <div class="flex items-center gap-2">
-                <h2 id="rekapStudentName" class="text-lg md:text-xl font-extrabold text-amber-200">Ahmad Fauzi</h2>
-                <span id="rekapStudentNis" class="text-[11px] bg-emerald-800/90 text-emerald-200 px-2.5 py-0.5 rounded-full font-mono font-bold border border-emerald-700">NIS: 1001</span>
-              </div>
-              <p id="rekapStudentClass" class="text-xs text-emerald-300 font-medium mt-0.5">
-                Halaqah: Kelas Al-Jazari &bull; Rekapitulasi Progres Bacaan, Hafalan & Tasmi'
+<p class="text-xs text-stone-500">Daftar rekam medis hafalan per sesi beserta catatan koreksi per-kata.</p>
+</div>
+<!-- Kontrol Filter Siswa, Jenis Setoran, dan Opsi Limit Tampilan (10, 30, 50, 100) -->
+<div class="flex flex-wrap items-center gap-2 text-xs">
+<!-- Filter Siswa -->
+<div class="flex items-center gap-1.5 bg-stone-50 border border-stone-300 rounded-xl px-2.5 py-1.5 shadow-sm">
+<i class="fa-solid fa-user-graduate text-emerald-700 text-xs"></i>
+<select class="bg-transparent text-xs font-bold text-stone-700 focus:outline-none cursor-pointer" id="jurnalFilterStudent" onchange="renderJurnalHistoryList()">
+<option value="Semua">Semua Santri / Siswa</option>
+</select>
+</div>
+<!-- Filter Jenis Kegiatan -->
+<select class="bg-stone-50 border border-stone-300 rounded-xl px-2.5 py-1.5 text-xs font-bold text-stone-700 focus:ring-2 focus:ring-emerald-600 focus:outline-none cursor-pointer shadow-sm" id="jurnalFilterType" onchange="renderJurnalHistoryList()">
+<option value="Semua">Semua Jenis Setoran</option>
+<option value="Setoran Bacaan">Setoran Bacaan (Tahsin)</option>
+<option value="Setoran Hafalan Baru">Setoran Hafalan Baru</option>
+<option value="Muraja'ah">Muraja'ah</option>
+<option value="Tasmi'">Tasmi'</option>
+</select>
+<!-- Opsi Jumlah Riwayat Ditampilkan (10, 30, 50, 100) -->
+<div class="flex items-center gap-1.5 bg-stone-50 border border-stone-300 rounded-xl px-2.5 py-1.5 shadow-sm">
+<span class="text-[11px] text-stone-500 font-semibold">Tampil:</span>
+<select class="bg-transparent text-xs font-black text-emerald-800 focus:outline-none cursor-pointer" id="jurnalLimitCount" onchange="renderJurnalHistoryList()">
+<option selected="" value="10">10 Riwayat</option>
+<option value="30">30 Riwayat</option>
+<option value="50">50 Riwayat</option>
+<option value="100">100 Riwayat</option>
+</select>
+</div>
+</div>
+</div>
+<!-- Bar Indikator Riwayat Aktif -->
+<div class="flex flex-wrap justify-between items-center text-[11px] text-stone-500 px-1 gap-2">
+<span class="font-medium text-stone-600" id="jurnalShowingCountInfo">Memuat riwayat setoran...</span>
+<span class="font-bold text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200" id="jurnalStudentFilterActiveBadge"></span>
+</div>
+<div class="space-y-3" id="jurnalHistoryList">
+</div>
+</div>
+</section>
+<!-- ============================================== -->
+<!-- VIEW BARU: REKAP PERSISWA (BACAAN, HAFALAN, TASMI') -->
+<!-- ============================================== -->
+<section class="hidden space-y-6" id="viewRekap">
+<!-- Student Banner & Profile Card in Rekap -->
+<div class="bg-gradient-to-r from-emerald-950 via-emerald-900 to-teal-950 text-white p-5 rounded-3xl shadow-xl border border-emerald-800 space-y-4">
+<div class="flex flex-wrap items-center justify-between gap-4 border-b border-emerald-800/70 pb-4">
+<div class="flex items-center gap-3.5">
+<div class="w-12 h-12 rounded-2xl bg-amber-400 text-emerald-950 flex items-center justify-center font-black text-2xl shadow-md">
+<i class="fa-solid fa-user-graduate"></i>
+</div>
+<div>
+<div class="flex items-center gap-2">
+<h2 class="text-lg md:text-xl font-extrabold text-amber-200" id="rekapStudentName">Ahmad Fauzi</h2>
+<span class="text-[11px] bg-emerald-800/90 text-emerald-200 px-2.5 py-0.5 rounded-full font-mono font-bold border border-emerald-700" id="rekapStudentNis">NIS: 1001</span>
+</div>
+<p class="text-xs text-emerald-300 font-medium mt-0.5" id="rekapStudentClass">
+                Halaqah: Kelas Al-Jazari • Rekapitulasi Progres Bacaan, Hafalan &amp; Tasmi'
               </p>
-            </div>
-          </div>
-
-          <!-- Quick Switcher Dropdown in Rekap -->
-          <div class="flex items-center gap-2">
-            <label class="text-xs text-emerald-300 font-bold hidden sm:inline">Pilih Santri:</label>
-            <select id="rekapStudentSelect" onchange="onStudentSelectChange(this.value)"
-              class="bg-emerald-950 text-white border border-emerald-700 rounded-xl px-3 py-2 font-semibold text-xs focus:ring-2 focus:ring-amber-400 focus:outline-none cursor-pointer shadow-inner">
-            </select>
-          </div>
-        </div>
-
-        <!-- Rekap Metrics Counters Grid -->
-        <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
-          <div class="bg-emerald-900/60 p-3 rounded-2xl border border-emerald-700/60 space-y-1">
-            <p class="text-emerald-300 text-[11px] font-medium flex items-center gap-1.5">
-              <i class="fa-solid fa-book-open-reader text-amber-300"></i> Setoran Bacaan (Lulus)
+</div>
+</div>
+<!-- Quick Switcher Dropdown in Rekap -->
+<div class="flex items-center gap-2">
+<label class="text-xs text-emerald-300 font-bold hidden sm:inline">Pilih Santri:</label>
+<select class="bg-emerald-950 text-white border border-emerald-700 rounded-xl px-3 py-2 font-semibold text-xs focus:ring-2 focus:ring-amber-400 focus:outline-none cursor-pointer shadow-inner" id="rekapStudentSelect" onchange="onStudentSelectChange(this.value)">
+</select>
+</div>
+</div>
+<!-- Rekap Metrics Counters Grid -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3 text-xs">
+<div class="bg-emerald-900/60 p-3 rounded-2xl border border-emerald-700/60 space-y-1">
+<p class="text-emerald-300 text-[11px] font-medium flex items-center gap-1.5">
+<i class="fa-solid fa-book-open-reader text-amber-300"></i> Setoran Bacaan (Lulus)
             </p>
-            <h4 id="rekapTotalBacaanCount" class="text-xl font-black text-white">0 Surah</h4>
-            <p id="rekapTotalBacaanSesi" class="text-[10px] text-emerald-400 font-medium">0 Sesi Lulus</p>
-          </div>
-
-          <div class="bg-emerald-900/60 p-3 rounded-2xl border border-emerald-700/60 space-y-1">
-            <p class="text-emerald-300 text-[11px] font-medium flex items-center gap-1.5">
-              <i class="fa-solid fa-brain text-amber-300"></i> Setoran Hafalan (Lulus)
+<h4 class="text-xl font-black text-white" id="rekapTotalBacaanCount">0 Surah</h4>
+<p class="text-[10px] text-emerald-400 font-medium" id="rekapTotalBacaanSesi">0 Sesi Lulus</p>
+</div>
+<div class="bg-emerald-900/60 p-3 rounded-2xl border border-emerald-700/60 space-y-1">
+<p class="text-emerald-300 text-[11px] font-medium flex items-center gap-1.5">
+<i class="fa-solid fa-brain text-amber-300"></i> Setoran Hafalan (Lulus)
             </p>
-            <h4 id="rekapTotalHafalanCount" class="text-xl font-black text-white">0 Surah</h4>
-            <p id="rekapTotalHafalanSesi" class="text-[10px] text-emerald-400 font-medium">0 Sesi Lulus</p>
-          </div>
-
-          <div class="bg-emerald-900/60 p-3 rounded-2xl border border-emerald-700/60 space-y-1">
-            <p class="text-emerald-300 text-[11px] font-medium flex items-center gap-1.5">
-              <i class="fa-solid fa-award text-amber-300"></i> Tasmi' (Lulus)
+<h4 class="text-xl font-black text-white" id="rekapTotalHafalanCount">0 Surah</h4>
+<p class="text-[10px] text-emerald-400 font-medium" id="rekapTotalHafalanSesi">0 Sesi Lulus</p>
+</div>
+<div class="bg-emerald-900/60 p-3 rounded-2xl border border-emerald-700/60 space-y-1">
+<p class="text-emerald-300 text-[11px] font-medium flex items-center gap-1.5">
+<i class="fa-solid fa-award text-amber-300"></i> Tasmi' (Lulus)
             </p>
-            <h4 id="rekapTotalTasmiJuzCount" class="text-xl font-black text-white">0 / 30 Juz</h4>
-            <p id="rekapTasmiAvgScore" class="text-[10px] text-emerald-400 font-medium">Rata-rata: 0</p>
-          </div>
-
-          <div class="bg-emerald-900/60 p-3 rounded-2xl border border-emerald-700/60 space-y-1">
-            <p class="text-emerald-300 text-[11px] font-medium flex items-center gap-1.5">
-              <i class="fa-solid fa-bullseye text-amber-300"></i> Capaian Target
+<h4 class="text-xl font-black text-white" id="rekapTotalTasmiJuzCount">0 / 30 Juz</h4>
+<p class="text-[10px] text-emerald-400 font-medium" id="rekapTasmiAvgScore">Rata-rata: 0</p>
+</div>
+<div class="bg-emerald-900/60 p-3 rounded-2xl border border-emerald-700/60 space-y-1">
+<p class="text-emerald-300 text-[11px] font-medium flex items-center gap-1.5">
+<i class="fa-solid fa-bullseye text-amber-300"></i> Capaian Target
             </p>
-            <h4 id="rekapTargetPercentage" class="text-xl font-black text-amber-300">0%</h4>
-            <p id="rekapTargetInfo" class="text-[10px] text-amber-200/90 font-medium truncate">Target: Juz 30</p>
-          </div>
-        </div>
-
-        <!-- Target Progress Bar (Dinamis per Jenis Kegiatan) -->
-        <div class="space-y-2.5 bg-emerald-950/60 p-3 rounded-2xl border border-emerald-800/80">
-          <div class="flex justify-between items-center text-[11px]">
-            <span class="text-emerald-300 font-bold flex items-center gap-1">
-              <i class="fa-solid fa-flag-checkered text-amber-400"></i> Progress Target Kurikulum per Kegiatan:
+<h4 class="text-xl font-black text-amber-300" id="rekapTargetPercentage">0%</h4>
+<p class="text-[10px] text-amber-200/90 font-medium truncate" id="rekapTargetInfo">Target: Juz 30</p>
+</div>
+</div>
+<!-- Target Progress Bar (Dinamis per Jenis Kegiatan) -->
+<div class="space-y-2.5 bg-emerald-950/60 p-3 rounded-2xl border border-emerald-800/80">
+<div class="flex justify-between items-center text-[11px]">
+<span class="text-emerald-300 font-bold flex items-center gap-1">
+<i class="fa-solid fa-flag-checkered text-amber-400"></i> Progress Target Kurikulum per Kegiatan:
             </span>
-            <button onclick="openModalTargetKurikulum(appState.activeStudentId)" type="button" class="text-[10px] bg-emerald-800 hover:bg-emerald-700 text-amber-300 font-bold px-2.5 py-1 rounded-lg border border-emerald-700 transition">
-              <i class="fa-solid fa-sliders"></i> Atur Target
+<button class="text-[10px] bg-emerald-800 hover:bg-emerald-700 text-amber-300 font-bold px-2.5 py-1 rounded-lg border border-emerald-700 transition" onclick="openModalTargetKurikulum(appState.activeStudentId)" type="button">
+<i class="fa-solid fa-sliders"></i> Atur Target
             </button>
-          </div>
-          <div id="targetProgressPanel" class="space-y-2.5">
-            <!-- diisi otomatis oleh renderTargetProgressPanel() -->
-          </div>
-        </div>
-
-        <!-- Tombol Aksi Cetak Rapor & WA Wali -->
-        <div class="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-emerald-800/60">
-          <div class="text-[11px] text-emerald-300">
-            <span>Wali Santri: </span><strong id="rekapWaliPhone" class="text-white">-</strong>
-          </div>
-          <div class="flex items-center gap-2">
-            <button onclick="shareRaporSummaryWA()" class="bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-bold px-3 py-1.5 rounded-xl text-xs shadow transition flex items-center gap-1.5">
-              <i class="fa-brands fa-whatsapp text-sm"></i> <span>Kirim Progres ke WA</span>
-            </button>
-            <button onclick="openRaporModal()" class="bg-amber-400 hover:bg-amber-500 active:scale-95 text-emerald-950 font-black px-3.5 py-1.5 rounded-xl text-xs shadow transition flex items-center gap-1.5">
-              <i class="fa-solid fa-file-pdf"></i> <span>Cetak Rapor Siswa</span>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Kontrol Tab Kategori, Filter Status & Pencarian Rekap -->
-      <div class="bg-white p-4 md:p-5 rounded-2xl border border-stone-200 shadow-sm space-y-4">
-        <div class="flex flex-wrap items-center justify-between gap-3">
-          <div class="flex flex-wrap items-center gap-1.5 bg-stone-100 p-1 rounded-2xl border border-stone-200 text-xs">
-            <button id="rekapTabBacaanBtn" onclick="switchRekapCategory('bacaan')" type="button"
-              class="px-4 py-2 rounded-xl transition flex items-center gap-2 bg-emerald-700 text-white shadow">
-              <i class="fa-solid fa-book-open-reader"></i> <span>Bacaan</span>
-              <span id="rekapBadgeBacaan" class="bg-white/20 text-[10px] font-black px-1.5 py-0.5 rounded-full">0</span>
-            </button>
-            <button id="rekapTabHafalanBtn" onclick="switchRekapCategory('hafalan')" type="button"
-              class="px-4 py-2 rounded-xl transition flex items-center gap-2 text-stone-600 hover:text-emerald-800">
-              <i class="fa-solid fa-brain"></i> <span>Hafalan</span>
-              <span id="rekapBadgeHafalan" class="bg-stone-200 text-stone-700 text-[10px] font-black px-1.5 py-0.5 rounded-full">0</span>
-            </button>
-            <button id="rekapTabTasmiBtn" onclick="switchRekapCategory('tasmi')" type="button"
-              class="px-4 py-2 rounded-xl transition flex items-center gap-2 text-stone-600 hover:text-emerald-800">
-              <i class="fa-solid fa-award"></i> <span>Tasmi'</span>
-              <span id="rekapBadgeTasmi" class="bg-stone-200 text-stone-700 text-[10px] font-black px-1.5 py-0.5 rounded-full">0/30</span>
-            </button>
-            <button id="rekapTabSemuaBtn" onclick="switchRekapCategory('semua_siswa')" type="button"
-              class="px-4 py-2 rounded-xl transition flex items-center gap-2 text-stone-600 hover:text-emerald-800">
-              <i class="fa-solid fa-users"></i> <span>Semua Santri</span>
-              <span id="rekapBadgeSemuaSiswa" class="bg-stone-200 text-stone-700 text-[10px] font-black px-1.5 py-0.5 rounded-full">0 Santri</span>
-            </button>
-          </div>
-
-          <span id="rekapCardCountIndicator" class="text-[11px] font-bold text-stone-500 shrink-0"></span>
-        </div>
-
-        <p id="rekapCategoryDescription" class="text-xs text-stone-500">
+</div>
+<div class="space-y-2.5" id="targetProgressPanel">
+<!-- diisi otomatis oleh renderTargetProgressPanel() -->
+</div>
+</div>
+<!-- Tombol Aksi Cetak Rapor & WA Wali -->
+<div class="flex flex-wrap items-center justify-between gap-2 pt-1 border-t border-emerald-800/60">
+<div class="text-[11px] text-emerald-300">
+<span>Wali Santri: </span><strong class="text-white" id="rekapWaliPhone">-</strong>
+</div>
+<div class="flex items-center gap-2">
+<button class="bg-emerald-600 hover:bg-emerald-500 active:scale-95 text-white font-bold px-3 py-1.5 rounded-xl text-xs shadow transition flex items-center gap-1.5" onclick="shareRaporSummaryWA()">
+<i class="fa-brands fa-whatsapp text-sm"></i> <span>Kirim Progres ke WA</span>
+</button>
+<button class="bg-amber-400 hover:bg-amber-500 active:scale-95 text-emerald-950 font-black px-3.5 py-1.5 rounded-xl text-xs shadow transition flex items-center gap-1.5" onclick="openRaporModal()">
+<i class="fa-solid fa-file-pdf"></i> <span>Cetak Rapor Siswa</span>
+</button>
+</div>
+</div>
+</div>
+<!-- Kontrol Tab Kategori, Filter Status & Pencarian Rekap -->
+<div class="bg-white p-4 md:p-5 rounded-2xl border border-stone-200 shadow-sm space-y-4">
+<div class="flex flex-wrap items-center justify-between gap-3">
+<div class="flex flex-wrap items-center gap-1.5 bg-stone-100 p-1 rounded-2xl border border-stone-200 text-xs">
+<button class="px-4 py-2 rounded-xl transition flex items-center gap-2 bg-emerald-700 text-white shadow" id="rekapTabBacaanBtn" onclick="switchRekapCategory('bacaan')" type="button">
+<i class="fa-solid fa-book-open-reader"></i> <span>Bacaan</span>
+<span class="bg-white/20 text-[10px] font-black px-1.5 py-0.5 rounded-full" id="rekapBadgeBacaan">0</span>
+</button>
+<button class="px-4 py-2 rounded-xl transition flex items-center gap-2 text-stone-600 hover:text-emerald-800" id="rekapTabHafalanBtn" onclick="switchRekapCategory('hafalan')" type="button">
+<i class="fa-solid fa-brain"></i> <span>Hafalan</span>
+<span class="bg-stone-200 text-stone-700 text-[10px] font-black px-1.5 py-0.5 rounded-full" id="rekapBadgeHafalan">0</span>
+</button>
+<button class="px-4 py-2 rounded-xl transition flex items-center gap-2 text-stone-600 hover:text-emerald-800" id="rekapTabTasmiBtn" onclick="switchRekapCategory('tasmi')" type="button">
+<i class="fa-solid fa-award"></i> <span>Tasmi'</span>
+<span class="bg-stone-200 text-stone-700 text-[10px] font-black px-1.5 py-0.5 rounded-full" id="rekapBadgeTasmi">0/30</span>
+</button>
+<button class="px-4 py-2 rounded-xl transition flex items-center gap-2 text-stone-600 hover:text-emerald-800" id="rekapTabSemuaBtn" onclick="switchRekapCategory('semua_siswa')" type="button">
+<i class="fa-solid fa-users"></i> <span>Semua Santri</span>
+<span class="bg-stone-200 text-stone-700 text-[10px] font-black px-1.5 py-0.5 rounded-full" id="rekapBadgeSemuaSiswa">0 Santri</span>
+</button>
+</div>
+<span class="text-[11px] font-bold text-stone-500 shrink-0" id="rekapCardCountIndicator"></span>
+</div>
+<p class="text-xs text-stone-500" id="rekapCategoryDescription">
           Menampilkan rekapitulasi setoran bacaan (Tahsin) per-surah (hanya sesi berstatus Lulus yang dihitung).
         </p>
-
-        <div class="flex flex-wrap items-center gap-2">
-          <div class="flex items-center gap-1.5 bg-stone-50 border border-stone-300 rounded-xl px-2.5 py-1.5 shadow-sm flex-1 min-w-[180px]">
-            <i class="fa-solid fa-magnifying-glass text-stone-400 text-xs"></i>
-            <input id="rekapSearchInput" type="text" oninput="onRekapFilterChange()" placeholder="Cari surah / juz / nama santri..."
-              class="bg-transparent text-xs font-semibold text-stone-700 focus:outline-none w-full">
-          </div>
-          <select id="rekapFilterStatus" onchange="onRekapFilterChange()"
-            class="bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 text-xs font-bold text-stone-700 focus:outline-none cursor-pointer shadow-sm">
-            <option value="semua">Tampilkan Semua</option>
-            <option value="disetor">Sudah Disetor / Lulus</option>
-            <option value="belum">Belum Disetor</option>
-          </select>
-        </div>
-      </div>
-
-      <!-- Grid Kartu / Tabel Rekapitulasi (diisi otomatis oleh renderRekapCards()) -->
-      <div id="rekapCardsContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3"></div>
-
-    </section>
-
-    <!-- ============================================== -->
-    <!-- VIEW 4: KELOLA SANTRI & EKSPOR-IMPOR DATA      -->
-    <!-- ============================================== -->
-    <section id="viewSantri" class="hidden space-y-6">
-      
-      <div class="grid grid-cols-1 md:grid-cols-12 gap-6">
-        
-        <!-- Roster Santri Management -->
-        <div class="md:col-span-7 bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-4">
-          <div class="flex justify-between items-center border-b border-stone-100 pb-3">
-            <div>
-              <h3 class="font-bold text-stone-800 text-sm flex items-center gap-2">
-                <i class="fa-solid fa-users text-emerald-700"></i> Daftar Santri / Siswa
+<div class="flex flex-wrap items-center gap-2">
+<div class="flex items-center gap-1.5 bg-stone-50 border border-stone-300 rounded-xl px-2.5 py-1.5 shadow-sm flex-1 min-w-[180px]">
+<i class="fa-solid fa-magnifying-glass text-stone-400 text-xs"></i>
+<input class="bg-transparent text-xs font-semibold text-stone-700 focus:outline-none w-full" id="rekapSearchInput" oninput="onRekapFilterChange()" placeholder="Cari surah / juz / nama santri..." type="text"/>
+</div>
+<select class="bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 text-xs font-bold text-stone-700 focus:outline-none cursor-pointer shadow-sm" id="rekapFilterStatus" onchange="onRekapFilterChange()">
+<option value="semua">Tampilkan Semua</option>
+<option value="disetor">Sudah Disetor / Lulus</option>
+<option value="belum">Belum Disetor</option>
+</select>
+</div>
+</div>
+<!-- Grid Kartu / Tabel Rekapitulasi (diisi otomatis oleh renderRekapCards()) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3" id="rekapCardsContainer"></div>
+</section>
+<!-- ============================================== -->
+<!-- VIEW 4: KELOLA SANTRI & EKSPOR-IMPOR DATA      -->
+<!-- ============================================== -->
+<section class="hidden space-y-6" id="viewSantri">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-6">
+<!-- Roster Santri Management -->
+<div class="md:col-span-7 bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-4">
+<div class="flex justify-between items-center border-b border-stone-100 pb-3">
+<div>
+<h3 class="font-bold text-stone-800 text-sm flex items-center gap-2">
+<i class="fa-solid fa-users text-emerald-700"></i> Daftar Santri / Siswa
               </h3>
-              <p class="text-xs text-stone-500">Kelola daftar nama dan kelas halaqa santri.</p>
-            </div>
-
-            <button onclick="openModalTambahSantri()" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs px-3 py-2 rounded-xl shadow transition flex items-center gap-1.5">
-              <i class="fa-solid fa-user-plus"></i> Tambah Santri
+<p class="text-xs text-stone-500">Kelola daftar nama dan kelas halaqa santri.</p>
+</div>
+<button class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-xs px-3 py-2 rounded-xl shadow transition flex items-center gap-1.5" onclick="openModalTambahSantri()">
+<i class="fa-solid fa-user-plus"></i> Tambah Santri
             </button>
-          </div>
-
-          <div class="overflow-x-auto">
-            <table class="w-full text-left text-xs text-stone-700">
-              <thead class="bg-stone-50 text-stone-800 uppercase font-bold border-b border-stone-200">
-                <tr>
-                  <th class="p-3">NIS / ID</th>
-                  <th class="p-3">Nama Lengkap</th>
-                  <th class="p-3">Halaqah / Kelas</th>
-                  <th class="p-3 text-center">Aksi</th>
-                </tr>
-              </thead>
-              <tbody id="santriTableBody" class="divide-y divide-stone-100">
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <!-- Ekspor & Impor Data Box -->
-        <div class="md:col-span-5 space-y-5">
-          
-          <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-3">
-            <h3 class="font-bold text-stone-800 text-sm flex items-center gap-2 border-b border-stone-100 pb-2">
-              <i class="fa-solid fa-file-export text-emerald-700"></i> Ekspor & Cadangkan Data
+</div>
+<div class="overflow-x-auto">
+<table class="w-full text-left text-xs text-stone-700">
+<thead class="bg-stone-50 text-stone-800 uppercase font-bold border-b border-stone-200">
+<tr>
+<th class="p-3">NIS / ID</th>
+<th class="p-3">Nama Lengkap</th>
+<th class="p-3">Halaqah / Kelas</th>
+<th class="p-3 text-center">Aksi</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-stone-100" id="santriTableBody">
+</tbody>
+</table>
+</div>
+</div>
+<!-- Ekspor & Impor Data Box -->
+<div class="md:col-span-5 space-y-5">
+<div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-3">
+<h3 class="font-bold text-stone-800 text-sm flex items-center gap-2 border-b border-stone-100 pb-2">
+<i class="fa-solid fa-file-export text-emerald-700"></i> Ekspor &amp; Cadangkan Data
             </h3>
-            <p class="text-xs text-stone-600 leading-relaxed">
+<p class="text-xs text-stone-600 leading-relaxed">
               Unduh seluruh berkas data santri dan riwayat setoran beserta catatan koreksi per-kata ke dalam format JSON.
             </p>
-            <button onclick="exportDataJSON()" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 px-4 rounded-xl text-xs shadow transition flex items-center justify-center gap-2">
-              <i class="fa-solid fa-download"></i> Unduh File Backup (JSON)
+<button class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 px-4 rounded-xl text-xs shadow transition flex items-center justify-center gap-2" onclick="exportDataJSON()">
+<i class="fa-solid fa-download"></i> Unduh File Backup (JSON)
             </button>
-          </div>
-
-          <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-3">
-            <h3 class="font-bold text-stone-800 text-sm flex items-center gap-2 border-b border-stone-100 pb-2">
-              <i class="fa-solid fa-file-import text-amber-700"></i> Impor / Pulihkan Data
+</div>
+<div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-3">
+<h3 class="font-bold text-stone-800 text-sm flex items-center gap-2 border-b border-stone-100 pb-2">
+<i class="fa-solid fa-file-import text-amber-700"></i> Impor / Pulihkan Data
             </h3>
-            <p class="text-xs text-stone-600 leading-relaxed">
+<p class="text-xs text-stone-600 leading-relaxed">
               Unggah file JSON cadangan untuk memulihkan seluruh data riwayat setoran dan daftar santri.
             </p>
-            
-            <div class="relative w-full">
-              <!-- Input file dibuat absolut, ukurannya penuh menutupi tombol, namun transparan (opacity-0) -->
-              <input type="file" id="importJsonFileInput" accept=".json" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" onchange="importDataJSON(event)">
-              <!-- Tombol visual berada di bawah input yang transparan -->
-              <div class="w-full bg-amber-500 hover:bg-amber-600 text-emerald-950 font-bold py-2.5 px-4 rounded-xl text-xs shadow transition flex items-center justify-center gap-2 pointer-events-none">
-                <i class="fa-solid fa-upload"></i> Pilih & Impor File JSON
+<div class="relative w-full">
+<!-- Input file dibuat absolut, ukurannya penuh menutupi tombol, namun transparan (opacity-0) -->
+<input accept=".json" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" id="importJsonFileInput" onchange="importDataJSON(event)" type="file"/>
+<!-- Tombol visual berada di bawah input yang transparan -->
+<div class="w-full bg-amber-500 hover:bg-amber-600 text-emerald-950 font-bold py-2.5 px-4 rounded-xl text-xs shadow transition flex items-center justify-center gap-2 pointer-events-none">
+<i class="fa-solid fa-upload"></i> Pilih &amp; Impor File JSON
               </div>
-            </div>
-          </div>
-
-          <!-- Card Pengelola Mushaf Full Offline (114 Surah) -->
-          <div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-3">
-            <div class="flex items-center justify-between border-b border-stone-100 pb-2">
-              <h3 class="font-bold text-stone-800 text-sm flex items-center gap-2">
-                <i class="fa-solid fa-cloud-arrow-down text-teal-700"></i> Penyimpanan Mushaf Offline
+</div>
+</div>
+<!-- Card Pengelola Mushaf Full Offline (114 Surah) -->
+<div class="bg-white p-5 rounded-2xl border border-stone-200 shadow-sm space-y-3">
+<div class="flex items-center justify-between border-b border-stone-100 pb-2">
+<h3 class="font-bold text-stone-800 text-sm flex items-center gap-2">
+<i class="fa-solid fa-cloud-arrow-down text-teal-700"></i> Penyimpanan Mushaf Offline
               </h3>
-              <span id="cardOfflineBadge" class="text-[10px] font-black px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300">
+<span class="text-[10px] font-black px-2 py-0.5 rounded-full bg-amber-100 text-amber-900 border border-amber-300" id="cardOfflineBadge">
                 0 / 114 Surah
               </span>
-            </div>
-            <p class="text-xs text-stone-600 leading-relaxed">
+</div>
+<p class="text-xs text-stone-600 leading-relaxed">
               Unduh seluruh 114 surah (6.236 ayat) teks rasm Utsmani Madinah ke dalam penyimpanan peramban (IndexedDB) agar aplikasi dapat beroperasi <strong>100% tanpa internet</strong>.
             </p>
-
-            <!-- Offline Progress Bar -->
-            <div class="space-y-1 bg-stone-50 p-2.5 rounded-xl border border-stone-200/80">
-              <div class="flex justify-between items-center text-[11px]">
-                <span class="text-stone-500 font-medium">Status Kesiapan:</span>
-                <span id="cardOfflinePercent" class="font-bold text-teal-800">0%</span>
-              </div>
-              <div class="w-full bg-stone-200 rounded-full h-2 overflow-hidden">
-                <div id="cardOfflineProgressBar" class="bg-teal-600 h-2 rounded-full transition-all duration-300" style="width: 0%"></div>
-              </div>
-            </div>
-
-            <div class="flex flex-col sm:flex-row gap-2 pt-1">
-              <button onclick="openDownloadOfflineModal()" type="button" class="flex-1 bg-teal-700 hover:bg-teal-800 active:scale-95 text-white font-bold py-2 px-3 rounded-xl text-xs shadow transition flex items-center justify-center gap-1.5">
-                <i class="fa-solid fa-download"></i> <span>Unduh 114 Surah</span>
-              </button>
-              <button onclick="confirmClearOfflineCache()" type="button" class="bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold py-2 px-3 rounded-xl text-xs border border-stone-300 transition flex items-center justify-center gap-1" title="Hapus Cache Mushaf">
-                <i class="fa-solid fa-trash-can"></i> <span>Hapus Cache</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Card Zona Bahaya: Reset Semua Data Aplikasi -->
-          <div class="bg-rose-50/60 p-5 rounded-2xl border border-rose-200 shadow-sm space-y-3">
-            <h3 class="font-bold text-rose-950 text-sm flex items-center gap-2 border-b border-rose-200 pb-2">
-              <i class="fa-solid fa-triangle-exclamation text-rose-600"></i> Zona Bahaya: Reset Sistem
+<!-- Offline Progress Bar -->
+<div class="space-y-1 bg-stone-50 p-2.5 rounded-xl border border-stone-200/80">
+<div class="flex justify-between items-center text-[11px]">
+<span class="text-stone-500 font-medium">Status Kesiapan:</span>
+<span class="font-bold text-teal-800" id="cardOfflinePercent">0%</span>
+</div>
+<div class="w-full bg-stone-200 rounded-full h-2 overflow-hidden">
+<div class="bg-teal-600 h-2 rounded-full transition-all duration-300" id="cardOfflineProgressBar" style="width: 0%"></div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-2 pt-1">
+<button class="flex-1 bg-teal-700 hover:bg-teal-800 active:scale-95 text-white font-bold py-2 px-3 rounded-xl text-xs shadow transition flex items-center justify-center gap-1.5" onclick="openDownloadOfflineModal()" type="button">
+<i class="fa-solid fa-download"></i> <span>Unduh 114 Surah</span>
+</button>
+<button class="bg-stone-100 hover:bg-stone-200 text-stone-700 font-semibold py-2 px-3 rounded-xl text-xs border border-stone-300 transition flex items-center justify-center gap-1" onclick="confirmClearOfflineCache()" title="Hapus Cache Mushaf" type="button">
+<i class="fa-solid fa-trash-can"></i> <span>Hapus Cache</span>
+</button>
+</div>
+</div>
+<!-- Card Zona Bahaya: Reset Semua Data Aplikasi -->
+<div class="bg-rose-50/60 p-5 rounded-2xl border border-rose-200 shadow-sm space-y-3">
+<h3 class="font-bold text-rose-950 text-sm flex items-center gap-2 border-b border-rose-200 pb-2">
+<i class="fa-solid fa-triangle-exclamation text-rose-600"></i> Zona Bahaya: Reset Sistem
             </h3>
-            <p class="text-xs text-rose-800 leading-relaxed">
+<p class="text-xs text-rose-800 leading-relaxed">
               Mereset seluruh data santri, riwayat setoran hafalan, catatan koreksi per-kata, dan memulai aplikasi dari awal bersih (setelan awal / tahun ajaran baru).
             </p>
-            <button onclick="openResetSemuaDataModal()" type="button" class="w-full bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-bold py-2.5 px-4 rounded-xl text-xs shadow transition flex items-center justify-center gap-2">
-              <i class="fa-solid fa-rotate-left"></i> Reset Semua Data ke Awal
+<button class="w-full bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-bold py-2.5 px-4 rounded-xl text-xs shadow transition flex items-center justify-center gap-2" onclick="openResetSemuaDataModal()" type="button">
+<i class="fa-solid fa-rotate-left"></i> Reset Semua Data ke Awal
             </button>
-          </div>
-
-        </div>
-
-      </div>
-
-    </section>
-
-  </main>
-
-  <!-- MODAL KOREKSI KATA (JALY / KHAFY PER-KATA) -->
-  <div id="modalKoreksiKata" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden border border-stone-200">
-      
-      <!-- Modal Header -->
-      <div class="bg-emerald-950 text-white p-4 flex justify-between items-center">
-        <div>
-          <span id="modalKoreksiWordSurahTitle" class="text-xs text-amber-300 font-bold">Surah Al-Fatihah : Ayat 2</span>
-          <h3 class="font-extrabold text-sm text-stone-100">Koreksi Kata Bacaan / Hafalan</h3>
-        </div>
-        <button onclick="closeModalKoreksiKata()" class="text-stone-400 hover:text-white p-1">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-      </div>
-
-      <!-- Word Preview Banner -->
-      <div class="p-4 bg-amber-50/60 border-b border-stone-200 text-center space-y-1">
-        <span class="text-[10px] font-bold text-stone-500 uppercase tracking-wider">Kata yang Dikoreksi:</span>
-        <div class="flex justify-center items-center py-1">
-          <span id="modalKoreksiTargetWord" dir="rtl" class="font-quran text-4xl text-emerald-950 font-bold px-5 py-2 rounded-2xl bg-white border border-amber-300 shadow-sm dir-rtl">
-          </span>
-        </div>
-        <p id="modalKoreksiFullVerse" class="text-xs text-stone-500 font-semibold truncate px-4 mt-1">
-        </p>
-      </div>
-
-      <!-- Form Evaluasi Koreksi -->
-      <form id="formKoreksiKata" onsubmit="saveWordCorrection(event)" class="p-4 space-y-3.5">
-        
-        <!-- Selection Jaly vs Khafy -->
-        <div>
-          <label class="block text-xs font-bold text-stone-700 mb-1.5">Klasifikasi Kesalahan:</label>
-          <div class="grid grid-cols-2 gap-2">
-            <label class="cursor-pointer border-2 border-rose-200 bg-rose-50 hover:bg-rose-100 p-2.5 rounded-2xl flex items-center gap-2 transition">
-              <input type="radio" name="kategoriError" value="Jaly" checked class="accent-rose-600">
-              <div>
-                <p class="text-xs font-bold text-rose-950">🔴 Kesalahan Jaly</p>
-                <p class="text-[10px] text-rose-800">Salah Harakat / Huruf / Lupa</p>
-              </div>
-            </label>
-
-            <label class="cursor-pointer border-2 border-amber-200 bg-amber-50 hover:bg-amber-100 p-2.5 rounded-2xl flex items-center gap-2 transition">
-              <input type="radio" name="kategoriError" value="Khafy" class="accent-amber-600">
-              <div>
-                <p class="text-xs font-bold text-amber-950">🟡 Kesalahan Khafy</p>
-                <p class="text-[10px] text-amber-800">Tajwid / Ghunnah / Mad</p>
-              </div>
-            </label>
-          </div>
-        </div>
-
-        <!-- Quick Tags -->
-        <div>
-          <label class="block text-xs font-bold text-stone-700 mb-1">Tag Cepat Koreksi:</label>
-          <div class="flex flex-wrap gap-1.5">
-            <button type="button" onclick="setQuickTag('Salah Harakat (Fathah/Kasrah/Dhommah)')" class="text-[10px] bg-stone-100 hover:bg-emerald-100 text-stone-700 hover:text-emerald-900 border border-stone-300 rounded-lg px-2 py-1 font-medium transition">
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- MODAL KOREKSI KATA (JALY / KHAFY PER-KATA) -->
+<div class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden" id="modalKoreksiKata">
+<div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full overflow-hidden border border-stone-200">
+<!-- Modal Header -->
+<div class="bg-emerald-950 text-white p-4 flex justify-between items-center">
+<div>
+<span class="text-xs text-amber-300 font-bold" id="modalKoreksiWordSurahTitle">Surah Al-Fatihah : Ayat 2</span>
+<h3 class="font-extrabold text-sm text-stone-100">Koreksi Kata Bacaan / Hafalan</h3>
+</div>
+<button class="text-stone-400 hover:text-white p-1" onclick="closeModalKoreksiKata()">
+<i class="fa-solid fa-xmark text-lg"></i>
+</button>
+</div>
+<!-- Word Preview Banner -->
+<div class="p-4 bg-amber-50/60 border-b border-stone-200 text-center space-y-1">
+<span class="text-[10px] font-bold text-stone-500 uppercase tracking-wider">Kata yang Dikoreksi:</span>
+<div class="flex justify-center items-center py-1">
+<span class="font-quran text-4xl text-emerald-950 font-bold px-5 py-2 rounded-2xl bg-white border border-amber-300 shadow-sm dir-rtl" dir="rtl" id="modalKoreksiTargetWord">
+</span>
+</div>
+<p class="text-xs text-stone-500 font-semibold truncate px-4 mt-1" id="modalKoreksiFullVerse">
+</p>
+</div>
+<!-- Form Evaluasi Koreksi -->
+<form class="p-4 space-y-3.5" id="formKoreksiKata" onsubmit="saveWordCorrection(event)">
+<!-- Selection Jaly vs Khafy -->
+<div>
+<label class="block text-xs font-bold text-stone-700 mb-1.5">Klasifikasi Kesalahan:</label>
+<div class="grid grid-cols-2 gap-2">
+<label class="cursor-pointer border-2 border-rose-200 bg-rose-50 hover:bg-rose-100 p-2.5 rounded-2xl flex items-center gap-2 transition">
+<input checked="" class="accent-rose-600" name="kategoriError" type="radio" value="Jaly"/>
+<div>
+<p class="text-xs font-bold text-rose-950">🔴 Kesalahan Jaly</p>
+<p class="text-[10px] text-rose-800">Salah Harakat / Huruf / Lupa</p>
+</div>
+</label>
+<label class="cursor-pointer border-2 border-amber-200 bg-amber-50 hover:bg-amber-100 p-2.5 rounded-2xl flex items-center gap-2 transition">
+<input class="accent-amber-600" name="kategoriError" type="radio" value="Khafy"/>
+<div>
+<p class="text-xs font-bold text-amber-950">🟡 Kesalahan Khafy</p>
+<p class="text-[10px] text-amber-800">Tajwid / Ghunnah / Mad</p>
+</div>
+</label>
+</div>
+</div>
+<!-- Quick Tags -->
+<div>
+<label class="block text-xs font-bold text-stone-700 mb-1">Tag Cepat Koreksi:</label>
+<div class="flex flex-wrap gap-1.5">
+<button class="text-[10px] bg-stone-100 hover:bg-emerald-100 text-stone-700 hover:text-emerald-900 border border-stone-300 rounded-lg px-2 py-1 font-medium transition" onclick="setQuickTag('Salah Harakat (Fathah/Kasrah/Dhommah)')" type="button">
               Salah Harakat
             </button>
-            <button type="button" onclick="setQuickTag('Makhraj Huruf Kurang Pas')" class="text-[10px] bg-stone-100 hover:bg-emerald-100 text-stone-700 hover:text-emerald-900 border border-stone-300 rounded-lg px-2 py-1 font-medium transition">
+<button class="text-[10px] bg-stone-100 hover:bg-emerald-100 text-stone-700 hover:text-emerald-900 border border-stone-300 rounded-lg px-2 py-1 font-medium transition" onclick="setQuickTag('Makhraj Huruf Kurang Pas')" type="button">
               Makhraj Huruf
             </button>
-            <button type="button" onclick="setQuickTag('Kadar Mad Kurang / Berlebih')" class="text-[10px] bg-stone-100 hover:bg-emerald-100 text-stone-700 hover:text-emerald-900 border border-stone-300 rounded-lg px-2 py-1 font-medium transition">
+<button class="text-[10px] bg-stone-100 hover:bg-emerald-100 text-stone-700 hover:text-emerald-900 border border-stone-300 rounded-lg px-2 py-1 font-medium transition" onclick="setQuickTag('Kadar Mad Kurang / Berlebih')" type="button">
               Kadar Mad
             </button>
-            <button type="button" onclick="setQuickTag('Ghunnah / Dengung Kurang')" class="text-[10px] bg-stone-100 hover:bg-emerald-100 text-stone-700 hover:text-emerald-900 border border-stone-300 rounded-lg px-2 py-1 font-medium transition">
+<button class="text-[10px] bg-stone-100 hover:bg-emerald-100 text-stone-700 hover:text-emerald-900 border border-stone-300 rounded-lg px-2 py-1 font-medium transition" onclick="setQuickTag('Ghunnah / Dengung Kurang')" type="button">
               Ghunnah
             </button>
-            <button type="button" onclick="setQuickTag('Tersendat / Lupa Lanjutan')" class="text-[10px] bg-stone-100 hover:bg-emerald-100 text-stone-700 hover:text-emerald-900 border border-stone-300 rounded-lg px-2 py-1 font-medium transition">
+<button class="text-[10px] bg-stone-100 hover:bg-emerald-100 text-stone-700 hover:text-emerald-900 border border-stone-300 rounded-lg px-2 py-1 font-medium transition" onclick="setQuickTag('Tersendat / Lupa Lanjutan')" type="button">
               Lupa Kata
             </button>
-          </div>
-        </div>
-
-        <!-- Catatan Khusus -->
-        <div>
-          <label class="block text-xs font-bold text-stone-700 mb-1">Catatan Detail Koreksi:</label>
-          <input type="text" id="koreksiCatatanInput" placeholder="Contoh: Harakat kasrah tertukar fathah..." 
-            class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 text-xs font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none">
-        </div>
-
-        <!-- Registered Mark Info -->
-        <div id="modalExistingMarkBanner" class="hidden bg-stone-100 p-3 rounded-xl border border-stone-200 text-xs space-y-1">
-          <p class="font-bold text-stone-700 text-[11px]">Tanda Terdaftar Pada Kata Ini:</p>
-          <div id="modalExistingMarkText" class="text-stone-800 text-[11px] font-medium"></div>
-        </div>
-
-        <!-- Action Buttons -->
-        <div class="flex gap-2 pt-2">
-          <button type="button" onclick="deleteWordCorrection()" id="btnHapusKoreksi" class="hidden w-1/3 bg-rose-100 hover:bg-rose-200 text-rose-900 font-bold py-2.5 rounded-xl text-xs transition">
+</div>
+</div>
+<!-- Catatan Khusus -->
+<div>
+<label class="block text-xs font-bold text-stone-700 mb-1">Catatan Detail Koreksi:</label>
+<input class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 text-xs font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none" id="koreksiCatatanInput" placeholder="Contoh: Harakat kasrah tertukar fathah..." type="text"/>
+</div>
+<!-- Registered Mark Info -->
+<div class="hidden bg-stone-100 p-3 rounded-xl border border-stone-200 text-xs space-y-1" id="modalExistingMarkBanner">
+<p class="font-bold text-stone-700 text-[11px]">Tanda Terdaftar Pada Kata Ini:</p>
+<div class="text-stone-800 text-[11px] font-medium" id="modalExistingMarkText"></div>
+</div>
+<!-- Action Buttons -->
+<div class="flex gap-2 pt-2">
+<button class="hidden w-1/3 bg-rose-100 hover:bg-rose-200 text-rose-900 font-bold py-2.5 rounded-xl text-xs transition" id="btnHapusKoreksi" onclick="deleteWordCorrection()" type="button">
             Hapus Tanda
           </button>
-          <button type="submit" id="btnSimpanKoreksi" class="flex-grow bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-2.5 rounded-xl text-xs shadow transition">
+<button class="flex-grow bg-emerald-800 hover:bg-emerald-900 text-white font-bold py-2.5 rounded-xl text-xs shadow transition" id="btnSimpanKoreksi" type="submit">
             Simpan Koreksi Kata
           </button>
-        </div>
-
-      </form>
-
-    </div>
-  </div>
-
-  <!-- MODAL TAMBAH SANTRI -->
-  <div id="modalTambahSantri" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-5 space-y-4 border border-stone-200">
-      <div class="flex justify-between items-center border-b border-stone-100 pb-2">
-        <h3 class="font-bold text-stone-800 text-sm flex items-center gap-2">
-          <i class="fa-solid fa-user-plus text-emerald-700"></i> Tambah Santri Baru
+</div>
+</form>
+</div>
+</div>
+<!-- MODAL TAMBAH SANTRI -->
+<div class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden" id="modalTambahSantri">
+<div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-5 space-y-4 border border-stone-200">
+<div class="flex justify-between items-center border-b border-stone-100 pb-2">
+<h3 class="font-bold text-stone-800 text-sm flex items-center gap-2">
+<i class="fa-solid fa-user-plus text-emerald-700"></i> Tambah Santri Baru
         </h3>
-        <button onclick="closeModalTambahSantri()" class="text-stone-400 hover:text-stone-600">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-
-      <div class="space-y-3 text-xs">
-        <div>
-          <label class="block font-bold text-stone-700 mb-1">NIS / ID Santri (Opsional):</label>
-          <input type="text" id="inputSantriNis" placeholder="Contoh: 1004"
-            class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none">
-        </div>
-        <div>
-          <label class="block font-bold text-stone-700 mb-1">Nama Lengkap Santri *:</label>
-          <input type="text" id="inputSantriNama" placeholder="Contoh: Zaid bin Tsabit"
-            class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none">
-        </div>
-        <div>
-          <label class="block font-bold text-stone-700 mb-1">Halaqah / Kelas:</label>
-          <input type="text" id="inputSantriKelas" placeholder="Contoh: Kelas Al-Jazari"
-            class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none">
-        </div>
-        <!-- Nomor WA Wali (Target Kurikulum diatur setelah santri disimpan) -->
-        <div>
-          <label class="block font-bold text-stone-700 mb-1">No. WhatsApp Wali:</label>
-          <input type="tel" id="inputSantriWa" placeholder="Contoh: 081234567890"
-            class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 font-semibold text-xs focus:ring-2 focus:ring-emerald-600 focus:outline-none">
-        </div>
-        <p class="text-[10px] text-stone-400 italic">
+<button class="text-stone-400 hover:text-stone-600" onclick="closeModalTambahSantri()">
+<i class="fa-solid fa-xmark"></i>
+</button>
+</div>
+<div class="space-y-3 text-xs">
+<div>
+<label class="block font-bold text-stone-700 mb-1">NIS / ID Santri (Opsional):</label>
+<input class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none" id="inputSantriNis" placeholder="Contoh: 1004" type="text"/>
+</div>
+<div>
+<label class="block font-bold text-stone-700 mb-1">Nama Lengkap Santri *:</label>
+<input class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none" id="inputSantriNama" placeholder="Contoh: Zaid bin Tsabit" type="text"/>
+</div>
+<div>
+<label class="block font-bold text-stone-700 mb-1">Halaqah / Kelas:</label>
+<input class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none" id="inputSantriKelas" placeholder="Contoh: Kelas Al-Jazari" type="text"/>
+</div>
+<!-- Nomor WA Wali (Target Kurikulum diatur setelah santri disimpan) -->
+<div>
+<label class="block font-bold text-stone-700 mb-1">No. WhatsApp Wali:</label>
+<input class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 font-semibold text-xs focus:ring-2 focus:ring-emerald-600 focus:outline-none" id="inputSantriWa" placeholder="Contoh: 081234567890" type="tel"/>
+</div>
+<p class="text-[10px] text-stone-400 italic">
           * Target Kurikulum (per jenis kegiatan: Bacaan, Hafalan Baru, Muraja'ah, Tasmi') dapat diatur setelah santri disimpan, melalui tombol edit di tabel Santri.
         </p>
-      </div>
-
-      <div class="flex gap-2 pt-2">
-        <button onclick="closeModalTambahSantri()" type="button" class="w-1/3 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold py-2 rounded-xl text-xs transition">
+</div>
+<div class="flex gap-2 pt-2">
+<button class="w-1/3 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold py-2 rounded-xl text-xs transition" onclick="closeModalTambahSantri()" type="button">
           Batal
         </button>
-        <button onclick="saveNewSantri()" type="button" class="flex-grow bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 rounded-xl text-xs shadow transition">
+<button class="flex-grow bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 rounded-xl text-xs shadow transition" onclick="saveNewSantri()" type="button">
           Simpan Santri
         </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL EDIT SANTRI (Ubah Data & Target Kurikulum Santri Terdaftar) -->
-  <div id="modalEditSantri" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-5 space-y-4 border border-stone-200">
-      <div class="flex justify-between items-center border-b border-stone-100 pb-2">
-        <h3 class="font-bold text-stone-800 text-sm flex items-center gap-2">
-          <i class="fa-solid fa-user-pen text-emerald-700"></i> Edit Data Santri
+</div>
+</div>
+</div>
+<!-- MODAL EDIT SANTRI (Ubah Data & Target Kurikulum Santri Terdaftar) -->
+<div class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden" id="modalEditSantri">
+<div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-5 space-y-4 border border-stone-200">
+<div class="flex justify-between items-center border-b border-stone-100 pb-2">
+<h3 class="font-bold text-stone-800 text-sm flex items-center gap-2">
+<i class="fa-solid fa-user-pen text-emerald-700"></i> Edit Data Santri
         </h3>
-        <button onclick="closeModalEditSantri()" class="text-stone-400 hover:text-stone-600">
-          <i class="fa-solid fa-xmark"></i>
+<button class="text-stone-400 hover:text-stone-600" onclick="closeModalEditSantri()">
+<i class="fa-solid fa-xmark"></i>
+</button>
+</div>
+<input id="inputEditSantriId" type="hidden"/>
+<div class="space-y-3 text-xs">
+<div>
+<label class="block font-bold text-stone-700 mb-1">NIS / ID Santri:</label>
+<input class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none" id="inputEditSantriNis" placeholder="Contoh: 1004" type="text"/>
+</div>
+<div>
+<label class="block font-bold text-stone-700 mb-1">Nama Lengkap Santri *:</label>
+<input class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none" id="inputEditSantriNama" placeholder="Contoh: Zaid bin Tsabit" type="text"/>
+</div>
+<div>
+<label class="block font-bold text-stone-700 mb-1">Halaqah / Kelas:</label>
+<input class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none" id="inputEditSantriKelas" placeholder="Contoh: Kelas Al-Jazari" type="text"/>
+</div>
+<!-- No. WhatsApp Wali & Tombol Atur Target Kurikulum -->
+<div>
+<label class="block font-bold text-stone-700 mb-1">No. WhatsApp Wali:</label>
+<input class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 font-semibold text-xs focus:ring-2 focus:ring-emerald-600 focus:outline-none" id="inputEditSantriWa" placeholder="Contoh: 081234567890" type="tel"/>
+</div>
+<button class="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-xs px-3 py-2.5 rounded-xl border border-emerald-200 transition flex items-center justify-center gap-1.5" onclick="openModalTargetKurikulum(document.getElementById('inputEditSantriId').value)" type="button">
+<i class="fa-solid fa-bullseye"></i> Atur Target Kurikulum (Bacaan, Hafalan, Muraja'ah, Tasmi')
         </button>
-      </div>
-
-      <input type="hidden" id="inputEditSantriId">
-
-      <div class="space-y-3 text-xs">
-        <div>
-          <label class="block font-bold text-stone-700 mb-1">NIS / ID Santri:</label>
-          <input type="text" id="inputEditSantriNis" placeholder="Contoh: 1004"
-            class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none">
-        </div>
-        <div>
-          <label class="block font-bold text-stone-700 mb-1">Nama Lengkap Santri *:</label>
-          <input type="text" id="inputEditSantriNama" placeholder="Contoh: Zaid bin Tsabit"
-            class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none">
-        </div>
-        <div>
-          <label class="block font-bold text-stone-700 mb-1">Halaqah / Kelas:</label>
-          <input type="text" id="inputEditSantriKelas" placeholder="Contoh: Kelas Al-Jazari"
-            class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none">
-        </div>
-        <!-- No. WhatsApp Wali & Tombol Atur Target Kurikulum -->
-        <div>
-          <label class="block font-bold text-stone-700 mb-1">No. WhatsApp Wali:</label>
-          <input type="tel" id="inputEditSantriWa" placeholder="Contoh: 081234567890"
-            class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 font-semibold text-xs focus:ring-2 focus:ring-emerald-600 focus:outline-none">
-        </div>
-        <button onclick="openModalTargetKurikulum(document.getElementById('inputEditSantriId').value)" type="button"
-          class="w-full bg-emerald-50 hover:bg-emerald-100 text-emerald-800 font-bold text-xs px-3 py-2.5 rounded-xl border border-emerald-200 transition flex items-center justify-center gap-1.5">
-          <i class="fa-solid fa-bullseye"></i> Atur Target Kurikulum (Bacaan, Hafalan, Muraja'ah, Tasmi')
-        </button>
-      </div>
-
-      <div class="flex gap-2 pt-2">
-        <button onclick="closeModalEditSantri()" type="button" class="w-1/3 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold py-2 rounded-xl text-xs transition">
+</div>
+<div class="flex gap-2 pt-2">
+<button class="w-1/3 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold py-2 rounded-xl text-xs transition" onclick="closeModalEditSantri()" type="button">
           Batal
         </button>
-        <button onclick="saveEditSantri()" type="button" class="flex-grow bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 rounded-xl text-xs shadow transition">
+<button class="flex-grow bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 rounded-xl text-xs shadow transition" onclick="saveEditSantri()" type="button">
           Simpan Perubahan
         </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL ATUR TARGET KURIKULUM (DINAMIS PER JENIS KEGIATAN: CENTANG JUZ/SURAH) -->
-  <div id="modalTargetKurikulum" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4 hidden">
-    <div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-5 space-y-3.5 border border-stone-200 max-h-[92vh] overflow-y-auto">
-      <div class="flex justify-between items-center border-b border-stone-100 pb-2">
-        <h3 class="font-bold text-stone-800 text-sm flex items-center gap-2">
-          <i class="fa-solid fa-bullseye text-emerald-700"></i> Atur Target &mdash; <span id="targetKurikulumStudentName" class="text-emerald-700"></span>
-        </h3>
-        <button onclick="closeModalTargetKurikulum()" class="text-stone-400 hover:text-stone-600">
-          <i class="fa-solid fa-xmark"></i>
-        </button>
-      </div>
-
-      <!-- Tab Jenis Kegiatan -->
-      <div class="flex flex-wrap gap-1.5 bg-stone-100 p-1 rounded-2xl border border-stone-200 text-[11px]" id="targetActivityTabsGroup">
-        <button id="targetTabBacaanBtn" onclick="switchTargetTab('Setoran Bacaan')" type="button" class="flex-1 px-2.5 py-2 rounded-xl transition font-bold">Bacaan</button>
-        <button id="targetTabHafalanBtn" onclick="switchTargetTab('Setoran Hafalan Baru')" type="button" class="flex-1 px-2.5 py-2 rounded-xl transition font-bold">Hafalan Baru</button>
-        <button id="targetTabMurajaahBtn" onclick="switchTargetTab('Muraja\'ah')" type="button" class="flex-1 px-2.5 py-2 rounded-xl transition font-bold">Muraja'ah</button>
-        <button id="targetTabTasmiBtn" onclick="switchTargetTab('Tasmi\'')" type="button" class="flex-1 px-2.5 py-2 rounded-xl transition font-bold">Tasmi'</button>
-      </div>
-
-      <!-- Mode Toggle + Aksi Cepat -->
-      <div class="flex flex-wrap items-center justify-between gap-2 text-[11px]">
-        <div class="flex items-center gap-1 bg-stone-100 p-1 rounded-xl border border-stone-200">
-          <button id="targetModeJuzBtn" onclick="switchTargetMode('juz')" type="button" class="px-3 py-1.5 rounded-lg font-bold transition">Per Juz</button>
-          <button id="targetModeSurahBtn" onclick="switchTargetMode('surah')" type="button" class="px-3 py-1.5 rounded-lg font-bold transition">Per Surah</button>
-        </div>
-        <div class="flex items-center gap-2">
-          <span id="targetSelectedCounter" class="font-bold text-stone-600">0 dipilih</span>
-          <button onclick="selectAllTargetItems()" type="button" class="text-emerald-700 hover:underline font-bold">Pilih Semua</button>
-          <button onclick="clearAllTargetItems()" type="button" class="text-rose-600 hover:underline font-bold">Hapus Semua</button>
-        </div>
-      </div>
-
-      <!-- Checklist Grid -->
-      <div id="targetChecklistGrid" class="grid grid-cols-3 sm:grid-cols-4 gap-1.5 max-h-64 overflow-y-auto p-2 bg-stone-50 rounded-2xl border border-stone-200 text-[11px]">
-        <!-- diisi otomatis oleh renderTargetChecklist() -->
-      </div>
-
-      <div class="flex gap-2 pt-2">
-        <button onclick="closeModalTargetKurikulum()" type="button" class="w-1/3 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold py-2 rounded-xl text-xs transition">
+</div>
+</div>
+</div>
+<!-- MODAL ATUR TARGET KURIKULUM (DINAMIS PER JENIS KEGIATAN: CENTANG JUZ/SURAH) -->
+<div class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[60] flex items-center justify-center p-4 hidden" id="modalTargetKurikulum">
+<div class="bg-white rounded-3xl shadow-2xl max-w-lg w-full p-5 space-y-3.5 border border-stone-200 max-h-[92vh] overflow-y-auto">
+<div class="flex justify-between items-center border-b border-stone-100 pb-2">
+<h3 class="font-bold text-stone-800 text-sm flex items-center gap-2">
+<i class="fa-solid fa-bullseye text-emerald-700"></i> Atur Target — <span class="text-emerald-700" id="targetKurikulumStudentName"></span>
+</h3>
+<button class="text-stone-400 hover:text-stone-600" onclick="closeModalTargetKurikulum()">
+<i class="fa-solid fa-xmark"></i>
+</button>
+</div>
+<!-- Tab Jenis Kegiatan -->
+<div class="flex flex-wrap gap-1.5 bg-stone-100 p-1 rounded-2xl border border-stone-200 text-[11px]" id="targetActivityTabsGroup">
+<button class="flex-1 px-2.5 py-2 rounded-xl transition font-bold" id="targetTabBacaanBtn" onclick="switchTargetTab('Setoran Bacaan')" type="button">Bacaan</button>
+<button class="flex-1 px-2.5 py-2 rounded-xl transition font-bold" id="targetTabHafalanBtn" onclick="switchTargetTab('Setoran Hafalan Baru')" type="button">Hafalan Baru</button>
+<button class="flex-1 px-2.5 py-2 rounded-xl transition font-bold" id="targetTabMurajaahBtn" onclick="switchTargetTab('Muraja\'ah')" type="button">Muraja'ah</button>
+<button class="flex-1 px-2.5 py-2 rounded-xl transition font-bold" id="targetTabTasmiBtn" onclick="switchTargetTab('Tasmi\'')" type="button">Tasmi'</button>
+</div>
+<!-- Mode Toggle + Aksi Cepat -->
+<div class="flex flex-wrap items-center justify-between gap-2 text-[11px]">
+<div class="flex items-center gap-1 bg-stone-100 p-1 rounded-xl border border-stone-200">
+<button class="px-3 py-1.5 rounded-lg font-bold transition" id="targetModeJuzBtn" onclick="switchTargetMode('juz')" type="button">Per Juz</button>
+<button class="px-3 py-1.5 rounded-lg font-bold transition" id="targetModeSurahBtn" onclick="switchTargetMode('surah')" type="button">Per Surah</button>
+</div>
+<div class="flex items-center gap-2">
+<span class="font-bold text-stone-600" id="targetSelectedCounter">0 dipilih</span>
+<button class="text-emerald-700 hover:underline font-bold" onclick="selectAllTargetItems()" type="button">Pilih Semua</button>
+<button class="text-rose-600 hover:underline font-bold" onclick="clearAllTargetItems()" type="button">Hapus Semua</button>
+</div>
+</div>
+<!-- Checklist Grid -->
+<div class="grid grid-cols-3 sm:grid-cols-4 gap-1.5 max-h-64 overflow-y-auto p-2 bg-stone-50 rounded-2xl border border-stone-200 text-[11px]" id="targetChecklistGrid">
+<!-- diisi otomatis oleh renderTargetChecklist() -->
+</div>
+<div class="flex gap-2 pt-2">
+<button class="w-1/3 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold py-2 rounded-xl text-xs transition" onclick="closeModalTargetKurikulum()" type="button">
           Batal
         </button>
-        <button onclick="saveTargetKurikulum()" type="button" class="flex-grow bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 rounded-xl text-xs shadow transition">
+<button class="flex-grow bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2 rounded-xl text-xs shadow transition" onclick="saveTargetKurikulum()" type="button">
           Simpan Target
         </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL KONFIRMASI KELULUSAN / HASIL SETORAN (LULUS VS PERLU MENGULANG) -->
-  <div id="modalKonfirmasiKelulusan" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-stone-200 animate-in fade-in duration-200">
-      
-      <!-- Header Modal Kelulusan -->
-      <div class="bg-gradient-to-r from-emerald-950 to-teal-900 text-white p-4 flex justify-between items-center">
-        <div class="flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-xl bg-amber-400 text-emerald-950 flex items-center justify-center font-black text-base shadow">
-            <i class="fa-solid fa-stamp"></i>
-          </div>
-          <div>
-            <h3 class="font-black text-sm text-stone-100">Konfirmasi Hasil Setoran</h3>
-            <p class="text-[10px] text-emerald-300 font-medium">Tentukan status kelulusan santri untuk sesi ini</p>
-          </div>
-        </div>
-        <button onclick="closeModalKelulusan()" class="text-stone-400 hover:text-white p-1 transition">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-      </div>
-
-      <!-- Ringkasan Hasil Bacaan & Kesalahan -->
-      <div class="p-4 bg-stone-50 border-b border-stone-200 space-y-2 text-xs">
-        <div class="flex justify-between items-center">
-          <span class="text-stone-500">Santri:</span>
-          <span id="modalKelulusanNama" class="font-extrabold text-stone-800 text-sm">Ahmad Fauzi</span>
-        </div>
-        <div class="flex justify-between items-center">
-          <span class="text-stone-500">Kegiatan:</span>
-          <span id="modalKelulusanKegiatan" class="font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-lg text-[11px]">Setoran Hafalan Baru</span>
-        </div>
-        <div class="flex justify-between items-center">
-          <span class="text-stone-500">Rentang Surah & Ayat:</span>
-          <span id="modalKelulusanRentang" class="font-bold text-stone-700">Surah Al-Fatihah (1-7)</span>
-        </div>
-        <div class="flex justify-between items-center pt-1 border-t border-stone-200/80">
-          <span class="text-stone-500">Deteksi Kesalahan:</span>
-          <div class="flex items-center gap-2.5 font-bold">
-            <span class="text-rose-700 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200">🔴 Jaly: <strong id="modalKelulusanJaly">0</strong></span>
-            <span class="text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">🟡 Khafy: <strong id="modalKelulusanKhafy">0</strong></span>
-          </div>
-        </div>
-        <div class="flex justify-between items-center pt-0.5">
-          <span class="text-stone-500">Skor Kalkulasi Otomatis:</span>
-          <span class="text-base font-black text-stone-900"><span id="modalKelulusanSkor" class="text-emerald-700 text-lg">100</span> / 100</span>
-        </div>
-      </div>
-
-      <!-- Pilihan Kelulusan: Lulus vs Perlu Mengulang -->
-      <div class="p-4 space-y-3.5">
-        <label class="block text-xs font-bold text-stone-700">Keputusan Hasil Setoran Pengampu:</label>
-        <div class="grid grid-cols-2 gap-2.5">
-          <!-- Opsi LULUS -->
-          <label id="labelOptionLulus" onclick="selectStatusKelulusan('Lulus')" class="cursor-pointer border-2 border-emerald-500 bg-emerald-50 p-3 rounded-2xl flex flex-col items-center text-center transition shadow-sm hover:bg-emerald-100/70">
-            <input type="radio" name="statusKelulusanRadio" value="Lulus" checked class="accent-emerald-600 mb-1" onchange="onStatusKelulusanChange()">
-            <span class="font-black text-xs text-emerald-950 flex items-center gap-1.5">
-              <i class="fa-solid fa-circle-check text-emerald-600 text-sm"></i> LULUS
+</div>
+</div>
+</div>
+<!-- MODAL KONFIRMASI KELULUSAN / HASIL SETORAN (LULUS VS PERLU MENGULANG) -->
+<div class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden" id="modalKonfirmasiKelulusan">
+<div class="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-stone-200 animate-in fade-in duration-200">
+<!-- Header Modal Kelulusan -->
+<div class="bg-gradient-to-r from-emerald-950 to-teal-900 text-white p-4 flex justify-between items-center">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-amber-400 text-emerald-950 flex items-center justify-center font-black text-base shadow">
+<i class="fa-solid fa-stamp"></i>
+</div>
+<div>
+<h3 class="font-black text-sm text-stone-100">Konfirmasi Hasil Setoran</h3>
+<p class="text-[10px] text-emerald-300 font-medium">Tentukan status kelulusan santri untuk sesi ini</p>
+</div>
+</div>
+<button class="text-stone-400 hover:text-white p-1 transition" onclick="closeModalKelulusan()">
+<i class="fa-solid fa-xmark text-lg"></i>
+</button>
+</div>
+<!-- Ringkasan Hasil Bacaan & Kesalahan -->
+<div class="p-4 bg-stone-50 border-b border-stone-200 space-y-2 text-xs">
+<div class="flex justify-between items-center">
+<span class="text-stone-500">Santri:</span>
+<span class="font-extrabold text-stone-800 text-sm" id="modalKelulusanNama">Ahmad Fauzi</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-stone-500">Kegiatan:</span>
+<span class="font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded-lg text-[11px]" id="modalKelulusanKegiatan">Setoran Hafalan Baru</span>
+</div>
+<div class="flex justify-between items-center">
+<span class="text-stone-500">Rentang Surah &amp; Ayat:</span>
+<span class="font-bold text-stone-700" id="modalKelulusanRentang">Surah Al-Fatihah (1-7)</span>
+</div>
+<div class="flex justify-between items-center pt-1 border-t border-stone-200/80">
+<span class="text-stone-500">Deteksi Kesalahan:</span>
+<div class="flex items-center gap-2.5 font-bold">
+<span class="text-rose-700 bg-rose-50 px-2 py-0.5 rounded-md border border-rose-200">🔴 Jaly: <strong id="modalKelulusanJaly">0</strong></span>
+<span class="text-amber-700 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">🟡 Khafy: <strong id="modalKelulusanKhafy">0</strong></span>
+</div>
+</div>
+<div class="flex justify-between items-center pt-0.5">
+<span class="text-stone-500">Skor Kalkulasi Otomatis:</span>
+<span class="text-base font-black text-stone-900"><span class="text-emerald-700 text-lg" id="modalKelulusanSkor">100</span> / 100</span>
+</div>
+</div>
+<!-- Pilihan Kelulusan: Lulus vs Perlu Mengulang -->
+<div class="p-4 space-y-3.5">
+<label class="block text-xs font-bold text-stone-700">Keputusan Hasil Setoran Pengampu:</label>
+<div class="grid grid-cols-2 gap-2.5">
+<!-- Opsi LULUS -->
+<label class="cursor-pointer border-2 border-emerald-500 bg-emerald-50 p-3 rounded-2xl flex flex-col items-center text-center transition shadow-sm hover:bg-emerald-100/70" id="labelOptionLulus" onclick="selectStatusKelulusan('Lulus')">
+<input checked="" class="accent-emerald-600 mb-1" name="statusKelulusanRadio" onchange="onStatusKelulusanChange()" type="radio" value="Lulus"/>
+<span class="font-black text-xs text-emerald-950 flex items-center gap-1.5">
+<i class="fa-solid fa-circle-check text-emerald-600 text-sm"></i> LULUS
             </span>
-            <span class="text-[10px] text-emerald-800 mt-0.5 font-semibold">Mutqin / Lanjut Materi</span>
-          </label>
-
-          <!-- Opsi PERLU MENGULANG -->
-          <label id="labelOptionUlang" onclick="selectStatusKelulusan('Perlu Mengulang')" class="cursor-pointer border-2 border-stone-200 bg-stone-50 p-3 rounded-2xl flex flex-col items-center text-center transition hover:bg-rose-50 hover:border-rose-300">
-            <input type="radio" name="statusKelulusanRadio" value="Perlu Mengulang" class="accent-rose-600 mb-1" onchange="onStatusKelulusanChange()">
-            <span class="font-black text-xs text-rose-950 flex items-center gap-1.5">
-              <i class="fa-solid fa-rotate-left text-rose-600 text-sm"></i> PERLU MENGULANG
+<span class="text-[10px] text-emerald-800 mt-0.5 font-semibold">Mutqin / Lanjut Materi</span>
+</label>
+<!-- Opsi PERLU MENGULANG -->
+<label class="cursor-pointer border-2 border-stone-200 bg-stone-50 p-3 rounded-2xl flex flex-col items-center text-center transition hover:bg-rose-50 hover:border-rose-300" id="labelOptionUlang" onclick="selectStatusKelulusan('Perlu Mengulang')">
+<input class="accent-rose-600 mb-1" name="statusKelulusanRadio" onchange="onStatusKelulusanChange()" type="radio" value="Perlu Mengulang"/>
+<span class="font-black text-xs text-rose-950 flex items-center gap-1.5">
+<i class="fa-solid fa-rotate-left text-rose-600 text-sm"></i> PERLU MENGULANG
             </span>
-            <span class="text-[10px] text-rose-800 mt-0.5 font-semibold">Belum Lancar / Ulangi Sesi</span>
-          </label>
-        </div>
-
-        <!-- Kolom Catatan Evaluasi Pengampu -->
-        <div>
-          <label class="block text-xs font-bold text-stone-700 mb-1">Catatan Evaluasi Guru / Pengampu (Opsional):</label>
-          <input type="text" id="modalKelulusanCatatan" placeholder="Contoh: Makhraj mantap, perhatikan waqaf di ayat 4..."
-            class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 text-xs font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none">
-        </div>
-
-        <!-- Tombol Aksi Simpan -->
-        <div class="flex gap-2 pt-2">
-          <button onclick="closeModalKelulusan()" type="button" class="w-1/3 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold py-2.5 rounded-xl text-xs transition">
+<span class="text-[10px] text-rose-800 mt-0.5 font-semibold">Belum Lancar / Ulangi Sesi</span>
+</label>
+</div>
+<!-- Kolom Catatan Evaluasi Pengampu -->
+<div>
+<label class="block text-xs font-bold text-stone-700 mb-1">Catatan Evaluasi Guru / Pengampu (Opsional):</label>
+<input class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 text-xs font-semibold focus:ring-2 focus:ring-emerald-600 focus:outline-none" id="modalKelulusanCatatan" placeholder="Contoh: Makhraj mantap, perhatikan waqaf di ayat 4..." type="text"/>
+</div>
+<!-- Tombol Aksi Simpan -->
+<div class="flex gap-2 pt-2">
+<button class="w-1/3 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold py-2.5 rounded-xl text-xs transition" onclick="closeModalKelulusan()" type="button">
             Batal
           </button>
-          <button onclick="commitFinalSessionSave()" type="button" class="w-2/3 bg-emerald-800 hover:bg-emerald-900 text-white font-extrabold py-2.5 rounded-xl text-xs shadow-md transition flex items-center justify-center gap-1.5 active:scale-95">
-            <i class="fa-solid fa-floppy-disk"></i> Konfirmasi & Simpan
+<button class="w-2/3 bg-emerald-800 hover:bg-emerald-900 text-white font-extrabold py-2.5 rounded-xl text-xs shadow-md transition flex items-center justify-center gap-1.5 active:scale-95" onclick="commitFinalSessionSave()" type="button">
+<i class="fa-solid fa-floppy-disk"></i> Konfirmasi &amp; Simpan
           </button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- MODAL CETAK RAPOR TAHFIDZ RESMI (PRINT / PDF READY) -->
-  <div id="modalRaporSantri" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 md:p-6 hidden overflow-y-auto">
-    <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full my-auto overflow-hidden border border-stone-300 flex flex-col max-h-[90vh]">
-      
-      <!-- Header Modal (Non-Print) -->
-      <div class="bg-emerald-950 text-white p-4 flex justify-between items-center tq-rapor-header sticky top-0 z-30">
-        <div class="flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-xl bg-amber-400 text-emerald-950 flex items-center justify-center font-black text-base shadow">
-            <i class="fa-solid fa-file-invoice"></i>
-          </div>
-          <div>
-            <h3 class="font-extrabold text-sm text-stone-100">Lembar Rapor & Evaluasi Tahfidz</h3>
-            <p class="text-[10px] text-emerald-300">Format Resmi Siap Cetak atau Unduh PDF</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-2 tq-rapor-actions no-print">
-          <button type="button" onclick="cetakRaporPDF()" class="bg-amber-400 hover:bg-amber-500 text-emerald-950 font-black px-3 py-1.5 rounded-xl text-xs shadow transition flex items-center gap-1.5">
-            <i class="fa-solid fa-print"></i> <span>Cetak / Simpan PDF</span>
-          </button>
-          <button type="button" id="btnCloseRapor" onclick="closeRaporModal()" class="text-stone-300 hover:text-white p-1" aria-label="Tutup laporan">
-            <i class="fa-solid fa-xmark text-lg"></i>
-          </button>
-        </div>
-      </div>
-
-      <!-- Kertas Rapor (Print Area) -->
-      <div class="p-6 overflow-y-auto bg-stone-50/50 flex-grow">
-        <div id="printAreaRapor">
-        <div class="bg-white border-2 border-emerald-900/40 p-6 rounded-2xl shadow-sm space-y-5">
-          
-          <!-- Kop Lembaga -->
-          <div class="flex items-center justify-between border-b-2 border-emerald-900 pb-4 text-center">
-            <div class="w-12 h-12 rounded-xl bg-emerald-900 text-amber-300 flex items-center justify-center text-2xl font-black shrink-0">
-              <i class="fa-solid fa-book-quran"></i>
-            </div>
-            <div class="flex-grow px-3">
-              <h2 class="text-base md:text-lg font-black text-emerald-950 uppercase tracking-wide">LEMBAR EVALUASI & RAPOR TAHFIDZ</h2>
-              <p class="text-xs font-bold text-stone-700">TashihQ Pro &bull; Sistem Monitoring Hafalan Standar Madinah</p>
-              <p class="text-[10px] text-stone-500">Laporan Kemajuan Belajar, Mutqin, & Catatan Tashih Santri</p>
-            </div>
-            <div class="w-12 h-12 shrink-0"></div>
-          </div>
-
-          <!-- Data Identitas Santri -->
-          <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs bg-stone-50 p-3.5 rounded-xl border border-stone-200">
-            <div>
-              <p class="text-stone-500 text-[10px]">Nama Santri:</p>
-              <h4 id="raporSantriNama" class="font-extrabold text-stone-900 text-sm">Ahmad Fauzi</h4>
-            </div>
-            <div>
-              <p class="text-stone-500 text-[10px]">NIS / ID:</p>
-              <p id="raporSantriNis" class="font-mono font-bold text-stone-700">1001</p>
-            </div>
-            <div>
-              <p class="text-stone-500 text-[10px]">Halaqah / Kelas:</p>
-              <p id="raporSantriHalaqa" class="font-bold text-stone-700">Kelas Al-Jazari</p>
-            </div>
-            <div>
-              <p class="text-stone-500 text-[10px]">Target Kurikulum:</p>
-              <p id="raporSantriTarget" class="font-bold text-emerald-800 text-[11px] leading-relaxed">Juz 30 (37 Surah)</p>
-            </div>
-          </div>
-
-          <!-- Ringkasan Statistik Capaian -->
-          <div class="grid grid-cols-4 gap-2 text-center text-xs">
-            <div class="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl">
-              <p class="text-[10px] text-emerald-800 font-bold">Surah Lulus</p>
-              <h3 id="raporSurahCount" class="text-lg font-black text-emerald-950">0</h3>
-            </div>
-            <div class="p-2.5 bg-teal-50 border border-teal-200 rounded-xl">
-              <p class="text-[10px] text-teal-800 font-bold">Juz Tasmi'</p>
-              <h3 id="raporTasmiCount" class="text-lg font-black text-teal-950">0 / 30</h3>
-            </div>
-            <div class="p-2.5 bg-amber-50 border border-amber-200 rounded-xl">
-              <p class="text-[10px] text-amber-800 font-bold">Rata-Rata Nilai</p>
-              <h3 id="raporAvgScore" class="text-lg font-black text-amber-950">0</h3>
-            </div>
-            <div class="p-2.5 bg-blue-50 border border-blue-200 rounded-xl">
-              <p class="text-[10px] text-blue-800 font-bold">Rata-Rata Target</p>
-              <h3 id="raporTargetPercent" class="text-lg font-black text-blue-950">0%</h3>
-            </div>
-          </div>
-
-          <!-- Rincian Capaian per Target Kurikulum -->
-          <div class="space-y-1.5 text-xs">
-            <h4 class="font-bold text-stone-800 flex items-center gap-1.5">
-              <i class="fa-solid fa-bullseye text-emerald-700"></i> Rincian Capaian per Target Kurikulum:
+</div>
+</div>
+</div>
+</div>
+<!-- MODAL CETAK RAPOR TAHFIDZ RESMI (PRINT / PDF READY) -->
+<div class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-3 md:p-6 hidden overflow-y-auto" id="modalRaporSantri">
+<div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full my-auto overflow-hidden border border-stone-300 flex flex-col max-h-[90vh]">
+<!-- Header Modal (Non-Print) -->
+<div class="bg-emerald-950 text-white p-4 flex justify-between items-center tq-rapor-header sticky top-0 z-30">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-amber-400 text-emerald-950 flex items-center justify-center font-black text-base shadow">
+<i class="fa-solid fa-file-invoice"></i>
+</div>
+<div>
+<h3 class="font-extrabold text-sm text-stone-100">Lembar Rapor &amp; Evaluasi Tahfidz</h3>
+<p class="text-[10px] text-emerald-300">Format Resmi Siap Cetak atau Unduh PDF</p>
+</div>
+</div>
+<div class="flex items-center gap-2 tq-rapor-actions no-print">
+<button class="bg-amber-400 hover:bg-amber-500 text-emerald-950 font-black px-3 py-1.5 rounded-xl text-xs shadow transition flex items-center gap-1.5" onclick="cetakRaporPDF()" type="button">
+<i class="fa-solid fa-print"></i> <span>Cetak / Simpan PDF</span>
+</button>
+<button aria-label="Tutup laporan" class="text-stone-300 hover:text-white p-1" id="btnCloseRapor" onclick="closeRaporModal()" type="button">
+<i class="fa-solid fa-xmark text-lg"></i>
+</button>
+</div>
+</div>
+<!-- Kertas Rapor (Print Area) -->
+<div class="p-6 overflow-y-auto bg-stone-50/50 flex-grow">
+<div id="printAreaRapor">
+<div class="bg-white border-2 border-emerald-900/40 p-6 rounded-2xl shadow-sm space-y-5">
+<!-- Kop Lembaga -->
+<div class="flex items-center justify-between border-b-2 border-emerald-900 pb-4 text-center">
+<div class="w-12 h-12 rounded-xl bg-emerald-900 text-amber-300 flex items-center justify-center text-2xl font-black shrink-0">
+<i class="fa-solid fa-book-quran"></i>
+</div>
+<div class="flex-grow px-3">
+<h2 class="text-base md:text-lg font-black text-emerald-950 uppercase tracking-wide">LEMBAR EVALUASI &amp; RAPOR TAHFIDZ</h2>
+<p class="text-xs font-bold text-stone-700">TashihQ Pro • Sistem Monitoring Hafalan Standar Madinah</p>
+<p class="text-[10px] text-stone-500">Laporan Kemajuan Belajar, Mutqin, &amp; Catatan Tashih Santri</p>
+</div>
+<div class="w-12 h-12 shrink-0"></div>
+</div>
+<!-- Data Identitas Santri -->
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs bg-stone-50 p-3.5 rounded-xl border border-stone-200">
+<div>
+<p class="text-stone-500 text-[10px]">Nama Santri:</p>
+<h4 class="font-extrabold text-stone-900 text-sm" id="raporSantriNama">Ahmad Fauzi</h4>
+</div>
+<div>
+<p class="text-stone-500 text-[10px]">NIS / ID:</p>
+<p class="font-mono font-bold text-stone-700" id="raporSantriNis">1001</p>
+</div>
+<div>
+<p class="text-stone-500 text-[10px]">Halaqah / Kelas:</p>
+<p class="font-bold text-stone-700" id="raporSantriHalaqa">Kelas Al-Jazari</p>
+</div>
+<div>
+<p class="text-stone-500 text-[10px]">Target Kurikulum:</p>
+<p class="font-bold text-emerald-800 text-[11px] leading-relaxed" id="raporSantriTarget">Juz 30 (37 Surah)</p>
+</div>
+</div>
+<!-- Ringkasan Statistik Capaian -->
+<div class="grid grid-cols-4 gap-2 text-center text-xs">
+<div class="p-2.5 bg-emerald-50 border border-emerald-200 rounded-xl">
+<p class="text-[10px] text-emerald-800 font-bold">Surah Lulus</p>
+<h3 class="text-lg font-black text-emerald-950" id="raporSurahCount">0</h3>
+</div>
+<div class="p-2.5 bg-teal-50 border border-teal-200 rounded-xl">
+<p class="text-[10px] text-teal-800 font-bold">Juz Tasmi'</p>
+<h3 class="text-lg font-black text-teal-950" id="raporTasmiCount">0 / 30</h3>
+</div>
+<div class="p-2.5 bg-amber-50 border border-amber-200 rounded-xl">
+<p class="text-[10px] text-amber-800 font-bold">Rata-Rata Nilai</p>
+<h3 class="text-lg font-black text-amber-950" id="raporAvgScore">0</h3>
+</div>
+<div class="p-2.5 bg-blue-50 border border-blue-200 rounded-xl">
+<p class="text-[10px] text-blue-800 font-bold">Rata-Rata Target</p>
+<h3 class="text-lg font-black text-blue-950" id="raporTargetPercent">0%</h3>
+</div>
+</div>
+<!-- Rincian Capaian per Target Kurikulum -->
+<div class="space-y-1.5 text-xs">
+<h4 class="font-bold text-stone-800 flex items-center gap-1.5">
+<i class="fa-solid fa-bullseye text-emerald-700"></i> Rincian Capaian per Target Kurikulum:
             </h4>
-            <div id="raporTargetBreakdown" class="space-y-2"></div>
-          </div>
-
-          <!-- Tabel Ringkasan Setoran Terakhir -->
-          <div class="space-y-1.5 text-xs">
-            <h4 class="font-bold text-stone-800 flex items-center gap-1.5">
-              <i class="fa-solid fa-list-check text-emerald-700"></i> Riwayat 5 Sesi Setoran Terakhir:
+<div class="space-y-2" id="raporTargetBreakdown"></div>
+</div>
+<!-- Tabel Ringkasan Setoran Terakhir -->
+<div class="space-y-1.5 text-xs">
+<h4 class="font-bold text-stone-800 flex items-center gap-1.5">
+<i class="fa-solid fa-list-check text-emerald-700"></i> Riwayat 5 Sesi Setoran Terakhir:
             </h4>
-            <table class="w-full text-left text-[11px] border border-stone-200 rounded-xl overflow-hidden">
-              <thead class="bg-stone-100 text-stone-800 font-bold border-b border-stone-200">
-                <tr>
-                  <th class="p-2">Tanggal</th>
-                  <th class="p-2">Kegiatan</th>
-                  <th class="p-2">Surah & Ayat</th>
-                  <th class="p-2 text-center">Jaly / Khafy</th>
-                  <th class="p-2 text-center">Status & Nilai</th>
-                </tr>
-              </thead>
-              <tbody id="raporRecentSessionsBody" class="divide-y divide-stone-100">
-              </tbody>
-            </table>
-          </div>
+<table class="w-full text-left text-[11px] border border-stone-200 rounded-xl overflow-hidden">
+<thead class="bg-stone-100 text-stone-800 font-bold border-b border-stone-200">
+<tr>
+<th class="p-2">Tanggal</th>
+<th class="p-2">Kegiatan</th>
+<th class="p-2">Surah &amp; Ayat</th>
+<th class="p-2 text-center">Jaly / Khafy</th>
+<th class="p-2 text-center">Status &amp; Nilai</th>
+</tr>
+</thead>
+<tbody class="divide-y divide-stone-100" id="raporRecentSessionsBody">
+</tbody>
+</table>
+</div>
+<!-- Kolom Tanda Tangan Formal -->
+<div class="pt-6 grid grid-cols-2 gap-6 text-center text-xs text-stone-700">
+<div>
+<p class="text-[10px] text-stone-400">Mengetahui,</p>
+<p class="font-bold mt-0.5">Orang Tua / Wali Santri</p>
+<div class="h-16 border-b border-stone-300 border-dashed mx-6"></div>
+<p class="mt-1 font-semibold text-stone-600">( ........................................ )</p>
+</div>
+<div>
+<p class="text-[10px] text-stone-400" id="raporSignDate">Tanggal: -</p>
+<p class="font-bold mt-0.5">Ustadz / Pengampu Halaqah</p>
+<div class="h-16 border-b border-stone-300 border-dashed mx-6"></div>
+<p class="mt-1 font-semibold text-stone-600">( Pengampu Tahfidz )</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
 
-          <!-- Kolom Tanda Tangan Formal -->
-          <div class="pt-6 grid grid-cols-2 gap-6 text-center text-xs text-stone-700">
-            <div>
-              <p class="text-[10px] text-stone-400">Mengetahui,</p>
-              <p class="font-bold mt-0.5">Orang Tua / Wali Santri</p>
-              <div class="h-16 border-b border-stone-300 border-dashed mx-6"></div>
-              <p class="mt-1 font-semibold text-stone-600">( ........................................ )</p>
-            </div>
-            <div>
-              <p class="text-[10px] text-stone-400" id="raporSignDate">Tanggal: -</p>
-              <p class="font-bold mt-0.5">Ustadz / Pengampu Halaqah</p>
-              <div class="h-16 border-b border-stone-300 border-dashed mx-6"></div>
-              <p class="mt-1 font-semibold text-stone-600">( Pengampu Tahfidz )</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- BOTTOM NAVIGATION BAR KHUSUS LAYAR HP (NATIVE ANDROID EXPERIENCE) -->
-  <nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-emerald-950/95 backdrop-blur-lg border-t border-emerald-800 flex justify-around items-center py-2 px-1 shadow-2xl text-[10px] font-semibold text-emerald-300">
-    <button onclick="switchView('mushaf')" id="bottomNavMushaf" class="flex flex-col items-center gap-1 py-1 px-2.5 rounded-xl transition text-amber-300">
-      <i class="fa-solid fa-book-open text-base"></i>
-      <span>Mushaf</span>
-    </button>
-    <button onclick="switchView('jurnal')" id="bottomNavJurnal" class="flex flex-col items-center gap-1 py-1 px-2.5 rounded-xl transition text-emerald-300">
-      <i class="fa-solid fa-chart-line text-base"></i>
-      <span>Jurnal</span>
-    </button>
-    <button onclick="switchView('rekap')" id="bottomNavRekap" class="flex flex-col items-center gap-1 py-1 px-2.5 rounded-xl transition text-emerald-300">
-      <i class="fa-solid fa-id-card-clip text-base"></i>
-      <span>Rekap</span>
-    </button>
-    <button onclick="switchView('santri')" id="bottomNavSantri" class="flex flex-col items-center gap-1 py-1 px-2.5 rounded-xl transition text-emerald-300">
-      <i class="fa-solid fa-users-gear text-base"></i>
-      <span>Santri</span>
-    </button>
-  </nav>
-
-  <!-- MODAL KONFIRMASI TINDAKAN (No Native Browser Confirm) -->
-  <div id="modalKonfirmasiAction" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[70] flex items-center justify-center p-4 hidden">
-    <div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-5 space-y-4 border border-stone-200">
-      <div class="flex items-start gap-3">
-        <div class="w-10 h-10 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-lg shrink-0">
-          <i class="fa-solid fa-triangle-exclamation"></i>
-        </div>
-        <div>
-          <h3 id="modalConfirmTitle" class="font-bold text-stone-800 text-sm">Konfirmasi Tindakan</h3>
-          <p id="modalConfirmMsg" class="text-xs text-stone-600 mt-1 leading-relaxed">Apakah Anda yakin ingin melanjutkan tindakan ini?</p>
-        </div>
-      </div>
-      <div class="flex gap-2 pt-2">
-        <button onclick="closeConfirmModal()" class="w-1/2 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold py-2 rounded-xl text-xs transition">
+<!-- BOTTOM NAVIGATION BAR KHUSUS LAYAR HP (NATIVE ANDROID EXPERIENCE) -->
+<nav class="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-emerald-950/95 backdrop-blur-lg border-t border-emerald-800 flex justify-around items-center py-2 px-1 shadow-2xl text-[10px] font-semibold text-emerald-300">
+<button class="flex flex-col items-center gap-1 py-1 px-2.5 rounded-xl transition text-amber-300" id="bottomNavMushaf" onclick="switchView('mushaf')">
+<i class="fa-solid fa-book-open text-base"></i>
+<span>Mushaf</span>
+</button>
+<button class="flex flex-col items-center gap-1 py-1 px-2.5 rounded-xl transition text-emerald-300" id="bottomNavJurnal" onclick="switchView('jurnal')">
+<i class="fa-solid fa-chart-line text-base"></i>
+<span>Jurnal</span>
+</button>
+<button class="flex flex-col items-center gap-1 py-1 px-2.5 rounded-xl transition text-emerald-300" id="bottomNavRekap" onclick="switchView('rekap')">
+<i class="fa-solid fa-id-card-clip text-base"></i>
+<span>Rekap</span>
+</button>
+<button class="flex flex-col items-center gap-1 py-1 px-2.5 rounded-xl transition text-emerald-300" id="bottomNavSantri" onclick="switchView('santri')">
+<i class="fa-solid fa-users-gear text-base"></i>
+<span>Santri</span>
+</button>
+</nav>
+<!-- MODAL KONFIRMASI TINDAKAN (No Native Browser Confirm) -->
+<div class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-[70] flex items-center justify-center p-4 hidden" id="modalKonfirmasiAction">
+<div class="bg-white rounded-3xl shadow-2xl max-w-sm w-full p-5 space-y-4 border border-stone-200">
+<div class="flex items-start gap-3">
+<div class="w-10 h-10 rounded-2xl bg-rose-100 text-rose-600 flex items-center justify-center text-lg shrink-0">
+<i class="fa-solid fa-triangle-exclamation"></i>
+</div>
+<div>
+<h3 class="font-bold text-stone-800 text-sm" id="modalConfirmTitle">Konfirmasi Tindakan</h3>
+<p class="text-xs text-stone-600 mt-1 leading-relaxed" id="modalConfirmMsg">Apakah Anda yakin ingin melanjutkan tindakan ini?</p>
+</div>
+</div>
+<div class="flex gap-2 pt-2">
+<button class="w-1/2 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold py-2 rounded-xl text-xs transition" onclick="closeConfirmModal()">
           Batal
         </button>
-        <button id="modalConfirmAcceptBtn" class="w-1/2 bg-rose-600 hover:bg-rose-700 text-white font-bold py-2 rounded-xl text-xs shadow transition">
+<button class="w-1/2 bg-rose-600 hover:bg-rose-700 text-white font-bold py-2 rounded-xl text-xs shadow transition" id="modalConfirmAcceptBtn">
           Lanjutkan
         </button>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL PENGUNDUH SELURUH LEMBAR MUSHAF OFFLINE (114 SURAH) -->
-  <div id="modalDownloadOffline" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-stone-200 animate-in fade-in duration-200">
-      
-      <div class="bg-emerald-950 text-white p-4 flex justify-between items-center">
-        <div class="flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-xl bg-amber-400 text-emerald-950 flex items-center justify-center font-black text-base shadow">
-            <i class="fa-solid fa-cloud-arrow-down"></i>
-          </div>
-          <div>
-            <h3 class="font-black text-sm text-stone-100">Unduh Mushaf Full Offline</h3>
-            <p class="text-[10px] text-emerald-300 font-medium">114 Surah Rasm Utsmani Madinah</p>
-          </div>
-        </div>
-        <button onclick="closeDownloadOfflineModal()" class="text-stone-400 hover:text-white p-1">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-      </div>
-
-      <div class="p-5 space-y-4 text-xs">
-        <div class="bg-teal-50 border border-teal-200 text-teal-900 p-3 rounded-2xl space-y-1">
-          <p class="font-bold text-xs flex items-center gap-1.5">
-            <i class="fa-solid fa-circle-info text-teal-700"></i> Mode Luring Mandiri
+</div>
+</div>
+</div>
+<!-- MODAL PENGUNDUH SELURUH LEMBAR MUSHAF OFFLINE (114 SURAH) -->
+<div class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden" id="modalDownloadOffline">
+<div class="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-stone-200 animate-in fade-in duration-200">
+<div class="bg-emerald-950 text-white p-4 flex justify-between items-center">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-amber-400 text-emerald-950 flex items-center justify-center font-black text-base shadow">
+<i class="fa-solid fa-cloud-arrow-down"></i>
+</div>
+<div>
+<h3 class="font-black text-sm text-stone-100">Unduh Mushaf Full Offline</h3>
+<p class="text-[10px] text-emerald-300 font-medium">114 Surah Rasm Utsmani Madinah</p>
+</div>
+</div>
+<button class="text-stone-400 hover:text-white p-1" onclick="closeDownloadOfflineModal()">
+<i class="fa-solid fa-xmark text-lg"></i>
+</button>
+</div>
+<div class="p-5 space-y-4 text-xs">
+<div class="bg-teal-50 border border-teal-200 text-teal-900 p-3 rounded-2xl space-y-1">
+<p class="font-bold text-xs flex items-center gap-1.5">
+<i class="fa-solid fa-circle-info text-teal-700"></i> Mode Luring Mandiri
           </p>
-          <p class="text-[11px] leading-relaxed text-teal-800">
+<p class="text-[11px] leading-relaxed text-teal-800">
             Sistem akan mengunduh seluruh teks ayat 114 surah dan menyimpannya secara lokal pada memori peramban (IndexedDB). Setelah selesai, Mushaf dapat dibuka di tempat tanpa internet sekalipun.
           </p>
-        </div>
-
-        <!-- Live Progress Status Box -->
-        <div class="space-y-2 bg-stone-50 p-4 rounded-2xl border border-stone-200">
-          <div class="flex justify-between items-center font-bold">
-            <span id="dlModalSurahInfo" class="text-stone-800 text-xs">Siap mengunduh...</span>
-            <span id="dlModalPercent" class="text-emerald-800 font-black text-sm">0%</span>
-          </div>
-
-          <div class="w-full bg-stone-200 rounded-full h-3 overflow-hidden shadow-inner">
-            <div id="dlModalProgressBar" class="bg-gradient-to-r from-emerald-600 to-teal-500 h-3 rounded-full transition-all duration-200" style="width: 0%"></div>
-          </div>
-
-          <div class="flex justify-between items-center text-[10px] text-stone-500 pt-0.5">
-            <span id="dlModalSurahCount">0 / 114 Surah Terunduh</span>
-            <span id="dlModalStatusLabel" class="font-semibold text-stone-600">Menunggu</span>
-          </div>
-        </div>
-
-        <div class="flex gap-2 pt-2">
-          <button id="btnCancelDownload" onclick="cancelDownloadAllSurahs()" type="button" class="hidden w-1/3 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold py-2.5 rounded-xl transition">
+</div>
+<!-- Live Progress Status Box -->
+<div class="space-y-2 bg-stone-50 p-4 rounded-2xl border border-stone-200">
+<div class="flex justify-between items-center font-bold">
+<span class="text-stone-800 text-xs" id="dlModalSurahInfo">Siap mengunduh...</span>
+<span class="text-emerald-800 font-black text-sm" id="dlModalPercent">0%</span>
+</div>
+<div class="w-full bg-stone-200 rounded-full h-3 overflow-hidden shadow-inner">
+<div class="bg-gradient-to-r from-emerald-600 to-teal-500 h-3 rounded-full transition-all duration-200" id="dlModalProgressBar" style="width: 0%"></div>
+</div>
+<div class="flex justify-between items-center text-[10px] text-stone-500 pt-0.5">
+<span id="dlModalSurahCount">0 / 114 Surah Terunduh</span>
+<span class="font-semibold text-stone-600" id="dlModalStatusLabel">Menunggu</span>
+</div>
+</div>
+<div class="flex gap-2 pt-2">
+<button class="hidden w-1/3 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold py-2.5 rounded-xl transition" id="btnCancelDownload" onclick="cancelDownloadAllSurahs()" type="button">
             Jeda / Batal
           </button>
-          <button id="btnStartDownload" onclick="startDownloadAllSurahs()" type="button" class="flex-grow bg-emerald-700 hover:bg-emerald-800 active:scale-95 text-white font-extrabold py-2.5 rounded-xl shadow-md transition flex items-center justify-center gap-2">
-            <i class="fa-solid fa-play"></i> <span>Mulai Unduh Seluruh Mushaf</span>
-          </button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- MODAL RESET SEMUA DATA SISTEM KE AWAL -->
-  <div id="modalResetSemuaData" class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden">
-    <div class="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-rose-200 animate-in fade-in duration-200">
-      
-      <div class="bg-gradient-to-r from-rose-950 to-rose-900 text-white p-4 flex justify-between items-center">
-        <div class="flex items-center gap-2.5">
-          <div class="w-9 h-9 rounded-xl bg-rose-500/30 text-rose-300 flex items-center justify-center font-black text-base border border-rose-400/40 shadow">
-            <i class="fa-solid fa-triangle-exclamation"></i>
-          </div>
-          <div>
-            <h3 class="font-black text-sm text-stone-100">Reset Semua Data Aplikasi</h3>
-            <p class="text-[10px] text-rose-300 font-medium">Mulai ulang jurnal & roster dari awal</p>
-          </div>
-        </div>
-        <button onclick="closeResetDataModal()" class="text-rose-300 hover:text-white p-1">
-          <i class="fa-solid fa-xmark text-lg"></i>
-        </button>
-      </div>
-
-      <div class="p-5 space-y-4 text-xs">
-        <div class="bg-rose-50 border border-rose-200 text-rose-900 p-3.5 rounded-2xl space-y-1.5">
-          <p class="font-bold text-xs flex items-center gap-1.5 text-rose-950">
-            <i class="fa-solid fa-circle-exclamation text-rose-600"></i> Peringatan Penghapusan Permanen!
+<button class="flex-grow bg-emerald-700 hover:bg-emerald-800 active:scale-95 text-white font-extrabold py-2.5 rounded-xl shadow-md transition flex items-center justify-center gap-2" id="btnStartDownload" onclick="startDownloadAllSurahs()" type="button">
+<i class="fa-solid fa-play"></i> <span>Mulai Unduh Seluruh Mushaf</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- MODAL RESET SEMUA DATA SISTEM KE AWAL -->
+<div class="fixed inset-0 bg-stone-900/60 backdrop-blur-sm z-50 flex items-center justify-center p-4 hidden" id="modalResetSemuaData">
+<div class="bg-white rounded-3xl shadow-2xl max-w-md w-full overflow-hidden border border-rose-200 animate-in fade-in duration-200">
+<div class="bg-gradient-to-r from-rose-950 to-rose-900 text-white p-4 flex justify-between items-center">
+<div class="flex items-center gap-2.5">
+<div class="w-9 h-9 rounded-xl bg-rose-500/30 text-rose-300 flex items-center justify-center font-black text-base border border-rose-400/40 shadow">
+<i class="fa-solid fa-triangle-exclamation"></i>
+</div>
+<div>
+<h3 class="font-black text-sm text-stone-100">Reset Semua Data Aplikasi</h3>
+<p class="text-[10px] text-rose-300 font-medium">Mulai ulang jurnal &amp; roster dari awal</p>
+</div>
+</div>
+<button class="text-rose-300 hover:text-white p-1" onclick="closeResetDataModal()">
+<i class="fa-solid fa-xmark text-lg"></i>
+</button>
+</div>
+<div class="p-5 space-y-4 text-xs">
+<div class="bg-rose-50 border border-rose-200 text-rose-900 p-3.5 rounded-2xl space-y-1.5">
+<p class="font-bold text-xs flex items-center gap-1.5 text-rose-950">
+<i class="fa-solid fa-circle-exclamation text-rose-600"></i> Peringatan Penghapusan Permanen!
           </p>
-          <p class="text-[11px] leading-relaxed text-rose-800">
+<p class="text-[11px] leading-relaxed text-rose-800">
             Tindakan ini akan <strong>menghapus permanen</strong> seluruh riwayat kegiatan setoran, catatan evaluasi per-kata, dan mereset daftar santri ke setelan awal bersih. Pastikan Anda telah mengunduh backup (ekspor JSON) jika sewaktu-waktu membutuhkan data ini kembali.
           </p>
-        </div>
-
-        <div class="space-y-2 bg-stone-50 p-3 rounded-2xl border border-stone-200 text-stone-700">
-          <label class="flex items-center gap-2 cursor-pointer select-none">
-            <input type="checkbox" id="checkResetOfflineCache" class="accent-rose-600 rounded">
-            <span class="text-xs font-semibold">Hapus juga cache lembar mushaf offline yang tersimpan</span>
-          </label>
-        </div>
-
-        <div>
-          <label class="block font-bold text-stone-700 mb-1">Ketik kata <span class="font-mono text-rose-600 font-extrabold bg-rose-50 px-1.5 py-0.5 rounded border border-rose-200">RESET</span> untuk konfirmasi:</label>
-          <input type="text" id="inputConfirmResetCode" placeholder="Ketik RESET di sini"
-            class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 font-bold text-xs tracking-wider uppercase focus:ring-2 focus:ring-rose-500 focus:outline-none">
-        </div>
-
-        <div class="flex gap-2 pt-1">
-          <button onclick="closeResetDataModal()" type="button" class="w-1/3 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold py-2.5 rounded-xl transition">
+</div>
+<div class="space-y-2 bg-stone-50 p-3 rounded-2xl border border-stone-200 text-stone-700">
+<label class="flex items-center gap-2 cursor-pointer select-none">
+<input class="accent-rose-600 rounded" id="checkResetOfflineCache" type="checkbox"/>
+<span class="text-xs font-semibold">Hapus juga cache lembar mushaf offline yang tersimpan</span>
+</label>
+</div>
+<div>
+<label class="block font-bold text-stone-700 mb-1">Ketik kata <span class="font-mono text-rose-600 font-extrabold bg-rose-50 px-1.5 py-0.5 rounded border border-rose-200">RESET</span> untuk konfirmasi:</label>
+<input class="w-full bg-stone-50 border border-stone-300 rounded-xl px-3 py-2 font-bold text-xs tracking-wider uppercase focus:ring-2 focus:ring-rose-500 focus:outline-none" id="inputConfirmResetCode" placeholder="Ketik RESET di sini" type="text"/>
+</div>
+<div class="flex gap-2 pt-1">
+<button class="w-1/3 bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold py-2.5 rounded-xl transition" onclick="closeResetDataModal()" type="button">
             Batal
           </button>
-          <button onclick="executeResetAllData()" type="button" class="w-2/3 bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-extrabold py-2.5 rounded-xl shadow transition flex items-center justify-center gap-1.5">
-            <i class="fa-solid fa-trash-can"></i> <span>Reset Sekarang</span>
-          </button>
-        </div>
-      </div>
-
-    </div>
-  </div>
-
-  <!-- TOAST NOTIFICATION -->
-  <div id="toastNotif" class="fixed bottom-5 right-5 bg-stone-900 text-white px-4 py-3 rounded-2xl shadow-2xl text-xs flex items-center gap-2.5 opacity-0 transition-all duration-300 pointer-events-none z-50 transform translate-y-2">
-    <i id="toastIcon" class="fa-solid fa-circle-check text-emerald-400 text-base"></i>
-    <span id="toastMessage" class="font-semibold">Notifikasi Aplikasi</span>
-  </div>
-
-  <script>
+<button class="w-2/3 bg-rose-600 hover:bg-rose-700 active:scale-95 text-white font-extrabold py-2.5 rounded-xl shadow transition flex items-center justify-center gap-1.5" onclick="executeResetAllData()" type="button">
+<i class="fa-solid fa-trash-can"></i> <span>Reset Sekarang</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+<!-- TOAST NOTIFICATION -->
+<div class="fixed bottom-5 right-5 bg-stone-900 text-white px-4 py-3 rounded-2xl shadow-2xl text-xs flex items-center gap-2.5 opacity-0 transition-all duration-300 pointer-events-none z-50 transform translate-y-2" id="toastNotif">
+<i class="fa-solid fa-circle-check text-emerald-400 text-base" id="toastIcon"></i>
+<span class="font-semibold" id="toastMessage">Notifikasi Aplikasi</span>
+</div>
+<script>
     const SURAH_DATA = [
       {no: 1, nama: "Al-Fatihah", ar: "الفَاتِحَةِ", ayat: 7, type: "Makkiyah", juz: 1},
       {no: 2, nama: "Al-Baqarah", ar: "البَقَرَةِ", ayat: 286, type: "Madaniyah", juz: 1},
@@ -2737,7 +2592,6 @@
       updateSessionTargetBadge();
       renderJurnalHistoryList();
       updateAnalyticsCharts();
-      render30JuzHeatmapCanvas();
       renderRekapView();
       const s = appState.students.find(x => x.id === val);
       if (s) showToast(`Santri aktif: ${s.nama}`);
@@ -3252,7 +3106,6 @@
       renderJurnalHistoryList();
       updateAnalyticsCharts();
       renderRekapView();
-      render30JuzHeatmapCanvas();
       updateSessionCounters();
       updateOfflineStorageUI();
 
@@ -4169,287 +4022,6 @@
       }
     }
 
-    function startWaveformSimulation() {
-      if (isWaveSimActive) return;
-      isWaveSimActive = true;
-      document.getElementById('simWaveStatus').textContent = "Status: Menguji Bacaan...";
-      document.getElementById('simWaveStatus').className = "text-[10px] bg-emerald-100 text-emerald-800 font-bold px-2.5 py-1 rounded-full border border-emerald-300";
-      animateWaveform();
-      showToast("Simulasi audio waveform setoran dimulai!");
-    }
-
-    function stopWaveformSimulation() {
-      isWaveSimActive = false;
-      if (waveAnimFrameId) cancelAnimationFrame(waveAnimFrameId);
-      document.getElementById('simWaveStatus').textContent = "Status: Dijeda";
-      document.getElementById('simWaveStatus').className = "text-[10px] bg-amber-100 text-amber-800 font-bold px-2.5 py-1 rounded-full border border-amber-300";
-    }
-
-    function animateWaveform() {
-      if (!isWaveSimActive) return;
-
-      const canvas = document.getElementById('recitationWaveformCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const width = canvas.width;
-      const height = canvas.height;
-
-      ctx.clearRect(0, 0, width, height);
-
-      ctx.strokeStyle = '#1e293b';
-      ctx.lineWidth = 1;
-      for (let x = 0; x < width; x += 30) {
-        ctx.beginPath();
-        ctx.moveTo(x, 0);
-        ctx.lineTo(x, height);
-        ctx.stroke();
-      }
-
-      ctx.strokeStyle = 'rgba(5, 150, 105, 0.3)';
-      ctx.beginPath();
-      ctx.moveTo(0, height / 2);
-      ctx.lineTo(width, height / 2);
-      ctx.stroke();
-
-      wavePhase += 0.08;
-      let strokeColor = '#34d399';
-      if (simulatedErrorSpike === 'Jaly') strokeColor = '#f87171';
-      else if (simulatedErrorSpike === 'Khafy') strokeColor = '#fbbf24';
-
-      ctx.beginPath();
-      ctx.lineWidth = 3;
-      ctx.strokeStyle = strokeColor;
-
-      for (let x = 0; x < width; x++) {
-        let amp = 25;
-        if (simulatedErrorSpike) amp = 60;
-
-        const y = height / 2 + 
-          Math.sin(x * 0.02 + wavePhase) * amp * Math.sin(x * 0.005) +
-          Math.cos(x * 0.05 - wavePhase) * 10;
-
-        if (x === 0) ctx.moveTo(x, y);
-        else ctx.lineTo(x, y);
-      }
-      ctx.stroke();
-
-      ctx.fillStyle = '#f8fafc';
-      ctx.font = 'bold 12px sans-serif';
-      ctx.fillText('FREKUENSI: 440 Hz', 15, 25);
-      ctx.fillText('DESIBEL: ' + (simulatedErrorSpike ? '88 dB (Spike)' : '54 dB (Normal)'), 15, 45);
-
-      if (simulatedErrorSpike) {
-        ctx.fillStyle = simulatedErrorSpike === 'Jaly' ? '#f87171' : '#fbbf24';
-        ctx.fillText('⚠️ DETEKSI ANOMALI BACAAN [' + simulatedErrorSpike.toUpperCase() + ']', 15, 160);
-      }
-
-      waveAnimFrameId = requestAnimationFrame(animateWaveform);
-    }
-
-    function triggerSimulatedError(type) {
-      simulatedErrorSpike = type;
-      if (!isWaveSimActive) startWaveformSimulation();
-
-      if (type === 'Jaly') {
-        simulatedAccuracyScore = Math.max(50, simulatedAccuracyScore - 10);
-      } else {
-        simulatedAccuracyScore = Math.max(50, simulatedAccuracyScore - 5);
-      }
-
-      drawAccuracyGaugeCanvas(simulatedAccuracyScore);
-      setTimeout(() => { simulatedErrorSpike = null; }, 2500);
-      showToast(`Simulasi anomali [${type}] terdeteksi pada gelombang audio!`, type === 'Jaly' ? 'rose' : 'amber');
-    }
-
-    function drawAccuracyGaugeCanvas(score) {
-      const canvas = document.getElementById('accuracyGaugeCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const cx = canvas.width / 2;
-      const cy = canvas.height - 20;
-      const radius = 110;
-
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-      ctx.beginPath();
-      ctx.arc(cx, cy, radius, Math.PI, 2 * Math.PI);
-      ctx.lineWidth = 22;
-      ctx.strokeStyle = '#1e293b';
-      ctx.stroke();
-
-      const grad = ctx.createLinearGradient(0, 0, canvas.width, 0);
-      grad.addColorStop(0, '#dc2626');
-      grad.addColorStop(0.5, '#d97706');
-      grad.addColorStop(1, '#059669');
-
-      const scoreAngle = Math.PI + (score / 100) * Math.PI;
-
-      ctx.beginPath();
-      ctx.arc(cx, cy, radius, Math.PI, scoreAngle);
-      ctx.lineWidth = 22;
-      ctx.strokeStyle = grad;
-      ctx.stroke();
-
-      ctx.save();
-      ctx.translate(cx, cy);
-      ctx.rotate(scoreAngle - Math.PI / 2);
-      ctx.beginPath();
-      ctx.moveTo(-4, 0);
-      ctx.lineTo(0, -radius + 15);
-      ctx.lineTo(4, 0);
-      ctx.fillStyle = '#f8fafc';
-      ctx.fill();
-      ctx.restore();
-
-      ctx.beginPath();
-      ctx.arc(cx, cy, 8, 0, 2 * Math.PI);
-      ctx.fillStyle = '#fbbf24';
-      ctx.fill();
-
-      ctx.fillStyle = '#ffffff';
-      ctx.font = 'extrabold 22px sans-serif';
-      ctx.textAlign = 'center';
-      ctx.fillText(`${score}%`, cx, cy - 35);
-
-      ctx.fillStyle = '#94a3b8';
-      ctx.font = 'bold 10px sans-serif';
-      ctx.fillText('SKOR AKURASI', cx, cy - 18);
-
-      document.getElementById('gaugeMakhrajVal').textContent = `${Math.min(100, score + 4)}%`;
-      document.getElementById('gaugeTajwidVal').textContent = `${Math.min(100, score - 2)}%`;
-      document.getElementById('gaugeFluencyVal').textContent = `${score}%`;
-    }
-
-    function render30JuzHeatmapCanvas() {
-      const canvas = document.getElementById('juzHeatmapCanvas');
-      if (!canvas) return;
-      const ctx = canvas.getContext('2d');
-      const width = canvas.width;
-      const height = canvas.height;
-
-      ctx.clearRect(0, 0, width, height);
-
-      const cols = 10;
-      const rows = 3;
-      const cellWidth = (width - 40) / cols;
-      const cellHeight = (height - 30) / rows;
-
-      const studentHistory = appState.setoranHistory.filter(h => h.studentId === appState.activeStudentId);
-
-      for (let i = 1; i <= 30; i++) {
-        const col = (i - 1) % cols;
-        const row = Math.floor((i - 1) / cols);
-        const x = 20 + col * cellWidth;
-        const y = 15 + row * cellHeight;
-
-        const juzSurahs = SURAH_DATA.filter(s => s.juz === i);
-        const juzSurahNos = juzSurahs.map(s => s.no);
-        const juzSetorans = studentHistory.filter(h => juzSurahNos.includes(h.surahNo));
-
-        const totalJaly = juzSetorans.reduce((a, b) => a + b.jalyCount, 0);
-        const totalKhafy = juzSetorans.reduce((a, b) => a + b.khafyCount, 0);
-
-        let cellColor = '#065f46';
-        let borderCol = '#047857';
-
-        if (totalJaly > 3) {
-          cellColor = '#991b1b';
-          borderCol = '#f87171';
-        } else if (totalKhafy > 2 || juzSetorans.length === 0) {
-          cellColor = '#92400e';
-          borderCol = '#fbbf24';
-        }
-
-        ctx.fillStyle = cellColor;
-        ctx.beginPath();
-        ctx.roundRect(x + 3, y + 3, cellWidth - 6, cellHeight - 6, 8);
-        ctx.fill();
-
-        ctx.strokeStyle = borderCol;
-        ctx.lineWidth = 1.5;
-        ctx.stroke();
-
-        ctx.fillStyle = '#ffffff';
-        ctx.font = 'bold 12px sans-serif';
-        ctx.textAlign = 'center';
-        ctx.fillText(`JUZ ${i}`, x + cellWidth / 2, y + cellHeight / 2 - 2);
-
-        ctx.fillStyle = '#fef3c7';
-        ctx.font = '10px sans-serif';
-        ctx.fillText(`${juzSetorans.length} Setoran`, x + cellWidth / 2, y + cellHeight / 2 + 12);
-      }
-    }
-
-    function onHeatmapCanvasClick(e) {
-      const canvas = document.getElementById('juzHeatmapCanvas');
-      const rect = canvas.getBoundingClientRect();
-      const clickX = (e.clientX - rect.left) * (canvas.width / rect.width);
-      const clickY = (e.clientY - rect.top) * (canvas.height / rect.height);
-
-      const cols = 10;
-      const rows = 3;
-      const cellWidth = (canvas.width - 40) / cols;
-      const cellHeight = (canvas.height - 30) / rows;
-
-      for (let i = 1; i <= 30; i++) {
-        const col = (i - 1) % cols;
-        const row = Math.floor((i - 1) / cols);
-        const x = 20 + col * cellWidth;
-        const y = 15 + row * cellHeight;
-
-        if (clickX >= x && clickX <= x + cellWidth && clickY >= y && clickY <= y + cellHeight) {
-          const juzSurahs = SURAH_DATA.filter(s => s.juz === i);
-          if (juzSurahs.length > 0) {
-            const firstSurah = juzSurahs[0];
-            const lastSurah = juzSurahs[juzSurahs.length - 1];
-
-            appState.currentSurahStart = firstSurah.no;
-            appState.currentAyatStart = 1;
-            appState.currentSurahEnd = lastSurah.no;
-            appState.currentAyatEnd = lastSurah.ayat;
-            appState.currentSurahNo = firstSurah.no;
-
-            document.getElementById('workflowSurahStartSelect').value = firstSurah.no;
-            document.getElementById('workflowSurahEndSelect').value = lastSurah.no;
-            document.getElementById('workflowAyatStartInput').value = 1;
-            document.getElementById('workflowAyatEndInput').value = lastSurah.ayat;
-
-            updateSessionTargetBadge();
-            switchView('mushaf');
-            renderMushafText();
-            showToast(`Membuka Juz ${i}: ${firstSurah.nama} s/d ${lastSurah.nama} (${juzSurahs.length} Surah)!`);
-          }
-          break;
-        }
-      }
-    }
-
-    function generateRandomTasmiQuestion() {
-      const randomIndex = Math.floor(Math.random() * SURAH_DATA.length);
-      const surah = SURAH_DATA[randomIndex];
-      const randomAyat = Math.floor(Math.random() * surah.ayat) + 1;
-
-      document.getElementById('tasmiPromptSurah').textContent = `Surah ${surah.nama} (${surah.ar}) : Sambung Ayat ${randomAyat}`;
-      document.getElementById('tasmiPromptArabic').textContent = `...سُورَةُ ${surah.ar} - (Ayat ${randomAyat} s/d ${Math.min(surah.ayat, randomAyat + 3)})`;
-
-      appState.currentSurahStart = surah.no;
-      appState.currentSurahEnd = surah.no;
-      appState.currentAyatStart = randomAyat;
-      appState.currentAyatEnd = Math.min(surah.ayat, randomAyat + 5);
-
-      showToast(`Soal Tasmi' diacak: Surah ${surah.nama} Ayat ${randomAyat}`);
-    }
-
-    function jumpToCurrentTasmiInMushaf() {
-      document.getElementById('workflowSurahStartSelect').value = appState.currentSurahStart;
-      document.getElementById('workflowSurahEndSelect').value = appState.currentSurahEnd;
-      document.getElementById('workflowAyatStartInput').value = appState.currentAyatStart;
-      document.getElementById('workflowAyatEndInput').value = appState.currentAyatEnd;
-      updateSessionTargetBadge();
-      switchView('mushaf');
-      renderMushafText();
-    }
-
     function renderSantriTable() {
       const tbody = document.getElementById('santriTableBody');
       if (!tbody) return;
@@ -4473,77 +4045,6 @@
         `;
         tbody.appendChild(tr);
       });
-    }
-
-    function closeModalTambahSantri() {
-      document.getElementById('modalTambahSantri').classList.add('hidden');
-    }
-
-    function openModalEditSantri(id) {
-      const s = appState.students.find(x => x.id === id);
-      if (!s) {
-        showToast("Data santri tidak ditemukan!", "rose");
-        return;
-      }
-      document.getElementById('inputEditSantriId').value = s.id;
-      document.getElementById('inputEditSantriNis').value = s.nis || '';
-      document.getElementById('inputEditSantriNama').value = s.nama || '';
-      document.getElementById('inputEditSantriKelas').value = s.halaqa || '';
-      document.getElementById('inputEditSantriWa').value = s.waWali || '';
-      document.getElementById('modalEditSantri').classList.remove('hidden');
-    }
-
-    function closeModalEditSantri() {
-      document.getElementById('modalEditSantri').classList.add('hidden');
-    }
-
-    function saveEditSantri() {
-      const id = document.getElementById('inputEditSantriId').value;
-      const s = appState.students.find(x => x.id === id);
-      if (!s) {
-        showToast("Data santri tidak ditemukan!", "rose");
-        return;
-      }
-
-      const nama = document.getElementById('inputEditSantriNama').value.trim();
-      if (!nama) {
-        showToast("Nama santri wajib diisi!", "rose");
-        return;
-      }
-
-      s.nis = document.getElementById('inputEditSantriNis').value.trim() || s.nis;
-      s.nama = nama;
-      s.halaqa = document.getElementById('inputEditSantriKelas').value.trim() || "Kelas Reguler";
-      s.waWali = document.getElementById('inputEditSantriWa').value.trim();
-
-      saveAppState();
-      populateStudentSelect();
-      renderSantriTable();
-      renderRekapView();
-      closeModalEditSantri();
-      showToast(`Data santri "${nama}" berhasil diperbarui!`);
-    }
-
-    function deleteSantri(id) {
-      if (appState.students.length <= 1) {
-        showToast("Minimal harus tersisa 1 santri dalam sistem!", "amber");
-        return;
-      }
-      openConfirmModal(
-        "Hapus Santri?",
-        "Santri ini akan dihapus dari daftar roster. Riwayat setoran sebelumnya tetap aman disimpan.",
-        function() {
-          appState.students = appState.students.filter(s => s.id !== id);
-          if (appState.activeStudentId === id) {
-            appState.activeStudentId = appState.students[0].id;
-          }
-          saveAppState();
-          populateStudentSelect();
-          renderSantriTable();
-          renderRekapView();
-          showToast("Santri berhasil dihapus.", "amber");
-        }
-      );
     }
 
     async function exportDataJSON() {
@@ -4625,8 +4126,7 @@
             renderSantriTable();
             renderJurnalHistoryList();
             updateAnalyticsCharts();
-            render30JuzHeatmapCanvas();
-            showToast("Data cadangan berhasil dipulihkan!");
+                  showToast("Data cadangan berhasil dipulihkan!");
           } else {
             showToast("Format file JSON tidak sesuai!", "amber");
           }
@@ -4827,9 +4327,6 @@
         updateAnalyticsCharts();
       } else if (viewName === 'rekap') {
         renderRekapView();
-      } else if (viewName === 'simulasi') {
-        render30JuzHeatmapCanvas();
-        drawAccuracyGaugeCanvas(simulatedAccuracyScore);
       } else if (viewName === 'santri') {
         renderSantriTable();
       }
@@ -5162,16 +4659,13 @@ _Pengampu Halaqah Tahfidz_`;
       document.body.classList.add('tq-direct-print-mode');
       modal.classList.remove('hidden');
 
-      // Beri browser satu frame untuk menerapkan mode cetak, lalu panggil print.
-      requestAnimationFrame(function () {
-        try {
-          window.print();
-        } catch (e) {
-          if (typeof showToast === 'function') {
-            showToast('Perintah cetak tidak dapat dijalankan. Gunakan menu Cetak browser.', 'amber');
-          }
+      try {
+        window.print();
+      } catch (e) {
+        if (typeof showToast === 'function') {
+          showToast('Perintah cetak tidak dapat dijalankan. Gunakan menu Cetak browser.', 'amber');
         }
-      });
+      }
     }
 
     // Setelah dialog cetak ditutup, kembalikan tampilan aplikasi seperti semula.
@@ -6099,9 +5593,6 @@ _Pengampu Halaqah Tahfidz_`;
     window.viewSessionInMushaf = viewSessionInMushaf;
     window.exitReviewMode = exitReviewMode;
     window.deleteHistoryEntry = deleteHistoryEntry;
-    window.startWaveformSimulation = startWaveformSimulation;
-    window.stopWaveformSimulation = stopWaveformSimulation;
-    window.triggerSimulatedError = triggerSimulatedError;
     window.switchRekapCategory = switchRekapCategory;
     window.onRekapFilterChange = onRekapFilterChange;
     window.selectStudentFromRekapTable = selectStudentFromRekapTable;
@@ -6130,13 +5621,6 @@ _Pengampu Halaqah Tahfidz_`;
       renderRekapView();
       updateOfflineStorageUI();
 
-      const heatmapCanvas = document.getElementById('juzHeatmapCanvas');
-      if (heatmapCanvas) {
-        heatmapCanvas.addEventListener('click', onHeatmapCanvasClick);
-      }
-
-      drawAccuracyGaugeCanvas(simulatedAccuracyScore);
-      
       initToolbarDrag();
     };
 
@@ -6301,9 +5785,6 @@ _Pengampu Halaqah Tahfidz_`;
       });
     }
   </script>
-
-
-
 <script>
 (function(){
   function unlock(){ try { if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); } catch(e){} }
