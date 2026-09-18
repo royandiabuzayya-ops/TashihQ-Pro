@@ -44,6 +44,13 @@
       background-color: #fcfaf7;
       -webkit-tap-highlight-color: transparent;
     }
+    /* PWA: orientasi mengikuti perangkat (portrait/landscape). */
+    html, body { width:100%; min-height:100%; overflow-x:hidden; }
+    @media screen and (orientation: landscape) {
+      body { min-height:100dvh; }
+      #modalRaporSantri > div { max-height:96dvh; }
+    }
+    @supports (height: 100svh) { body { min-height:100svh; } }
     .font-quran {
       font-family: 'Amiri', serif;
       font-size: var(--quran-font-size) !important;
@@ -116,29 +123,127 @@
     }
 
     /* PRINT STYLES UNTUK CETAK RAPOR TAHFIDZ */
-    @media print {
-      body * {
-        visibility: hidden;
-      }
-      #printAreaRapor, #printAreaRapor * {
-        visibility: visible;
-      }
-      #printAreaRapor {
-        position: absolute;
-        left: 0;
-        top: 0;
-        width: 100%;
-        margin: 0;
-        padding: 20px;
-        background: white !important;
-        color: black !important;
-        box-shadow: none !important;
-        border: none !important;
-      }
-      .no-print {
-        display: none !important;
-      }
-    }
+@media print {
+  #tqRaporActionBar { display:none !important; }
+
+  @page {
+    size: A4 portrait;
+    margin: 7mm;
+  }
+
+  html, body {
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+
+  /* Sembunyikan seluruh aplikasi, lalu tampilkan HANYA area rapor. */
+  body * {
+    visibility: hidden !important;
+  }
+
+  #modalRaporSantri,
+  #modalRaporSantri *,
+  #printAreaRapor,
+  #printAreaRapor * {
+    visibility: visible !important;
+  }
+
+  /* Lepaskan modal dari fixed/max-height/overflow agar tidak dicetak sebagai
+     dua lapisan atau dua area yang saling bertumpuk. */
+  #modalRaporSantri {
+    display: block !important;
+    position: static !important;
+    inset: auto !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+
+  #modalRaporSantri > div {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: none !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  #printAreaRapor {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    height: auto !important;
+    max-height: none !important;
+    min-height: 0 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    overflow: visible !important;
+    background: #fff !important;
+  }
+
+  #printAreaRapor > div {
+    width: 100% !important;
+    margin: 0 !important;
+    padding: 5mm !important;
+    box-sizing: border-box !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+  }
+
+  .no-print {
+    display: none !important;
+  }
+
+  /* Hindari kartu/tabel terpotong di tengah halaman. */
+  #raporTargetBreakdown .tq-target-card,
+  #raporTargetBreakdown .tq-activity-section,
+  #printAreaRapor table,
+  #printAreaRapor tr {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  #printAreaRapor .space-y-5 > * {
+    margin-top: 0.45rem !important;
+    margin-bottom: 0.45rem !important;
+  }
+
+  #raporTargetBreakdown .tq-target-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+    gap: 3px !important;
+  }
+
+  #raporTargetBreakdown .tq-target-card {
+    padding: 4px 5px !important;
+  }
+
+  /* Ukuran teks cetak dibuat ringkas supaya satu lembar lebih mudah tercapai. */
+  #printAreaRapor {
+    font-size: 9px !important;
+  }
+}
+
+@media print {
+  #modalRaporSantri .no-print { display:none !important; }
+  #printAreaRapor { display:block !important; visibility:visible !important; width:100% !important; height:auto !important; overflow:visible !important; }
+  #printAreaRapor * { visibility:visible !important; }
+}
   </style>
 
 <style id="tqRaporProgressCardStyle">
@@ -241,6 +346,122 @@
 }
 </style>
 
+
+<style id="tqRaporScreenControlsFix">
+@media screen {
+  #modalRaporSantri .tq-rapor-header {
+    display:flex !important;
+    visibility:visible !important;
+    position:sticky !important;
+    top:0 !important;
+    z-index:100 !important;
+  }
+  #modalRaporSantri .tq-rapor-actions {
+    display:flex !important;
+    visibility:visible !important;
+    align-items:center !important;
+    gap:8px !important;
+    flex-shrink:0 !important;
+  }
+  #modalRaporSantri .tq-rapor-actions button {
+    display:inline-flex !important;
+    visibility:visible !important;
+    pointer-events:auto !important;
+  }
+  #modalRaporSantri .tq-rapor-actions button[onclick="cetakRaporPDF()"] {
+    min-height:38px !important;
+  }
+  #modalRaporSantri #btnCloseRapor {
+    min-width:38px !important;
+    min-height:38px !important;
+    align-items:center !important;
+    justify-content:center !important;
+  }
+}
+@media print {
+  #modalRaporSantri .tq-rapor-header,
+  #modalRaporSantri .tq-rapor-actions {
+    display:none !important;
+    visibility:hidden !important;
+  }
+}
+</style>
+
+<style id="tqRaporNavigationFix">
+/* Tombol Rapor selalu aktif di layar, tetapi disembunyikan saat mencetak. */
+@media screen {
+  #modalRaporSantri .tq-rapor-actions button {
+    cursor:pointer !important;
+    pointer-events:auto !important;
+  }
+}
+@media print {
+  #modalRaporSantri .no-print { display:none !important; }
+}
+</style>
+
+
+<style id="tqDirectPrintModeFix">
+/* Mode cetak langsung: tetap memakai DOM aplikasi agar konten dinamis Rapor tidak hilang. */
+@media print {
+  body.tq-direct-print-mode > * { visibility:hidden !important; }
+  body.tq-direct-print-mode #modalRaporSantri,
+  body.tq-direct-print-mode #modalRaporSantri * { visibility:visible !important; }
+
+  body.tq-direct-print-mode #modalRaporSantri {
+    display:block !important;
+    position:static !important;
+    inset:auto !important;
+    width:100% !important;
+    height:auto !important;
+    max-height:none !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow:visible !important;
+    background:#fff !important;
+  }
+  body.tq-direct-print-mode #modalRaporSantri > div {
+    display:block !important;
+    position:static !important;
+    width:100% !important;
+    max-width:none !important;
+    height:auto !important;
+    max-height:none !important;
+    margin:0 !important;
+    padding:0 !important;
+    overflow:visible !important;
+    border:0 !important;
+    border-radius:0 !important;
+    box-shadow:none !important;
+    background:#fff !important;
+  }
+  body.tq-direct-print-mode #modalRaporSantri .tq-rapor-header,
+  body.tq-direct-print-mode #modalRaporSantri .tq-rapor-actions,
+  body.tq-direct-print-mode #modalRaporSantri .no-print { display:none !important; }
+
+  body.tq-direct-print-mode #modalRaporSantri > div > div:not(#printAreaRapor) { overflow:visible !important; }
+  body.tq-direct-print-mode #printAreaRapor {
+    display:block !important;
+    visibility:visible !important;
+    position:static !important;
+    width:100% !important;
+    height:auto !important;
+    max-height:none !important;
+    overflow:visible !important;
+    margin:0 !important;
+    padding:0 !important;
+    background:#fff !important;
+  }
+  body.tq-direct-print-mode #printAreaRapor > div {
+    width:100% !important;
+    margin:0 !important;
+    box-shadow:none !important;
+    border-radius:0 !important;
+    box-sizing:border-box !important;
+  }
+}
+</style>
+
 </head>
 <body class="text-slate-800 min-h-screen flex flex-col antialiased pb-20 md:pb-4">
 
@@ -270,9 +491,6 @@
         </button>
         <button id="navRekapBtn" onclick="switchView('rekap')" class="px-3.5 py-1.5 rounded-xl text-emerald-200 hover:text-white transition flex items-center gap-1.5">
           <i class="fa-solid fa-id-card-clip"></i> <span>Rekap Siswa</span>
-        </button>
-        <button id="navSimulasiBtn" onclick="switchView('simulasi')" class="px-3.5 py-1.5 rounded-xl text-emerald-200 hover:text-white transition flex items-center gap-1.5">
-          <i class="fa-solid fa-microchip"></i> <span>Simulasi Canvas</span>
         </button>
         <button id="navSantriBtn" onclick="switchView('santri')" class="px-3.5 py-1.5 rounded-xl text-emerald-200 hover:text-white transition flex items-center gap-1.5">
           <i class="fa-solid fa-users-gear"></i> <span>Santri & Data</span>
@@ -859,99 +1077,6 @@
     </section>
 
     <!-- ============================================== -->
-    <!-- VIEW 3: SIMULASI CANVAS (DEMO VISUAL & LATIHAN) -->
-    <!-- ============================================== -->
-    <section id="viewSimulasi" class="hidden space-y-5">
-
-      <div class="bg-white p-3.5 rounded-2xl border border-stone-200 shadow-sm">
-        <h3 class="font-bold text-stone-800 text-sm flex items-center gap-2">
-          <i class="fa-solid fa-microchip text-emerald-700"></i> Simulasi Canvas &mdash; Demo Visual Interaktif
-        </h3>
-        <p class="text-xs text-stone-500 mt-0.5">
-          Panel ini untuk demonstrasi/latihan visual (bukan data setoran sungguhan): simulasi gelombang audio bacaan, gauge skor akurasi, dan heatmap progres 30 Juz.
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-4">
-
-        <!-- Panel Simulasi Gelombang Audio Bacaan -->
-        <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm space-y-3">
-          <div class="flex items-center justify-between">
-            <h4 class="font-bold text-stone-800 text-xs flex items-center gap-2">
-              <i class="fa-solid fa-wave-square text-emerald-700"></i> Simulasi Gelombang Audio Setoran
-            </h4>
-            <span id="simWaveStatus" class="text-[10px] bg-amber-100 text-amber-800 font-bold px-2.5 py-1 rounded-full border border-amber-300">Status: Dijeda</span>
-          </div>
-
-          <div class="canvas-container-dark p-2">
-            <canvas id="recitationWaveformCanvas" width="500" height="180" class="w-full h-auto"></canvas>
-          </div>
-
-          <div class="flex flex-wrap items-center gap-2">
-            <button onclick="startWaveformSimulation()" type="button" class="bg-emerald-700 hover:bg-emerald-800 text-white font-bold text-[11px] px-3 py-2 rounded-xl transition shadow flex items-center gap-1.5">
-              <i class="fa-solid fa-play"></i> Mulai
-            </button>
-            <button onclick="stopWaveformSimulation()" type="button" class="bg-stone-100 hover:bg-stone-200 text-stone-700 font-bold text-[11px] px-3 py-2 rounded-xl transition border border-stone-300 flex items-center gap-1.5">
-              <i class="fa-solid fa-pause"></i> Jeda
-            </button>
-            <button onclick="triggerSimulatedError('Jaly')" type="button" class="bg-rose-100 hover:bg-rose-200 text-rose-800 font-bold text-[11px] px-3 py-2 rounded-xl transition border border-rose-300 flex items-center gap-1.5">
-              🔴 Simulasi Jaly
-            </button>
-            <button onclick="triggerSimulatedError('Khafy')" type="button" class="bg-amber-100 hover:bg-amber-200 text-amber-800 font-bold text-[11px] px-3 py-2 rounded-xl transition border border-amber-300 flex items-center gap-1.5">
-              🟡 Simulasi Khafy
-            </button>
-          </div>
-        </div>
-
-        <!-- Panel Gauge Skor Akurasi -->
-        <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm space-y-3">
-          <h4 class="font-bold text-stone-800 text-xs flex items-center gap-2">
-            <i class="fa-solid fa-gauge-high text-emerald-700"></i> Gauge Skor Akurasi Bacaan
-          </h4>
-
-          <div class="canvas-container-dark p-2 flex justify-center">
-            <canvas id="accuracyGaugeCanvas" width="320" height="190" class="max-w-full h-auto"></canvas>
-          </div>
-
-          <div class="grid grid-cols-3 gap-2 text-center text-[11px]">
-            <div class="bg-stone-50 border border-stone-200 rounded-xl p-2">
-              <p class="text-stone-500 font-medium">Makhraj</p>
-              <p id="gaugeMakhrajVal" class="font-black text-emerald-700 text-sm">0%</p>
-            </div>
-            <div class="bg-stone-50 border border-stone-200 rounded-xl p-2">
-              <p class="text-stone-500 font-medium">Tajwid</p>
-              <p id="gaugeTajwidVal" class="font-black text-emerald-700 text-sm">0%</p>
-            </div>
-            <div class="bg-stone-50 border border-stone-200 rounded-xl p-2">
-              <p class="text-stone-500 font-medium">Fluency</p>
-              <p id="gaugeFluencyVal" class="font-black text-emerald-700 text-sm">0%</p>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Panel Heatmap 30 Juz -->
-      <div class="bg-white p-4 rounded-2xl border border-stone-200 shadow-sm space-y-3">
-        <div class="flex flex-wrap items-center justify-between gap-2">
-          <h4 class="font-bold text-stone-800 text-xs flex items-center gap-2">
-            <i class="fa-solid fa-table-cells text-emerald-700"></i> Heatmap Progres 30 Juz &mdash; Santri Aktif
-          </h4>
-          <div class="flex items-center gap-3 text-[10px] font-semibold">
-            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-[#065f46] inline-block border border-[#047857]"></span> Aman</span>
-            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-[#92400e] inline-block border border-[#fbbf24]"></span> Khafy / Belum Setor</span>
-            <span class="flex items-center gap-1"><span class="w-2.5 h-2.5 rounded bg-[#991b1b] inline-block border border-[#f87171]"></span> Jaly Tinggi</span>
-          </div>
-        </div>
-        <p class="text-[11px] text-stone-500">Klik salah satu kotak Juz untuk langsung membuka rentang surah tersebut di Mushaf.</p>
-        <div class="canvas-container-dark p-2">
-          <canvas id="juzHeatmapCanvas" width="900" height="220" class="w-full h-auto cursor-pointer"></canvas>
-        </div>
-      </div>
-
-    </section>
-
-    <!-- ============================================== -->
     <!-- VIEW 4: KELOLA SANTRI & EKSPOR-IMPOR DATA      -->
     <!-- ============================================== -->
     <section id="viewSantri" class="hidden space-y-6">
@@ -1427,7 +1552,7 @@
     <div class="bg-white rounded-3xl shadow-2xl max-w-2xl w-full my-auto overflow-hidden border border-stone-300 flex flex-col max-h-[90vh]">
       
       <!-- Header Modal (Non-Print) -->
-      <div class="bg-emerald-950 text-white p-4 flex justify-between items-center no-print">
+      <div class="bg-emerald-950 text-white p-4 flex justify-between items-center tq-rapor-header sticky top-0 z-30">
         <div class="flex items-center gap-2.5">
           <div class="w-9 h-9 rounded-xl bg-amber-400 text-emerald-950 flex items-center justify-center font-black text-base shadow">
             <i class="fa-solid fa-file-invoice"></i>
@@ -1437,18 +1562,19 @@
             <p class="text-[10px] text-emerald-300">Format Resmi Siap Cetak atau Unduh PDF</p>
           </div>
         </div>
-        <div class="flex items-center gap-2">
-          <button onclick="window.print()" class="bg-amber-400 hover:bg-amber-500 text-emerald-950 font-black px-3 py-1.5 rounded-xl text-xs shadow transition flex items-center gap-1.5">
+        <div class="flex items-center gap-2 tq-rapor-actions no-print">
+          <button type="button" onclick="cetakRaporPDF()" class="bg-amber-400 hover:bg-amber-500 text-emerald-950 font-black px-3 py-1.5 rounded-xl text-xs shadow transition flex items-center gap-1.5">
             <i class="fa-solid fa-print"></i> <span>Cetak / Simpan PDF</span>
           </button>
-          <button onclick="closeRaporModal()" class="text-stone-300 hover:text-white p-1">
+          <button type="button" id="btnCloseRapor" onclick="closeRaporModal()" class="text-stone-300 hover:text-white p-1" aria-label="Tutup laporan">
             <i class="fa-solid fa-xmark text-lg"></i>
           </button>
         </div>
       </div>
 
       <!-- Kertas Rapor (Print Area) -->
-      <div class="p-6 overflow-y-auto bg-stone-50/50 flex-grow" id="printAreaRapor">
+      <div class="p-6 overflow-y-auto bg-stone-50/50 flex-grow">
+        <div id="printAreaRapor">
         <div class="bg-white border-2 border-emerald-900/40 p-6 rounded-2xl shadow-sm space-y-5">
           
           <!-- Kop Lembaga -->
@@ -1551,6 +1677,8 @@
         </div>
       </div>
 
+        </div>
+      </div>
     </div>
   </div>
 
@@ -1567,10 +1695,6 @@
     <button onclick="switchView('rekap')" id="bottomNavRekap" class="flex flex-col items-center gap-1 py-1 px-2.5 rounded-xl transition text-emerald-300">
       <i class="fa-solid fa-id-card-clip text-base"></i>
       <span>Rekap</span>
-    </button>
-    <button onclick="switchView('simulasi')" id="bottomNavSimulasi" class="flex flex-col items-center gap-1 py-1 px-2.5 rounded-xl transition text-emerald-300">
-      <i class="fa-solid fa-microchip text-base"></i>
-      <span>Simulasi</span>
     </button>
     <button onclick="switchView('santri')" id="bottomNavSantri" class="flex flex-col items-center gap-1 py-1 px-2.5 rounded-xl transition text-emerald-300">
       <i class="fa-solid fa-users-gear text-base"></i>
@@ -4652,7 +4776,6 @@
         mushaf: document.getElementById('viewMushaf'),
         jurnal: document.getElementById('viewJurnal'),
         rekap: document.getElementById('viewRekap'),
-        simulasi: document.getElementById('viewSimulasi'),
         santri: document.getElementById('viewSantri')
       };
 
@@ -4660,7 +4783,6 @@
         mushaf: document.getElementById('navMushafBtn'),
         jurnal: document.getElementById('navJurnalBtn'),
         rekap: document.getElementById('navRekapBtn'),
-        simulasi: document.getElementById('navSimulasiBtn'),
         santri: document.getElementById('navSantriBtn')
       };
 
@@ -4668,7 +4790,6 @@
         mushaf: document.getElementById('bottomNavMushaf'),
         jurnal: document.getElementById('bottomNavJurnal'),
         rekap: document.getElementById('bottomNavRekap'),
-        simulasi: document.getElementById('bottomNavSimulasi'),
         santri: document.getElementById('bottomNavSantri')
       };
 
@@ -5017,8 +5138,46 @@ _Pengampu Halaqah Tahfidz_`;
     }
 
     function closeRaporModal() {
-      document.getElementById('modalRaporSantri').classList.add('hidden');
+      const modal = document.getElementById('modalRaporSantri');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('overflow-hidden');
     }
+
+    function cetakRaporPDF() {
+      const modal = document.getElementById('modalRaporSantri');
+      const area = document.getElementById('printAreaRapor');
+      if (!modal || modal.classList.contains('hidden') || !area) {
+        if (typeof showToast === 'function') showToast('Laporan belum terbuka.', 'amber');
+        return;
+      }
+
+      /*
+       * Cetak FIX: jangan membuat halaman baru yang hanya berisi #printAreaRapor.
+       * Pada Android, hasil clone seperti itu dapat menjadi kosong karena sebagian
+       * CSS/kelas Tailwind dan konteks modal tidak ikut ter-render.
+       * Kita cetak DOM yang sedang tampil, menggunakan CSS khusus print.
+       */
+      document.body.classList.add('tq-direct-print-mode');
+      modal.classList.remove('hidden');
+
+      // Beri browser satu frame untuk menerapkan mode cetak, lalu panggil print.
+      requestAnimationFrame(function () {
+        try {
+          window.print();
+        } catch (e) {
+          if (typeof showToast === 'function') {
+            showToast('Perintah cetak tidak dapat dijalankan. Gunakan menu Cetak browser.', 'amber');
+          }
+        }
+      });
+    }
+
+    // Setelah dialog cetak ditutup, kembalikan tampilan aplikasi seperti semula.
+    window.addEventListener('afterprint', function () {
+      document.body.classList.remove('tq-direct-print-mode');
+    });
 
     function openModalTambahSantri() {
       document.getElementById('inputSantriNis').value = '';
@@ -5897,6 +6056,15 @@ _Pengampu Halaqah Tahfidz_`;
     window.saveNewSantri = saveNewSantri;
     window.openRaporModal = openRaporModal;
     window.closeRaporModal = closeRaporModal;
+    window.cetakRaporPDF = cetakRaporPDF;
+    // Navigasi aman pada modal Rapor: Escape / klik backdrop untuk kembali.
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeRaporModal();
+    });
+    document.addEventListener('click', function(e) {
+      const modal = document.getElementById('modalRaporSantri');
+      if (modal && e.target === modal) closeRaporModal();
+    });
     window.openDownloadOfflineModal = openDownloadOfflineModal;
     window.closeDownloadOfflineModal = closeDownloadOfflineModal;
     window.startDownloadAllSurahs = startDownloadAllSurahs;
@@ -6133,5 +6301,15 @@ _Pengampu Halaqah Tahfidz_`;
       });
     }
   </script>
+
+
+
+<script>
+(function(){
+  function unlock(){ try { if (screen.orientation && screen.orientation.unlock) screen.orientation.unlock(); } catch(e){} }
+  window.addEventListener('load', unlock);
+  document.addEventListener('visibilitychange', function(){ if(!document.hidden) unlock(); });
+})();
+</script>
 </body>
 </html>
